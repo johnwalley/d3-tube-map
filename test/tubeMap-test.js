@@ -1,7 +1,7 @@
 var tape = require("tape"),
-    bumpsChart = require("../");
+    tubeMap = require("../");
 
-tape("setup() a valid svg element", function(test) {
-  test.doesNotThrow(tubeMap.tubeMap().setup, "");
+tape("tubeMap() does not throw", function(test) {
+  test.doesNotThrow(tubeMap.tubeMap(), "");
   test.end();
 });
