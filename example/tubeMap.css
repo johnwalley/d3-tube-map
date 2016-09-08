@@ -1,0 +1,130 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(0,0,0,0.87);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.md-sidenav-left p {
+  font-size: 13px;
+}
+
+.toggle-pub-button {
+  margin: -30px 8px 10px;
+  background-color: rgb(0,152,212);
+  fill: rgb(255, 255, 255);
+}
+
+.angular-google-map-container { height: 300px; }
+
+.autocomplete {
+  width: 200px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: 60px;
+  margin-top: 20px;
+  left: auto;
+  right: 20%;
+}
+
+.progress-wrapper {
+  position: absolute;
+  margin-left: auto;
+  margin-right: 32px;
+  margin-top: 10px;
+  left: auto;
+  right: 5%;
+}
+
+.progress {
+    position: absolute;
+    font-weight: 100;
+    line-height: 1;
+    transform: translateY(-50%) translateX(-50%);
+    top: 50%;
+    bottom: auto;
+    left: 50%;
+    color: rgba(0, 0, 0, 0.9);
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 22px;
+    text-align: center;
+}
+
+
+h2.name {
+  -webkit-margin-before: 0em;
+  -webkit-margin-after: 0.2em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+text {
+  font-family: 'Hammersmith One', sans-serif;
+  fill: #0019A8;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: normal;
+}
+.side-nav-content {
+  overflow-x: hidden;
+  margin: -20px 0px 0px 0px;
+}
+.side-nav-info-icon {
+  margin: 0px 24px 0px 0px !important;
+  color: rgb(49, 133, 255);
+}
+.side-nav-info-list md-list-item {
+  padding: 0px 24px 6px 0px;
+  min-height: 0px;
+}
+text.highlighted {
+  text-decoration: line-through;
+}
+.line {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+.line.translucent {
+  opacity: 0.1;
+}
+.station {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+.station.translucent {
+  opacity: 0.1;
+}
+.interchange {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+.interchange.translucent {
+  opacity: 0.3;
+}
+
+.label {
+  transition: opacity 0.5s ease-out;
+  transition: transform 0.5s ease-in-out;
+  transform-origin: 50% 50%;
+}
+
+.label.translucent {
+  opacity: 0.1;
+}
+
+.label.selected {
+  transform: scale(1.2);
+}
