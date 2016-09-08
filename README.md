@@ -5,6 +5,8 @@
 
 Draw tube maps in the style of the London Underground using d3.
 
+See a demo [here](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db420).
+
 ## Installing
 
 If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest release](https://github.com/johnwalley/d3-tube-map/releases/latest). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `tubeMap` global is exported:
