@@ -158,6 +158,14 @@ export default function() {
           // Update the interchanges
           interchanges.enter().append("g")
             .attr("id", function(d) { return d.name; })
+            .on("click", function() {
+              var label = d3.select(this);
+              var name = label.attr("id");
+
+              selectStation(name);
+
+              dispatch.call("click", this, name);
+            })
             .append("path")
             .attr("d", markerFunction)
             .attr("transform", function(d) { return "translate(" + xScale(d.x + d.marker[0].shiftX*lineWidthMultiplier) + "," + yScale(d.y + d.marker[0].shiftY*lineWidthMultiplier) + ")" })
@@ -174,6 +182,14 @@ export default function() {
           // Update the stations
           stations.enter().append("g")
             .attr("id", function(d) { return d.name; })
+            .on("click", function() {
+              var label = d3.select(this);
+              var name = label.attr("id");
+
+              selectStation(name);
+
+              dispatch.call("click", this, name);
+            })
             .append("path")
             .attr("d", function(d) {
               var dir;
@@ -222,6 +238,14 @@ export default function() {
             labels.enter().append("g")
               .attr("id", function(d) { return d.name; })
               .classed("label", true)
+              .on("click", function() {
+                var label = d3.select(this);
+                var name = label.attr("id");
+
+                selectStation(name);
+
+                dispatch.call("click", this, name);
+              })
               .append("text")
               .text(function(d) { return d.label })
               .attr("dy", 0.1)
@@ -257,32 +281,6 @@ export default function() {
               .attr("stroke", '#AAAAAA')
               .attr("stroke-width", lineWidth/4)
               .style("stroke-dasharray", ("3, 3"));
-
-            interchanges.on("click", function() {
-              var interchange = d3.select(this);
-              var name = interchange.attr("id");
-              selectStation(name);
-
-              dispatch.click(name);
-            });
-
-            stations.on("click", function() {
-              var station = d3.select(this);
-              var name = station.attr("id");
-
-              selectStation(name);
-
-              dispatch.click(name);
-            });
-
-            labels.on("click", function() {
-              var label = d3.select(this);
-              var name = label.attr("id");
-
-              selectStation(name);
-
-              dispatch.click(name);
-            });
       });
     }
 
