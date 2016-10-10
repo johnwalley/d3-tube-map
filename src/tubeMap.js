@@ -232,12 +232,7 @@ export default function() {
               .style("font-size", 1.2*lineWidth/lineWidthMultiplier + "px")
               .style("-webkit-user-select", "none")
               .attr("class", function(d) {
-                // TODO: this is horrible and also ignores interchanges. And inserts a space at the front!
-                var str = "";
-                d.marker.forEach(function(marker) {
-                  str = str + " " + marker.line;
-                });
-                return str;
+                return d.marker.map(function(marker) { return marker.line; }).join(" ");
               })
               .classed("highlighted", function(d) { return d.visited; })
               .call(wrap);
@@ -343,6 +338,8 @@ export default function() {
     }
 
     map.centerOnPub = function(name) {
+      if (name === undefined) return;
+
       var station = model.stations.stations[name];
 
       var width = window.innerWidth;
