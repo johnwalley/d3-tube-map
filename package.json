@@ -1,13 +1,14 @@
 {
   "name": "d3-tube-map",
-  "version": "0.0.2s",
+  "version": "0.0.4",
   "description": "Draw tube map.",
   "keywords": [
     "d3",
     "d3-module",
-    "tube"
+    "tube",
+    "map"
   ],
-  "homepage": "https://github.com/johnwalley/d3-tube-map/",
+  "homepage": "http://www.pubmap.co.uk/",
   "license": "BSD-3-Clause",
   "author": {
     "name": "John Walley",
