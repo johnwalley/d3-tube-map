@@ -26,7 +26,7 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
   var width = 1600;
   var height = 1024;
 
-  const map = tubeMap.tubeMap()()
+  const map = tubeMap.tubeMap()
     .width(width)
     .height(height)
     .margin({
