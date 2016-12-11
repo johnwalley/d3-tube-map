@@ -345,7 +345,8 @@ export default function tubeMap() {
 
     t = [-scale*(xScale(station.x)) + width/2, -scale*(yScale(station.y)) + height/2]
 
-    zoom.translate(t).scaleTo(2);
+    // FIXME: Need valid d3 v4 syntax for zooming
+    zoom.translateBy(t).scaleTo(2);
     gEnter.transition().duration(750).attr("transform", "translate(" + t[0] + "," + t[1] + ")scale(" + scale + ")");
   }
 
