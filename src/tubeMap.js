@@ -87,7 +87,7 @@ export default function tubeMap() {
       // Select the svg element, if it exists
       svg = d3.select(this).selectAll("svg").data([data]);
 
-      var g = svg.enter().append("svg").append("g");
+      var g = svg.enter().append("g");
 
       // Fill with white rectangle to capture zoom events
       g.append("rect")
