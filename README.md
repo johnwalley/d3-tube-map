@@ -21,7 +21,7 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
   var svg = d3.select(el)
       .append('svg')
       .style('width', '100%')
-      .style('height', '100%');;
+      .style('height', '100%');
 
   var width = 1600;
   var height = 1024;
