@@ -11,7 +11,7 @@ See a demo [here](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db42
 
 ## Installing
 
-If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest release](https://github.com/johnwalley/d3-tube-map/releases/latest). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `tubeMap` global is exported:
+If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest release](https://github.com/johnwalley/d3-tube-map/releases/latest). AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global is exported:
 
 ```html
 <script src="https://d3js.org/d3.v4.js"></script>
@@ -46,7 +46,7 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
 
 ## API Reference
 
-<a name="tubeMap" href="#tubeMap">#</a> tubeMap.<b>tubeMap</b>() [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js "Source")
+<a name="tubeMap" href="#tubeMap">#</a> d3.<b>tubeMap</b>() [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js "Source")
 
 Constructs a new tube map generator with the default settings.
 
