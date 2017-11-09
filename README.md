@@ -44,30 +44,6 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
 </script>
 ```
 
-## Releasing
-
-Bump the version in your package.json file.
-
-Next, create a git tag that corresponds to the version:
-
-```
-git tag -a v1.0.2
-```
-
-Push the tag to GitHub:
-
-```
-git push --tags
-```
-
-Publish to NPM:
-
-```
-npm publish
-```
-
-As a side-effect of publishing, NPM will create a d3-tube-map.zip archive of your release in the build folder. Add this as a custom download to your GitHub releases so that people can download your code without needing to use NPM.
-
 ## API Reference
 
 <a name="tubeMap" href="#tubeMap">#</a> tubeMap.<b>tubeMap</b>() [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js "Source")
