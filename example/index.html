@@ -14,14 +14,14 @@
     var el = document.getElementById('tube-map');
 
     var svg = d3.select(el)
-        .append('svg')
-        .style('width', '100%')
-        .style('height', '100%');;
+      .append('svg')
+      .style('width', '100%')
+      .style('height', '100%');;
 
     var width = 1600;
     var height = 1024;
 
-    const map = tubeMap.tubeMap()
+    const map = d3.tubeMap()
       .width(width)
       .height(height)
       .margin({
@@ -29,9 +29,9 @@
         right: width / 7,
         bottom: height / 10,
         left: width / 7,
-      });    
+      });
 
-    d3.json("./pubs.json", function(error, data) {
+    d3.json("./pubs.json", function (error, data) {
       svg.datum(data).call(map);
     });
   </script>
