@@ -28,7 +28,7 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
   var width = 1600;
   var height = 1024;
 
-  const map = tubeMap.tubeMap()
+  const map = d3.tubeMap()
     .width(width)
     .height(height)
     .margin({
@@ -50,15 +50,15 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
 
 Constructs a new tube map generator with the default settings.
 
-<a name="tubeMap_width" href="#tubeMap_width">#</a> <i>tubeMap</i>.<b>width</b>(<i>w</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L294 "Source")
+<a name="tubeMap_width" href="#tubeMap_width">#</a> <i>tubeMap</i>.<b>width</b>(<i>w</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L285 "Source")
 
 Sets the width of the viewbox the map is rendered to.
 
-<a name="tubeMap_height" href="#tubeMap_height">#</a> <i>tubeMap</i>.<b>height</b>(<i>h</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L300 "Source")
+<a name="tubeMap_height" href="#tubeMap_height">#</a> <i>tubeMap</i>.<b>height</b>(<i>h</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L291 "Source")
 
 Sets the height of the viewbox the map is rendered to.
 
-<a name="tubeMap_margin" href="#tubeMap_margin">#</a> <i>tubeMap</i>.<b>margin</b>(<i>m</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L306 "Source")
+<a name="tubeMap_margin" href="#tubeMap_margin">#</a> <i>tubeMap</i>.<b>margin</b>(<i>m</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L297 "Source")
 
 Sets the margin around the map. Takes an object of the following form:
 
