@@ -25,9 +25,7 @@ export default function() {
 
   function map(selection) {
     selection.each(function(data) {
-      // Convert data to standard representation
       data = transformData(data);
-
       model = data;
 
       var minX = d3.min(data.raw, function(line) {
@@ -56,9 +54,10 @@ export default function() {
       var actualAspectRatio =
         (width - margin.left - margin.right) /
         (height - margin.top - margin.bottom);
-      var ratioRatio = actualAspectRatio / desiredAspectRatio;
 
-      var maxXRange, maxYRange;
+      var ratioRatio = actualAspectRatio / desiredAspectRatio;
+      var maxXRange;
+      var maxYRange;
 
       // Note that we flip the sense of the y-axis here
       if (desiredAspectRatio > actualAspectRatio) {
@@ -69,16 +68,10 @@ export default function() {
         maxYRange = height - margin.top - margin.bottom;
       }
 
-      // Update the x-scale
       xScale.domain([minX, maxX]).range([0, maxXRange]);
-
-      // Update the y-scale
       yScale.domain([minY, maxY]).range([maxYRange, 0]);
-
-      // Update line width
       lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
-      // Select the svg element, if it exists
       svg = d3
         .select(this)
         .selectAll('svg')
@@ -103,197 +96,13 @@ export default function() {
         .on('zoom', zoomed);
 
       gEnter = g.call(zoom).append('g');
-
-      var river = gEnter
-        .append('g')
-        .attr('class', 'river')
-        .selectAll('path')
-        .data(function(d) {
-          return [d.river];
-        });
-
-      var lines = gEnter
-        .append('g')
-        .attr('class', 'lines')
-        .selectAll('path')
-        .data(function(d) {
-          return d.lines.lines;
-        });
-
-      var interchanges = gEnter
-        .append('g')
-        .attr('class', 'interchanges')
-        .selectAll('path')
-        .data(function(d) {
-          return d.stations.interchanges();
-        });
-
-      var stations = gEnter
-        .append('g')
-        .attr('class', 'stations')
-        .selectAll('path')
-        .data(function(d) {
-          return d.stations.normalStations();
-        });
-
-      var labels = gEnter
-        .append('g')
-        .attr('class', 'labels')
-        .selectAll('text')
-        .data(function(d) {
-          return d.stations.toArray();
-        });
-
-      // Update the outer dimensions
       svg.attr('width', '100%').attr('height', '100%');
 
-      // Update the river
-      river
-        .enter()
-        .append('path')
-        .attr('d', function(d) {
-          return line(d, xScale, yScale, lineWidth);
-        })
-        .attr('stroke', '#C4E8F8')
-        .attr('fill', 'none')
-        .attr('stroke-width', 1.8 * lineWidth);
-
-      // Update the lines
-      lines
-        .enter()
-        .append('path')
-        .attr('d', function(d) {
-          return line(d, xScale, yScale, lineWidth);
-        })
-        .attr('id', function(d) {
-          return d.name;
-        })
-        .attr('stroke', function(d) {
-          return d.color;
-        })
-        .attr('fill', 'none')
-        .attr('stroke-width', function(d) {
-          return d.highlighted ? lineWidth * 1.3 : lineWidth;
-        })
-        .classed('line', true);
-
-      var fgColor = '#000000';
-      var bgColor = '#ffffff';
-
-      // Update the interchanges
-      interchanges
-        .enter()
-        .append('g')
-        .attr('id', function(d) {
-          return d.name;
-        })
-        .on('click', function() {
-          var label = d3.select(this);
-          var name = label.attr('id');
-
-          selectStation(name);
-
-          dispatch.call('click', this, name);
-        })
-        .append('path')
-        .attr('d', interchange(lineWidth))
-        .attr('transform', function(d) {
-          return (
-            'translate(' +
-            xScale(d.x + d.marker[0].shiftX * lineWidthMultiplier) +
-            ',' +
-            yScale(d.y + d.marker[0].shiftY * lineWidthMultiplier) +
-            ')'
-          );
-        })
-        .attr('stroke-width', lineWidth / 2)
-        .attr('fill', function(d) {
-          return d.visited ? fgColor : bgColor;
-        })
-        .attr('stroke', function(d) {
-          return d.visited ? bgColor : fgColor;
-        })
-        .classed('interchange', true)
-        .style('cursor', 'pointer');
-
-      // Update the stations
-      stations
-        .enter()
-        .append('g')
-        .attr('id', function(d) {
-          return d.name;
-        })
-        .on('click', function() {
-          var label = d3.select(this);
-          var name = label.attr('id');
-
-          selectStation(name);
-
-          dispatch.call('click', this, name);
-        })
-        .append('path')
-        .attr('d', function(d) {
-          return station(d, xScale, yScale, lineWidthMultiplier);
-        })
-        .attr('stroke', function(d) {
-          return d.color;
-        })
-        .attr('stroke-width', lineWidth / 2)
-        .attr('fill', 'none')
-        .attr('class', function(d) {
-          return d.line;
-        })
-        .attr('id', function(d) {
-          return d.name;
-        })
-        .classed('station', true);
-
-      // Update the label text
-      labels
-        .enter()
-        .append('g')
-        .attr('id', function(d) {
-          return d.name;
-        })
-        .classed('label', true)
-        .on('click', function() {
-          var label = d3.select(this);
-          var name = label.attr('id');
-
-          selectStation(name);
-
-          dispatch.call('click', this, name);
-        })
-        .append('text')
-        .text(function(d) {
-          return d.label;
-        })
-        .attr('dy', 0.1)
-        .attr('x', function(d) {
-          return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
-        })
-        .attr('y', function(d) {
-          return yScale(d.y + d.labelShiftY) - textPos(d).pos[1];
-        }) // Flip y-axis
-        .attr('text-anchor', function(d) {
-          return textPos(d).textAnchor;
-        })
-        .style('display', function(d) {
-          return d.hide !== true ? 'block' : 'none';
-        })
-        .style('font-size', 1.2 * lineWidth / lineWidthMultiplier + 'px')
-        .style('-webkit-user-select', 'none')
-        .attr('class', function(d) {
-          return d.marker
-            .map(function(marker) {
-              return marker.line;
-            })
-            .join(' ');
-        })
-        .classed('highlighted', function(d) {
-          return d.visited;
-        })
-        .call(wrap);
+      drawRiver(gEnter);
+      drawLines(gEnter);
+      drawInterchanges(gEnter);
+      drawStations(gEnter);
+      drawLabels(gEnter);
     });
   }
 
@@ -415,16 +224,194 @@ export default function() {
       .classed('highlighted', highlighted);
   }
 
+  function drawRiver(gEnter) {
+    gEnter
+      .append('g')
+      .attr('class', 'river')
+      .selectAll('path')
+      .data(function(d) {
+        return [d.river];
+      })
+      .enter()
+      .append('path')
+      .attr('d', function(d) {
+        return line(d, xScale, yScale, lineWidth);
+      })
+      .attr('stroke', '#C4E8F8')
+      .attr('fill', 'none')
+      .attr('stroke-width', 1.8 * lineWidth);
+  }
+
+  function drawLines(gEnter) {
+    gEnter
+      .append('g')
+      .attr('class', 'lines')
+      .selectAll('path')
+      .data(function(d) {
+        return d.lines.lines;
+      })
+      .enter()
+      .append('path')
+      .attr('d', function(d) {
+        return line(d, xScale, yScale, lineWidth);
+      })
+      .attr('id', function(d) {
+        return d.name;
+      })
+      .attr('stroke', function(d) {
+        return d.color;
+      })
+      .attr('fill', 'none')
+      .attr('stroke-width', function(d) {
+        return d.highlighted ? lineWidth * 1.3 : lineWidth;
+      })
+      .classed('line', true);
+  }
+
+  function drawInterchanges(gEnter) {
+    var fgColor = '#000000';
+    var bgColor = '#ffffff';
+
+    gEnter
+      .append('g')
+      .attr('class', 'interchanges')
+      .selectAll('path')
+      .data(function(d) {
+        return d.stations.interchanges();
+      })
+      .enter()
+      .append('g')
+      .attr('id', function(d) {
+        return d.name;
+      })
+      .on('click', function() {
+        var label = d3.select(this);
+        var name = label.attr('id');
+
+        selectStation(name);
+        dispatch.call('click', this, name);
+      })
+      .append('path')
+      .attr('d', interchange(lineWidth))
+      .attr('transform', function(d) {
+        return (
+          'translate(' +
+          xScale(d.x + d.marker[0].shiftX * lineWidthMultiplier) +
+          ',' +
+          yScale(d.y + d.marker[0].shiftY * lineWidthMultiplier) +
+          ')'
+        );
+      })
+      .attr('stroke-width', lineWidth / 2)
+      .attr('fill', function(d) {
+        return d.visited ? fgColor : bgColor;
+      })
+      .attr('stroke', function(d) {
+        return d.visited ? bgColor : fgColor;
+      })
+      .classed('interchange', true)
+      .style('cursor', 'pointer');
+  }
+
+  function drawStations(gEnter) {
+    gEnter
+      .append('g')
+      .attr('class', 'stations')
+      .selectAll('path')
+      .data(function(d) {
+        return d.stations.normalStations();
+      })
+      .enter()
+      .append('g')
+      .attr('id', function(d) {
+        return d.name;
+      })
+      .on('click', function() {
+        var label = d3.select(this);
+        var name = label.attr('id');
+
+        selectStation(name);
+        dispatch.call('click', this, name);
+      })
+      .append('path')
+      .attr('d', function(d) {
+        return station(d, xScale, yScale, lineWidthMultiplier);
+      })
+      .attr('stroke', function(d) {
+        return d.color;
+      })
+      .attr('stroke-width', lineWidth / 2)
+      .attr('fill', 'none')
+      .attr('class', function(d) {
+        return d.line;
+      })
+      .attr('id', function(d) {
+        return d.name;
+      })
+      .classed('station', true);
+  }
+
+  function drawLabels(gEnter) {
+    gEnter
+      .append('g')
+      .attr('class', 'labels')
+      .selectAll('text')
+      .data(function(d) {
+        return d.stations.toArray();
+      })
+      .enter()
+      .append('g')
+      .attr('id', function(d) {
+        return d.name;
+      })
+      .classed('label', true)
+      .on('click', function() {
+        var label = d3.select(this);
+        var name = label.attr('id');
+
+        selectStation(name);
+
+        dispatch.call('click', this, name);
+      })
+      .append('text')
+      .text(function(d) {
+        return d.label;
+      })
+      .attr('dy', 0.1)
+      .attr('x', function(d) {
+        return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
+      })
+      .attr('y', function(d) {
+        return yScale(d.y + d.labelShiftY) - textPos(d).pos[1];
+      })
+      .attr('text-anchor', function(d) {
+        return textPos(d).textAnchor;
+      })
+      .style('display', function(d) {
+        return d.hide !== true ? 'block' : 'none';
+      })
+      .style('font-size', 1.2 * lineWidth / lineWidthMultiplier + 'px')
+      .style('-webkit-user-select', 'none')
+      .attr('class', function(d) {
+        return d.marker
+          .map(function(marker) {
+            return marker.line;
+          })
+          .join(' ');
+      })
+      .classed('highlighted', function(d) {
+        return d.visited;
+      })
+      .call(wrap);
+  }
+
   function transformData(data) {
-    var transformedData = {};
-
-    // Data manipulation
-    transformedData.raw = data.lines;
-    transformedData.river = data.river;
-    transformedData.stations = extractStations(data);
-    transformedData.lines = extractLines(data.lines);
-
-    return transformedData;
+    return {
+      raw: data.lines,
+      river: data.river,
+      stations: extractStations(data),
+      lines: extractLines(data.lines),
+    };
   }
 
   function extractStations(data) {
