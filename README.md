@@ -46,19 +46,23 @@ If you use NPM, `npm install d3-tube-map`. Otherwise, download the [latest relea
 
 ## API Reference
 
-<a name="tubeMap" href="#tubeMap">#</a> d3.<b>tubeMap</b>() [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js "Source")
+<a name="tubeMap" href="#tubeMap">#</a> d3.<b>tubeMap</b>() [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js "Source")
 
 Constructs a new tube map generator with the default settings.
 
-<a name="tubeMap_width" href="#tubeMap_width">#</a> <i>tubeMap</i>.<b>width</b>(<i>w</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L285 "Source")
+<a name="_tubeMap" href="#_tubeMap">#</a> <i>tubeMap</i>(<i>selection</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L26 "Source")
+
+Render the tube map to the given *selection*, which is a [selection](https://github.com/d3/d3-selection) of SVG containers (either SVG or G elements).
+
+<a name="tubeMap_width" href="#tubeMap_width">#</a> <i>tubeMap</i>.<b>width</b>(<i>w</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L109 "Source")
 
 Sets the width of the viewbox the map is rendered to.
 
-<a name="tubeMap_height" href="#tubeMap_height">#</a> <i>tubeMap</i>.<b>height</b>(<i>h</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L291 "Source")
+<a name="tubeMap_height" href="#tubeMap_height">#</a> <i>tubeMap</i>.<b>height</b>(<i>h</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L115 "Source")
 
 Sets the height of the viewbox the map is rendered to.
 
-<a name="tubeMap_margin" href="#tubeMap_margin">#</a> <i>tubeMap</i>.<b>margin</b>(<i>m</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/tubeMap.js#L297 "Source")
+<a name="tubeMap_margin" href="#tubeMap_margin">#</a> <i>tubeMap</i>.<b>margin</b>(<i>m</i>) [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L121 "Source")
 
 Sets the margin around the map. Takes an object of the following form:
 
