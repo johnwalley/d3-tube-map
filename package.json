@@ -1,6 +1,6 @@
 {
   "name": "d3-tube-map",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Draw tube map.",
   "keywords": ["d3", "d3-module", "tube", "map"],
   "homepage": "http://www.pubmap.co.uk/",

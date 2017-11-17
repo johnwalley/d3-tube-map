@@ -196,9 +196,7 @@ export default function() {
           dispatch.call('click', this, name);
         })
         .append('path')
-        .attr('d', function(d) {
-          return interchange(d, lineWidth);
-        })
+        .attr('d', interchange(lineWidth))
         .attr('transform', function(d) {
           return (
             'translate(' +

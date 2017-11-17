@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export function interchange(d, lineWidth) {
+export function interchange(lineWidth) {
   return d3
     .arc()
     .innerRadius(0)
@@ -73,6 +73,7 @@ export function line(data, xScale, yScale, lineWidth) {
   var lineNodes = data.nodes;
 
   var unitLength = xScale(1) - xScale(0);
+  var sqrt2 = Math.sqrt(2);
 
   var shiftCoords = [
     data.shiftCoords[0] * lineWidth / unitLength,
@@ -103,8 +104,6 @@ export function line(data, xScale, yScale, lineWidth) {
           if (yDiff > 0) lineEndCorrection = [0, -lineWidth / (4 * unitLength)];
           if (yDiff < 0) lineEndCorrection = [0, lineWidth / (4 * unitLength)];
         } else {
-          var sqrt2 = Math.sqrt(2);
-
           if (xDiff > 0 && yDiff > 0)
             lineEndCorrection = [
               -lineWidth / (4 * unitLength * sqrt2),
