@@ -1,1 +1,1 @@
-export { default as tubeMap } from "./src/tubeMap";
+export { default as tubeMap } from './src/map';
