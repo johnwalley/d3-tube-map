@@ -11,16 +11,13 @@ export default function() {
   var yScale = d3.scaleLinear();
   var lineWidth;
   var lineWidthMultiplier = 1.2;
-
-  var dispatch = d3.dispatch('click');
-
   var svg;
   var _data;
-
   var gMap;
   var zoom;
-
   var t;
+
+  var dispatch = d3.dispatch('click');
 
   function map(selection) {
     selection.each(function(data) {
@@ -31,6 +28,7 @@ export default function() {
           return node.coords[0];
         });
       });
+
       var maxX = d3.max(_data.raw, function(line) {
         return d3.max(line.nodes, function(node) {
           return node.coords[0];
@@ -42,6 +40,7 @@ export default function() {
           return node.coords[1];
         });
       });
+
       var maxY = d3.max(_data.raw, function(line) {
         return d3.max(line.nodes, function(node) {
           return node.coords[1];
@@ -124,105 +123,9 @@ export default function() {
     return map;
   };
 
-  map.highlightLine = function(name) {
-    var lines = svg.selectAll('.line');
-    var stations = svg.selectAll('.station');
-    var labels = svg.selectAll('.label');
-
-    lines.classed('translucent', true);
-    stations.classed('translucent', true);
-    labels.classed('translucent', true);
-
-    stations.filter('.' + name).classed('translucent', false);
-    labels.filter('.' + name).classed('translucent', false);
-    svg.select('#' + name).classed('translucent', false);
-  };
-
-  map.unhighlightAll = function() {
-    var lines = svg.selectAll('.line');
-    var stations = svg.selectAll('.station');
-    var labels = svg.selectAll('.label');
-
-    lines.classed('translucent', false);
-    stations.classed('translucent', false);
-    labels.classed('translucent', false);
-  };
-
-  map.unhighlightLine = function() {
-    this.unhighlightAll();
-  };
-
-  map.centerOnPub = function(name) {
-    if (name === undefined) return;
-
-    var station = _data.stations.stations[name];
-
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-
-    var scale = 2;
-
-    t = [
-      -scale * xScale(station.x) + width / 2,
-      -scale * yScale(station.y) + height / 2,
-    ];
-
-    // FIXME: Need valid d3 v4 syntax for zooming
-    zoom.translateBy(t).scaleTo(2);
-    gMap
-      .transition()
-      .duration(750)
-      .attr(
-        'transform',
-        'translate(' + t[0] + ',' + t[1] + ')scale(' + scale + ')'
-      );
-  };
-
-  map.addStation = function(name) {
-    visitStation(name, true);
-  };
-
-  map.removeStation = function(name) {
-    visitStation(name, false);
-  };
-
-  map.visitStations = function(visited) {
-    svg
-      .selectAll('.labels')
-      .select('text')
-      .classed('highlighted', false);
-    visited.map(function(pub) {
-      visitStation(pub, true);
-    });
-  };
-
   map.on = function(event, callback) {
     dispatch.on(event, callback);
   };
-
-  map.selectStation = function(name) {
-    selectStation(name);
-  };
-
-  function selectStation(name) {
-    d3
-      .select('.labels')
-      .selectAll('.label')
-      .classed('selected', false);
-
-    d3
-      .select('.labels')
-      .select('#' + name)
-      .classed('selected', true);
-  }
-
-  function visitStation(name, highlighted) {
-    d3
-      .select('.labels')
-      .select('#' + name)
-      .select('text')
-      .classed('highlighted', highlighted);
-  }
 
   function drawRiver() {
     gMap
@@ -281,8 +184,6 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-
-        selectStation(name);
         dispatch.call('click', this, name);
       })
       .append('path')
@@ -321,8 +222,6 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-
-        selectStation(name);
         dispatch.call('click', this, name);
       })
       .append('path')
@@ -358,9 +257,6 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-
-        selectStation(name);
-
         dispatch.call('click', this, name);
       })
       .append('text')
