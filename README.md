@@ -22,10 +22,7 @@ is exported:
 <script src="../build/d3-tube-map.js"></script>
 
 <script>
-  var container = d3.select('#tube-map')
-      .append('svg')
-      .style('width', '100%')
-      .style('height', '100%');
+  var container = d3.select('#tube-map');
 
   var width = 1600;
   var height = 1024;
