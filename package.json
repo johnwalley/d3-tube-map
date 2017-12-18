@@ -1,6 +1,6 @@
 {
   "name": "d3-tube-map",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Draw tube maps in the style of the London Underground",
   "keywords": ["d3", "d3-module", "tube", "map"],
   "homepage": "http://www.pubmap.co.uk/",

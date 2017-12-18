@@ -92,8 +92,8 @@ export default function() {
       var zoomContainer = g.call(zoom);
       gMap = zoomContainer.append('g');
 
-      var initialScale = 0.7;
-      var initialTranslate = [-200, 200];
+      var initialScale = 2;
+      var initialTranslate = [100, 200];
 
       zoom.scaleTo(zoomContainer, initialScale);
       zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);

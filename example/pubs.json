@@ -431,14 +431,6 @@
         "lon": 0.112693
       }
     },
-    "JennyWren": {
-      "title": "Jenny Wren",
-      "address": "St Kilda Ave, Cambridge, CB4 2QA",
-      "position": {
-        "lat": 52.229577,
-        "lon": 0.137331
-      }
-    },
     "KingsHead": {
       "title": "King's Head",
       "address": "50 High St, Fen Ditton, Cambridge CB5 8ST",
@@ -1478,9 +1470,7 @@
           "dir": "E"
         },
         {
-          "coords": [39, 33],
-          "name": "JennyWren",
-          "labelPos": "E"
+          "coords": [39, 33]
         },
         {
           "coords": [39, 42],
