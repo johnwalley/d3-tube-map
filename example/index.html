@@ -11,17 +11,11 @@
   <div id="tube-map">
   </div>
   <script>
-    var el = document.getElementById('tube-map');
-
-    var svg = d3.select(el)
-      .append('svg')
-      .style('width', '100%')
-      .style('height', '100%');;
-
+    var container = d3.select('#tube-map');
     var width = 1600;
     var height = 1024;
 
-    const map = d3.tubeMap()
+    var map = d3.tubeMap()
       .width(width)
       .height(height)
       .margin({
@@ -32,7 +26,8 @@
       });
 
     d3.json("./pubs.json", function (error, data) {
-      svg.datum(data).call(map);
+      container
+        .datum(data).call(map);
     });
   </script>
 </body>

@@ -1,0 +1,25 @@
+{
+  "stations": {},
+  "lines": [
+    {
+      "name": "Town",
+      "label": "Town",
+      "color": "#ffd300",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [0, 0]
+        },
+        {
+          "coords": [2, 0]
+        },
+        {
+          "coords": [4, 1]
+        },
+        {
+          "coords": [6, 3]
+        }
+      ]
+    }
+  ]
+}

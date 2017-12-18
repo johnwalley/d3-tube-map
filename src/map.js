@@ -15,36 +15,34 @@ export default function() {
   var dispatch = d3.dispatch('click');
 
   var svg;
+  var _data;
 
-  var model;
-
-  var gEnter;
+  var gMap;
   var zoom;
 
   var t;
 
   function map(selection) {
     selection.each(function(data) {
-      data = transformData(data);
-      model = data;
+      _data = transformData(data);
 
-      var minX = d3.min(data.raw, function(line) {
+      var minX = d3.min(_data.raw, function(line) {
         return d3.min(line.nodes, function(node) {
           return node.coords[0];
         });
       });
-      var maxX = d3.max(data.raw, function(line) {
+      var maxX = d3.max(_data.raw, function(line) {
         return d3.max(line.nodes, function(node) {
           return node.coords[0];
         });
       });
 
-      var minY = d3.min(data.raw, function(line) {
+      var minY = d3.min(_data.raw, function(line) {
         return d3.min(line.nodes, function(node) {
           return node.coords[1];
         });
       });
-      var maxY = d3.max(data.raw, function(line) {
+      var maxY = d3.max(_data.raw, function(line) {
         return d3.max(line.nodes, function(node) {
           return node.coords[1];
         });
@@ -72,12 +70,12 @@ export default function() {
       yScale.domain([minY, maxY]).range([maxYRange, 0]);
       lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
-      svg = d3
-        .select(this)
-        .selectAll('svg')
-        .data([data]);
+      svg = selection
+        .append('svg')
+        .style('width', '100%')
+        .style('height', '100%');
 
-      var g = svg.enter().append('g');
+      var g = svg.append('g');
 
       // Fill with white rectangle to capture zoom events
       g
@@ -87,7 +85,7 @@ export default function() {
         .attr('fill', 'white');
 
       var zoomed = function() {
-        gEnter.attr('transform', d3.event.transform.toString());
+        gMap.attr('transform', d3.event.transform.toString());
       };
 
       zoom = d3
@@ -95,14 +93,16 @@ export default function() {
         .scaleExtent([0.5, 6])
         .on('zoom', zoomed);
 
-      gEnter = g.call(zoom).append('g');
-      svg.attr('width', '100%').attr('height', '100%');
+      gMap = g.call(zoom).append('g');
 
-      drawRiver(gEnter);
-      drawLines(gEnter);
-      drawInterchanges(gEnter);
-      drawStations(gEnter);
-      drawLabels(gEnter);
+      if (_data.river !== undefined) {
+        drawRiver();
+      }
+
+      drawLines();
+      drawInterchanges();
+      drawStations();
+      drawLabels();
     });
   }
 
@@ -125,9 +125,9 @@ export default function() {
   };
 
   map.highlightLine = function(name) {
-    var lines = d3.select('#map').selectAll('.line');
-    var stations = d3.select('#map').selectAll('.station');
-    var labels = d3.select('#map').selectAll('.label');
+    var lines = svg.selectAll('.line');
+    var stations = svg.selectAll('.station');
+    var labels = svg.selectAll('.label');
 
     lines.classed('translucent', true);
     stations.classed('translucent', true);
@@ -135,13 +135,13 @@ export default function() {
 
     stations.filter('.' + name).classed('translucent', false);
     labels.filter('.' + name).classed('translucent', false);
-    d3.select('#' + name).classed('translucent', false);
+    svg.select('#' + name).classed('translucent', false);
   };
 
   map.unhighlightAll = function() {
-    var lines = d3.select('#map').selectAll('.line');
-    var stations = d3.select('#map').selectAll('.station');
-    var labels = d3.select('#map').selectAll('.label');
+    var lines = svg.selectAll('.line');
+    var stations = svg.selectAll('.station');
+    var labels = svg.selectAll('.label');
 
     lines.classed('translucent', false);
     stations.classed('translucent', false);
@@ -155,7 +155,7 @@ export default function() {
   map.centerOnPub = function(name) {
     if (name === undefined) return;
 
-    var station = model.stations.stations[name];
+    var station = _data.stations.stations[name];
 
     var width = window.innerWidth;
     var height = window.innerHeight;
@@ -169,7 +169,7 @@ export default function() {
 
     // FIXME: Need valid d3 v4 syntax for zooming
     zoom.translateBy(t).scaleTo(2);
-    gEnter
+    gMap
       .transition()
       .duration(750)
       .attr(
@@ -187,7 +187,7 @@ export default function() {
   };
 
   map.visitStations = function(visited) {
-    d3
+    svg
       .selectAll('.labels')
       .select('text')
       .classed('highlighted', false);
@@ -224,14 +224,12 @@ export default function() {
       .classed('highlighted', highlighted);
   }
 
-  function drawRiver(gEnter) {
-    gEnter
+  function drawRiver() {
+    gMap
       .append('g')
       .attr('class', 'river')
       .selectAll('path')
-      .data(function(d) {
-        return [d.river];
-      })
+      .data([_data.river])
       .enter()
       .append('path')
       .attr('d', function(d) {
@@ -242,14 +240,12 @@ export default function() {
       .attr('stroke-width', 1.8 * lineWidth);
   }
 
-  function drawLines(gEnter) {
-    gEnter
+  function drawLines() {
+    gMap
       .append('g')
       .attr('class', 'lines')
       .selectAll('path')
-      .data(function(d) {
-        return d.lines.lines;
-      })
+      .data(_data.lines.lines)
       .enter()
       .append('path')
       .attr('d', function(d) {
@@ -268,17 +264,15 @@ export default function() {
       .classed('line', true);
   }
 
-  function drawInterchanges(gEnter) {
+  function drawInterchanges() {
     var fgColor = '#000000';
     var bgColor = '#ffffff';
 
-    gEnter
+    gMap
       .append('g')
       .attr('class', 'interchanges')
       .selectAll('path')
-      .data(function(d) {
-        return d.stations.interchanges();
-      })
+      .data(_data.stations.interchanges())
       .enter()
       .append('g')
       .attr('id', function(d) {
@@ -313,14 +307,12 @@ export default function() {
       .style('cursor', 'pointer');
   }
 
-  function drawStations(gEnter) {
-    gEnter
+  function drawStations() {
+    gMap
       .append('g')
       .attr('class', 'stations')
       .selectAll('path')
-      .data(function(d) {
-        return d.stations.normalStations();
-      })
+      .data(_data.stations.normalStations())
       .enter()
       .append('g')
       .attr('id', function(d) {
@@ -351,14 +343,12 @@ export default function() {
       .classed('station', true);
   }
 
-  function drawLabels(gEnter) {
-    gEnter
+  function drawLabels() {
+    gMap
       .append('g')
       .attr('class', 'labels')
       .selectAll('text')
-      .data(function(d) {
-        return d.stations.toArray();
-      })
+      .data(_data.stations.toArray())
       .enter()
       .append('g')
       .attr('id', function(d) {
