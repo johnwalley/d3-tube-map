@@ -10,7 +10,7 @@ export default function() {
   var xScale = d3.scaleLinear();
   var yScale = d3.scaleLinear();
   var lineWidth;
-  var lineWidthMultiplier = 1.2;
+  var lineWidthMultiplier = 0.8;
   var lineWidthTickRatio = 3 / 2;
   var svg;
   var _data;
@@ -86,14 +86,17 @@ export default function() {
 
       zoom = d3
         .zoom()
-        .scaleExtent([0.2, 6])
+        .scaleExtent([0.5, 6])
         .on('zoom', zoomed);
 
       var zoomContainer = g.call(zoom);
       gMap = zoomContainer.append('g');
 
-      zoom.scaleTo(zoomContainer, 0.5);
-      zoom.translateTo(zoomContainer, 0, -400);
+      var initialScale = 0.7;
+      var initialTranslate = [-200, 200];
+
+      zoom.scaleTo(zoomContainer, initialScale);
+      zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
 
       function zoomed() {
         gMap.attr('transform', d3.event.transform.toString());
@@ -425,11 +428,11 @@ export default function() {
         textAnchor = 'start';
         break;
       case 'se':
-        pos = [offset / sqrt2, -offset / sqrt2];
+        pos = [offset / sqrt2, -1.4 * offset / sqrt2];
         textAnchor = 'start';
         break;
       case 's':
-        pos = [0, -lineWidthMultiplier * offset];
+        pos = [0, -1.4 * lineWidthMultiplier * offset];
         textAnchor = 'middle';
         break;
       case 'sw':
