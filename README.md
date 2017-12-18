@@ -8,7 +8,7 @@ Draw tube maps in the style of the London Underground using d3.
 See a demo
 [here](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db420).
 
-![Screenshot](https://user-images.githubusercontent.com/981531/32612404-220d7d62-c560-11e7-8070-78c2dd328c00.png)
+![Screenshot](https://user-images.githubusercontent.com/981531/34120207-c26283f4-e41c-11e7-9683-e772f7bd308d.png)
 
 ## Installing
 
