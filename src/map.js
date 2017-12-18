@@ -11,13 +11,14 @@ export default function() {
   var yScale = d3.scaleLinear();
   var lineWidth;
   var lineWidthMultiplier = 1.2;
+  var lineWidthTickRatio = 3 / 2;
   var svg;
   var _data;
   var gMap;
   var zoom;
   var t;
 
-  var dispatch = d3.dispatch('click');
+  var listeners = d3.dispatch('click');
 
   function map(selection) {
     selection.each(function(data) {
@@ -83,16 +84,20 @@ export default function() {
         .attr('height', '100%')
         .attr('fill', 'white');
 
-      var zoomed = function() {
-        gMap.attr('transform', d3.event.transform.toString());
-      };
-
       zoom = d3
         .zoom()
-        .scaleExtent([0.5, 6])
+        .scaleExtent([0.2, 6])
         .on('zoom', zoomed);
 
-      gMap = g.call(zoom).append('g');
+      var zoomContainer = g.call(zoom);
+      gMap = zoomContainer.append('g');
+
+      zoom.scaleTo(zoomContainer, 0.5);
+      zoom.translateTo(zoomContainer, 0, -400);
+
+      function zoomed() {
+        gMap.attr('transform', d3.event.transform.toString());
+      }
 
       if (_data.river !== undefined) {
         drawRiver();
@@ -123,8 +128,9 @@ export default function() {
     return map;
   };
 
-  map.on = function(event, callback) {
-    dispatch.on(event, callback);
+  map.on = function() {
+    var value = listeners.on.apply(listeners, arguments);
+    return value === listeners ? map : value;
   };
 
   function drawRiver() {
@@ -136,9 +142,9 @@ export default function() {
       .enter()
       .append('path')
       .attr('d', function(d) {
-        return line(d, xScale, yScale, lineWidth);
+        return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
-      .attr('stroke', '#C4E8F8')
+      .attr('stroke', '#CCECF4')
       .attr('fill', 'none')
       .attr('stroke-width', 1.8 * lineWidth);
   }
@@ -152,7 +158,7 @@ export default function() {
       .enter()
       .append('path')
       .attr('d', function(d) {
-        return line(d, xScale, yScale, lineWidth);
+        return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
       .attr('id', function(d) {
         return d.name;
@@ -184,7 +190,7 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-        dispatch.call('click', this, name);
+        listeners.call('click', this, name);
       })
       .append('path')
       .attr('d', interchange(lineWidth))
@@ -222,16 +228,22 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-        dispatch.call('click', this, name);
+        listeners.call('click', this, name);
       })
       .append('path')
       .attr('d', function(d) {
-        return station(d, xScale, yScale, lineWidthMultiplier);
+        return station(
+          d,
+          xScale,
+          yScale,
+          lineWidthMultiplier,
+          lineWidthTickRatio
+        );
       })
       .attr('stroke', function(d) {
         return d.color;
       })
-      .attr('stroke-width', lineWidth / 2)
+      .attr('stroke-width', lineWidth / lineWidthTickRatio)
       .attr('fill', 'none')
       .attr('class', function(d) {
         return d.line;
@@ -257,12 +269,13 @@ export default function() {
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
-        dispatch.call('click', this, name);
+        listeners.call('click', this, name);
       })
       .append('text')
       .text(function(d) {
         return d.label;
       })
+      .attr('fill', '#10137E')
       .attr('dy', 0.1)
       .attr('x', function(d) {
         return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
@@ -276,7 +289,7 @@ export default function() {
       .style('display', function(d) {
         return d.hide !== true ? 'block' : 'none';
       })
-      .style('font-size', 1.2 * lineWidth / lineWidthMultiplier + 'px')
+      .style('font-size', lineWidth + 'px')
       .style('-webkit-user-select', 'none')
       .attr('class', function(d) {
         return d.marker

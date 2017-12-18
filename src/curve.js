@@ -4,12 +4,18 @@ export function interchange(lineWidth) {
   return d3
     .arc()
     .innerRadius(0)
-    .outerRadius(lineWidth)
+    .outerRadius(1.25 * lineWidth)
     .startAngle(0)
     .endAngle(2 * Math.PI);
 }
 
-export function station(d, xScale, yScale, lineWidthMultiplier) {
+export function station(
+  d,
+  xScale,
+  yScale,
+  lineWidthMultiplier,
+  lineWidthTickRatio
+) {
   var dir;
   var sqrt2 = Math.sqrt(2);
 
@@ -61,13 +67,19 @@ export function station(d, xScale, yScale, lineWidthMultiplier) {
         lineWidthMultiplier / 2.05 * dir[1],
     ],
     [
-      d.x + d.shiftX * lineWidthMultiplier + lineWidthMultiplier * dir[0],
-      d.y + d.shiftY * lineWidthMultiplier + lineWidthMultiplier * dir[1],
+      d.x +
+        d.shiftX * lineWidthMultiplier +
+        lineWidthMultiplier / 2 * dir[0] +
+        lineWidthMultiplier / lineWidthTickRatio * dir[0],
+      d.y +
+        d.shiftY * lineWidthMultiplier +
+        lineWidthMultiplier / 2 * dir[1] +
+        lineWidthMultiplier / lineWidthTickRatio * dir[1],
     ],
   ]);
 }
 
-export function line(data, xScale, yScale, lineWidth) {
+export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
   var path = '';
 
   var lineNodes = data.nodes;
@@ -99,30 +111,46 @@ export function line(data, xScale, yScale, lineWidth) {
 
       if (lineNode === lineNodes.length - 1) {
         if (xDiff == 0 || yDiff == 0) {
-          if (xDiff > 0) lineEndCorrection = [-lineWidth / (4 * unitLength), 0];
-          if (xDiff < 0) lineEndCorrection = [lineWidth / (4 * unitLength), 0];
-          if (yDiff > 0) lineEndCorrection = [0, -lineWidth / (4 * unitLength)];
-          if (yDiff < 0) lineEndCorrection = [0, lineWidth / (4 * unitLength)];
+          if (xDiff > 0)
+            lineEndCorrection = [
+              -lineWidth / (2 * lineWidthTickRatio * unitLength),
+              0,
+            ];
+          if (xDiff < 0)
+            lineEndCorrection = [
+              lineWidth / (2 * lineWidthTickRatio * unitLength),
+              0,
+            ];
+          if (yDiff > 0)
+            lineEndCorrection = [
+              0,
+              -lineWidth / (2 * lineWidthTickRatio * unitLength),
+            ];
+          if (yDiff < 0)
+            lineEndCorrection = [
+              0,
+              lineWidth / (2 * lineWidthTickRatio * unitLength),
+            ];
         } else {
           if (xDiff > 0 && yDiff > 0)
             lineEndCorrection = [
-              -lineWidth / (4 * unitLength * sqrt2),
-              -lineWidth / (4 * unitLength * sqrt2),
+              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
             ];
           if (xDiff > 0 && yDiff < 0)
             lineEndCorrection = [
-              -lineWidth / (4 * unitLength * sqrt2),
-              lineWidth / (4 * unitLength * sqrt2),
+              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
             ];
           if (xDiff < 0 && yDiff > 0)
             lineEndCorrection = [
-              lineWidth / (4 * unitLength * sqrt2),
-              -lineWidth / (4 * unitLength * sqrt2),
+              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
             ];
           if (xDiff < 0 && yDiff < 0)
             lineEndCorrection = [
-              lineWidth / (4 * unitLength * sqrt2),
-              lineWidth / (4 * unitLength * sqrt2),
+              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
             ];
         }
       }
@@ -272,30 +300,46 @@ export function line(data, xScale, yScale, lineWidth) {
       var lineStartCorrection = [0, 0];
 
       if (xDiff == 0 || yDiff == 0) {
-        if (xDiff > 0) lineStartCorrection = [lineWidth / (4 * unitLength), 0];
-        if (xDiff < 0) lineStartCorrection = [-lineWidth / (4 * unitLength), 0];
-        if (yDiff > 0) lineStartCorrection = [0, lineWidth / (4 * unitLength)];
-        if (yDiff < 0) lineStartCorrection = [0, -lineWidth / (4 * unitLength)];
+        if (xDiff > 0)
+          lineStartCorrection = [
+            lineWidth / (2 * lineWidthTickRatio * unitLength),
+            0,
+          ];
+        if (xDiff < 0)
+          lineStartCorrection = [
+            -lineWidth / (2 * lineWidthTickRatio * unitLength),
+            0,
+          ];
+        if (yDiff > 0)
+          lineStartCorrection = [
+            0,
+            lineWidth / (2 * lineWidthTickRatio * unitLength),
+          ];
+        if (yDiff < 0)
+          lineStartCorrection = [
+            0,
+            -lineWidth / (2 * lineWidthTickRatio * unitLength),
+          ];
       } else {
         if (xDiff > 0 && yDiff > 0)
           lineStartCorrection = [
-            lineWidth / (4 * unitLength * sqrt2),
-            lineWidth / (4 * unitLength * sqrt2),
+            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
           ];
         if (xDiff > 0 && yDiff < 0)
           lineStartCorrection = [
-            lineWidth / (4 * unitLength * sqrt2),
-            -lineWidth / (4 * unitLength * sqrt2),
+            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
           ];
         if (xDiff < 0 && yDiff > 0)
           lineStartCorrection = [
-            -lineWidth / (4 * unitLength * sqrt2),
-            lineWidth / (4 * unitLength * sqrt2),
+            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
           ];
         if (xDiff < 0 && yDiff < 0)
           lineStartCorrection = [
-            -lineWidth / (4 * unitLength * sqrt2),
-            -lineWidth / (4 * unitLength * sqrt2),
+            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
+            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
           ];
       }
 

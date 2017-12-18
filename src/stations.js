@@ -51,26 +51,6 @@ Stations.prototype.normalStations = function() {
   return stationMarkers;
 };
 
-Stations.prototype.visited = function() {
-  var visitedStations = this.toArray();
-
-  return visitedStations.filter(function(station) {
-    return station.visited;
-  });
-};
-
-Stations.prototype.visitedFriendly = function() {
-  var visitedStations = this.visited();
-
-  return visitedStations.map(function(station) {
-    return station.title;
-  });
-};
-
-Stations.prototype.isVisited = function(name) {
-  return this.stations[name].visited;
-};
-
 export default function(stations) {
   return new Stations(stations);
 }

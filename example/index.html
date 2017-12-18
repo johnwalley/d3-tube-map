@@ -12,8 +12,8 @@
   </div>
   <script>
     var container = d3.select('#tube-map');
-    var width = 1600;
-    var height = 1024;
+    var width = 3200;
+    var height = 2048;
 
     var map = d3.tubeMap()
       .width(width)
@@ -23,6 +23,9 @@
         right: width / 7,
         bottom: height / 10,
         left: width / 7,
+      })
+      .on("click", function (name) {
+        console.log(name);
       });
 
     d3.json("./pubs.json", function (error, data) {

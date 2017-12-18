@@ -13,6 +13,8 @@ tape('map(selection) produces the expected result', function(test) {
   var bodyActual = new jsdom.JSDOM('<!DOCTYPE html><div></div>').window.document
     .body;
 
+  global.SVGElement = function() {};
+
   var bodyExpected = new jsdom.JSDOM(file('map.html')).window.document.body;
   var data = JSON.parse(
     fs.readFileSync(path.join(__dirname, 'map.json'), 'utf8')
