@@ -547,6 +547,15 @@
         "lon": 0.124987
       }
     },
+    "Petersfield": {
+      "title": "Petersfield",
+      "address": "2 Sturton Street, Cambridge CB1 2QA",
+      "phone": "01223 306306",
+      "position": {
+        "lat": 52.201332,
+        "lon": 0.140671
+      }
+    },
     "Pickerel": {
       "title": "Pickerel",
       "address": "30 Magdalene St, Cambridge CB3 0AF",
@@ -1087,16 +1096,16 @@
         },
         {
           "coords": [57, 2],
-          "name": "Dobblers",
+          "name": "BlueMoon",
           "labelPos": "S"
         },
         {
           "coords": [62, 2],
-          "name": "BlueMoon",
+          "name": "Dobblers",
           "labelPos": "N"
         },
         {
-          "coords": [67, 2],
+          "coords": [66, 2],
           "name": "AlexandraArms",
           "labelPos": "S"
         },
@@ -1112,11 +1121,13 @@
           "coords": [72, 1]
         },
         {
-          "coords": [74, -1]
+          "coords": [74, -1],
+          "name": "CambridgeBlue",
+          "labelPos": "NE"
         },
         {
           "coords": [76, -3],
-          "name": "CambridgeBlue",
+          "name": "Petersfield",
           "labelPos": "NE"
         },
         {

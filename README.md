@@ -57,7 +57,7 @@ Render the tube map to the given _selection_, which is a
 [selection](https://github.com/d3/d3-selection).
 
 <a name="tubeMap_width" href="#tubeMap_width">#</a>
-<i>tubeMap</i>.<b>width</b>(<i>w</i>)lk
+<i>tubeMap</i>.<b>width</b>(<i>w</i>)
 [<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L109 "Source")
 
 Sets the width of the viewbox the map is rendered to.
