@@ -66,8 +66,8 @@ export default function() {
         maxYRange = height - margin.top - margin.bottom;
       }
 
-      xScale.domain([minX, maxX]).range([0, maxXRange]);
-      yScale.domain([minY, maxY]).range([maxYRange, 0]);
+      xScale.domain([minX, maxX]).range([margin.left, margin.left + maxXRange]);
+      yScale.domain([minY, maxY]).range([margin.top + maxYRange, margin.top]);
       lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
       svg = selection
@@ -75,32 +75,7 @@ export default function() {
         .style('width', '100%')
         .style('height', '100%');
 
-      var g = svg.append('g');
-
-      // Fill with white rectangle to capture zoom events
-      g
-        .append('rect')
-        .attr('width', '100%')
-        .attr('height', '100%')
-        .attr('fill', 'white');
-
-      zoom = d3
-        .zoom()
-        .scaleExtent([0.5, 6])
-        .on('zoom', zoomed);
-
-      var zoomContainer = g.call(zoom);
-      gMap = zoomContainer.append('g');
-
-      var initialScale = 2;
-      var initialTranslate = [100, 200];
-
-      zoom.scaleTo(zoomContainer, initialScale);
-      zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
-
-      function zoomed() {
-        gMap.attr('transform', d3.event.transform.toString());
-      }
+      gMap = svg.append('g');
 
       if (_data.river !== undefined) {
         drawRiver();
