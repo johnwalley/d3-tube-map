@@ -16,27 +16,3 @@ text {
   cursor: pointer;
   font-weight: normal;
 }
-
-.line {
-  transition-property: opacity;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-out;
-}
-
-.station {
-  transition-property: opacity;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-out;
-}
-
-.interchange {
-  transition-property: opacity;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-out;
-}
-
-.label {
-  transition: opacity 0.5s ease-out;
-  transition: transform 0.5s ease-in-out;
-  transform-origin: 50% 50%;
-}

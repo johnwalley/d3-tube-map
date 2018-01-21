@@ -326,7 +326,7 @@ export default function() {
           station.labelPos = d.labelPos;
         }
 
-        station.label = data.stations[d.name].title;
+        station.label = data.stations[d.name].label;
         station.position = data.stations[d.name].position;
         station.visited = false;
 

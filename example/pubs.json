@@ -1,7 +1,8 @@
 {
   "stations": {
     "AlexandraArms": {
-      "title": "Alexandra\nArms",
+      "name": "Alexandra Arms",
+      "label": "Alexandra\nArms",
       "place_id": "ChIJaVrou4hw2EcROetQMMOP12M",
       "address": "22 Gwydir St, Cambridge CB1 2LL",
       "website": "http://www.thealexcambridge.com/",
@@ -12,7 +13,8 @@
       }
     },
     "Alma": {
-      "title": "Alma",
+      "name": "Alma",
+      "label": "Alma",
       "place_id": "ChIJF5v8q55w2EcRWbfRNUQNPmE",
       "address": "26 Russel Court, Cambridge, CB2 1HW",
       "website": "http://www.thealmacambridge.co.uk/",
@@ -23,7 +25,8 @@
       }
     },
     "Anchor": {
-      "title": "Anchor",
+      "name": "Anchor",
+      "label": "Anchor",
       "place_id": "hIJocwdyrxw2EcRnogp-KBkY_o",
       "address": "Silver Street, Cambridge, CB3 9EL",
       "website": "http://www.anchorcambridge.com",
@@ -34,7 +37,8 @@
       }
     },
     "AncientShepherds": {
-      "title": "Ancient Shepherds",
+      "name": "Ancient Shepherds",
+      "label": "Ancient Shepherds",
       "place_id": "ChIJI5agpzlw2EcR55ZT5vZy_ok",
       "address": "5 High St, Fen Ditton, Cambridge, CB5 8ST",
       "website": "http://www.theancientshepherds.co.uk/",
@@ -45,7 +49,8 @@
       }
     },
     "Architect": {
-      "title": "Architect",
+      "name": "Architect",
+      "label": "Architect",
       "place_id": "ChIJX3Dbo7hw2EcR4iVxgX74BlU",
       "address": "43 Castle St, Cambridge, CB3 0AH",
       "website": "http://www.thearchitectcambridge.co.uk/",
@@ -56,7 +61,8 @@
       }
     },
     "BaronOfBeef": {
-      "title": "Baron\nof Beef",
+      "name": "Baron of Beef",
+      "label": "Baron\nof Beef",
       "place_id": "ChIJVeAxW75w2EcRkM91IuEN_oU",
       "address": "19 Bridge St, Cambridge CB2 1UF",
       "website": "http://www.baronofbeef-cambridge.co.uk/",
@@ -67,7 +73,8 @@
       }
     },
     "BathHouse": {
-      "title": "Bath House",
+      "name": "Bath House",
+      "label": "Bath House",
       "address": "3 Benet Street, Cambridge, CB2 3QN",
       "website": "http://www.bathhouse-cambridge.co.uk/",
       "phone": "01223 350969",
@@ -77,7 +84,8 @@
       }
     },
     "BlueBallInn": {
-      "title": "Blue Ball Inn",
+      "name": "Blue Ball Inn",
+      "label": "Blue Ball Inn",
       "address": "57 Broadway, Grantchester, Cambridge CB3 9NQ",
       "website": "http://www.blueballgrantchester.co.uk/",
       "phone": "01223 846004",
@@ -87,7 +95,8 @@
       }
     },
     "BlueMoon": {
-      "title": "Blue Moon",
+      "name": "Blue Moon",
+      "label": "Blue Moon",
       "address": "2 Norfolk St, Cambridge CB1 2LF",
       "website": "https://www.facebook.com/bluemooncambridge/",
       "phone": "01223 500238",
@@ -97,7 +106,8 @@
       }
     },
     "Boathouse": {
-      "title": "Boathouse",
+      "name": "Boathouse",
+      "label": "Boathouse",
       "address": "14 Chesterton Rd, Cambridge CB4 3AX",
       "website": "http://www.boathouse-cambridge.co.uk/",
       "phone": "01223 460905",
@@ -107,7 +117,8 @@
       }
     },
     "BrewHouse": {
-      "title": "Brew\nHouse",
+      "name": "Brew House",
+      "label": "Brew\nHouse",
       "address": "1 King St, Cambridge CB1 1LH",
       "website": "http://www.thecambridgebrewhouse.com/",
       "phone": "01223 855185",
@@ -117,7 +128,8 @@
       }
     },
     "Brook": {
-      "title": "Brook",
+      "name": "Brook",
+      "label": "Brook",
       "address": "25 Brookfields, Cambridge CB1 3NW",
       "website": "http://www.thebrookpub.co.uk/",
       "phone": "01223 566929",
@@ -127,7 +139,8 @@
       }
     },
     "BurleighArms": {
-      "title": "Burleigh\nArms",
+      "name": "Burleigh Arms",
+      "label": "Burleigh\nArms",
       "address": "9-11 Newmarket Rd, Cambridge CB5 8EG",
       "website": "http://www.burleigharmscambridge.co.uk/",
       "phone": "01223 301547",
@@ -137,7 +150,8 @@
       }
     },
     "CambridgeBlue": {
-      "title": "Cambridge Blue",
+      "name": "Cambridge Blue",
+      "label": "Cambridge Blue",
       "address": "85-87 Gwydir St, Cambridge CB1 2LG",
       "website": "http://www.the-cambridgeblue.co.uk/",
       "phone": "01223 471680",
@@ -147,7 +161,8 @@
       }
     },
     "CarltonArms": {
-      "title": "Carlton Arms",
+      "name": "Carlton Arms",
+      "label": "Carlton Arms",
       "address": "Carlton Way, Cambridge CB4 2DF",
       "website": "http://thecarltonarmscambridge.co.uk/",
       "phone": "01223 367422",
@@ -157,7 +172,8 @@
       }
     },
     "CarpentersArms": {
-      "title": "Carpenter's Arms",
+      "name": "Carpenter's Arms",
+      "label": "Carpenter's Arms",
       "address": "184-186 Victoria Rd, Cambridge, CB4 3DZ",
       "website": "http://www.carpentersarmscambridge.co.uk/",
       "phone": "01223 367050",
@@ -167,7 +183,8 @@
       }
     },
     "CastleInn": {
-      "title": "Castle\nInn",
+      "name": "Castle Inn",
+      "label": "Castle\nInn",
       "place_id": "ChIJoccoXsdw2EcROG63agLdFi4",
       "address": "38 Castle St, City Centre, Cambridge CB3 0AJ",
       "website": "http://thecastleinncambridge.com/",
@@ -178,7 +195,8 @@
       }
     },
     "ChampionOfTheThames": {
-      "title": "Champion\nof the\nThames",
+      "name": "Champion of the Thames",
+      "label": "Champion\nof the\nThames",
       "address": "68 King St, Cambridge CB1 1LN",
       "position": {
         "lat": 52.207328,
@@ -186,7 +204,8 @@
       }
     },
     "ClarendonArms": {
-      "title": "Clarendon\nArms",
+      "name": "Clarendon Arms",
+      "label": "Clarendon\nArms",
       "address": "35-36 Clarendon St, Cambridge CB1 1JX",
       "phone": "01223 778272",
       "position": {
@@ -195,7 +214,8 @@
       }
     },
     "CornerHouse": {
-      "title": "Corner House",
+      "name": "Corner House",
+      "label": "Corner House",
       "address": "231 Newmarket Rd, Cambridge CB5 8JE",
       "phone": "01223 352047",
       "position": {
@@ -204,7 +224,8 @@
       }
     },
     "Cricketers": {
-      "title": "Cricketers",
+      "name": "Cricketers",
+      "label": "Cricketers",
       "address": "18 Melbourne Pl, Cambridge CB1 1EQ",
       "website": "http://lukthai.com/",
       "phone": "01223 778871",
@@ -214,7 +235,8 @@
       }
     },
     "DevonshireArms": {
-      "title": "Devonshire Arms",
+      "name": "Devonshire Arms",
+      "label": "Devonshire Arms",
       "address": "1B Devonshire Rd, Cambridge, CB1 2BH",
       "website": "https://www.individualpubs.co.uk/devonshire/",
       "phone": "01223 316610",
@@ -224,7 +246,8 @@
       }
     },
     "Dobblers": {
-      "title": "Dobblers",
+      "name": "Dobblers",
+      "label": "Dobblers",
       "address": "184 Sturton St, Cambridge, CB1 2QF",
       "website": "http://www.thedobblers.com/",
       "phone": "01223 576092",
@@ -234,7 +257,8 @@
       }
     },
     "DukeOfCambridge": {
-      "title": "Duke\nof Cambridge",
+      "name": "Duke of Cambridge",
+      "label": "Duke\nof Cambridge",
       "address": "176 East Rd, Cambridge CB1 1BG",
       "website": "http://www.dukeofcambridge-cambridge.co.uk/",
       "phone": "01223 304121",
@@ -244,7 +268,8 @@
       }
     },
     "Eagle": {
-      "title": "Eagle",
+      "name": "Eagle",
+      "label": "Eagle",
       "address": "8 Benet Street, Cambridge, CB2 3QN",
       "website": "http://www.eagle-cambridge.co.uk/",
       "phone": "01223 505020",
@@ -254,7 +279,8 @@
       }
     },
     "EarlOfBeaconsfield": {
-      "title": "Earl of Beaconsfield",
+      "name": "Earl of Beaconsfield",
+      "label": "Earl of Beaconsfield",
       "address": "133 Mill Rd, Cambridge CB1 3AA",
       "website": "http://www.earlofbeaconsfield.co.uk/",
       "phone": "01223 410703",
@@ -264,7 +290,8 @@
       }
     },
     "EarlOfDerby": {
-      "title": "Earl of Derby",
+      "name": "Earl of Derby",
+      "label": "Earl of Derby",
       "address": "129 Hills Rd, Cambridge CB2 1PG",
       "website": "http://www.theearlofderby.com/",
       "phone": "01223 352785",
@@ -274,7 +301,8 @@
       }
     },
     "ElmTree": {
-      "title": "Elm Tree",
+      "name": "Elm Tree",
+      "label": "Elm Tree",
       "address": "16A Orchard St, Cambridge CB1 1JT",
       "website": "http://www.theelmtreecambridge.co.uk/",
       "phone": "01223 502632",
@@ -284,7 +312,8 @@
       }
     },
     "Empress": {
-      "title": "Empress",
+      "name": "Empress",
+      "label": "Empress",
       "address": "72 Thoday St, Cambridge, CB1 3AX",
       "phone": "01223 247236",
       "position": {
@@ -293,7 +322,8 @@
       }
     },
     "FlyingPig": {
-      "title": "Flying Pig",
+      "name": "Flying Pig",
+      "label": "Flying Pig",
       "address": "106 Hills Rd, Cambridge, CB2 1LQ",
       "phone": "01223 354623",
       "position": {
@@ -302,7 +332,8 @@
       }
     },
     "FortStGeorge": {
-      "title": "Fort St George",
+      "name": "Fort St George",
+      "label": "Fort St George",
       "address": "Cambridge CB4 1HA",
       "website": "http://www.fortstgeorge-cambridge.co.uk/",
       "phone": "01223 305523",
@@ -312,7 +343,8 @@
       }
     },
     "FreePress": {
-      "title": "Free Press",
+      "name": "Free Press",
+      "label": "Free Press",
       "address": "7 Prospect Row, Cambridge, CB1 1DU",
       "website": "http://www.freepresspub.com/",
       "phone": "01223 368337",
@@ -322,7 +354,8 @@
       }
     },
     "Geldart": {
-      "title": "Geldart",
+      "name": "Geldart",
+      "label": "Geldart",
       "address": "1 Ainsworth St, Cambridge, CB1 2PF",
       "website": "http://www.the-geldart.co.uk/",
       "phone": "01223 314264",
@@ -332,7 +365,8 @@
       }
     },
     "GoldenHind": {
-      "title": "Golden Hind",
+      "name": "Golden Hind",
+      "label": "Golden Hind",
       "address": "355 Milton Rd, Cambridge, CB4 1SP",
       "website": "http://www.golden-hind-pub-cambridge.co.uk/",
       "phone": "01223 420816",
@@ -342,7 +376,8 @@
       }
     },
     "GrainStore": {
-      "title": "Grain Store",
+      "name": "Grain Store",
+      "label": "Grain Store",
       "address": "69-76 Regent St, Cambridge CB2 1AA",
       "website": "http://www.grainandhopstore-cambridge.co.uk/",
       "phone": "01223 323405",
@@ -352,7 +387,8 @@
       }
     },
     "Granta": {
-      "title": "Granta",
+      "name": "Granta",
+      "label": "Granta",
       "address": "14 Newnham Rd, Cambridge, CB3 9EX",
       "website": "http://www.granta-cambridge.co.uk/",
       "phone": "01223 505016",
@@ -362,7 +398,8 @@
       }
     },
     "Grapes": {
-      "title": "Grapes",
+      "name": "Grapes",
+      "label": "Grapes",
       "address": "19 Histon Rd, Cambridge CB4 3JB",
       "website": "http://www.thegrapescambridge.co.uk/",
       "phone": "01223 511974",
@@ -372,7 +409,8 @@
       }
     },
     "GreenDragon": {
-      "title": "Green Dragon",
+      "name": "Green Dragon",
+      "label": "Green Dragon",
       "address": "5 Water St, Cambridge CB4 1NZ",
       "website": "http://www.greendragon-cambridge.co.uk/",
       "phone": "01223 505035",
@@ -382,7 +420,8 @@
       }
     },
     "GreenManGrantchester": {
-      "title": "Green Man",
+      "name": "Green Man",
+      "label": "Green Man",
       "address": "59 High St, Grantchester, Cambridge CB3 9NF",
       "website": "http://www.thegreenmangrantchester.co.uk/",
       "phone": "01223 844669",
@@ -392,7 +431,8 @@
       }
     },
     "GreenManTrumpington": {
-      "title": "Green Man",
+      "name": "Green Man",
+      "label": "Green Man",
       "address": "55 High St, Cambridge, Trumpington CB2 9HZ",
       "website": "http://www.thegreenmantrumpington.com/",
       "phone": "01223 844903",
@@ -402,7 +442,8 @@
       }
     },
     "Haymakers": {
-      "title": "Haymakers",
+      "name": "Haymakers",
+      "label": "Haymakers",
       "address": "54 High St, Cambridge CB4 1NG",
       "website": "https://www.facebook.com/cambridgehaymakers",
       "phone": "01223 311077",
@@ -412,7 +453,8 @@
       }
     },
     "Hopbine": {
-      "title": "Hopbine",
+      "name": "Hopbine",
+      "label": "Hopbine",
       "address": "11-12 Fair St, Cambridge, CB1 1HA",
       "website": "http://www.thehopbine.co.uk/",
       "phone": "01223 367204",
@@ -422,7 +464,8 @@
       }
     },
     "HudsonsAleHouse": {
-      "title": "Hudson's Ale House",
+      "name": "Hudson's Ale House",
+      "label": "Hudson's Ale House",
       "address": "77 High St, Trumpington CB2 9HZ",
       "website": "http://www.hudsonalehouse.co.uk/",
       "phone": "01223 570042",
@@ -432,7 +475,8 @@
       }
     },
     "KingsHead": {
-      "title": "King's Head",
+      "name": "King's Head",
+      "label": "King's Head",
       "address": "50 High St, Fen Ditton, Cambridge CB5 8ST",
       "phone": "01223 293861",
       "position": {
@@ -441,7 +485,8 @@
       }
     },
     "KingstonArms": {
-      "title": "Kingston Arms",
+      "name": "Kingston Arms",
+      "label": "Kingston Arms",
       "address": "33 Kingston St, Cambridge CB1 2NU",
       "website": "http://www.kingston-arms.co.uk/",
       "phone": "01223 319414",
@@ -451,7 +496,8 @@
       }
     },
     "KingStreetRun": {
-      "title": "King Street\nRun",
+      "name": "King Street Run",
+      "label": "King Street\nRun",
       "address": "86 King St, Cambridge CB1 1LN",
       "phone": "01223 328900",
       "position": {
@@ -460,7 +506,8 @@
       }
     },
     "LiveAndLetLive": {
-      "title": "Live and Let Live",
+      "name": "Live and Let Live",
+      "label": "Live and Let Live",
       "address": "40 Mawson Rd, Cambridge, CB1 2EA",
       "phone": "01223 460261",
       "position": {
@@ -469,7 +516,8 @@
       }
     },
     "LordByronInn": {
-      "title": "Lord Byron Inn",
+      "name": "Lord Byron Inn",
+      "label": "Lord Byron Inn",
       "address": "22 Church Ln, Trumpington, Cambridge CB2 9LA",
       "website": "http://www.lordbyroninn.co.uk/",
       "phone": "01223 845102",
@@ -479,7 +527,8 @@
       }
     },
     "Maypole": {
-      "title": "Maypole",
+      "name": "Maypole",
+      "label": "Maypole",
       "address": "20A Portugal Pl, Cambridge CB5 8AF",
       "website": "http://www.maypolefreehouse.co.uk/",
       "phone": "01223 352999",
@@ -489,7 +538,8 @@
       }
     },
     "Med": {
-      "title": "Med",
+      "name": "Med",
+      "label": "Med",
       "address": "Perne Rd, Cambridge, CB1 3RX",
       "phone": "01223 240808",
       "position": {
@@ -498,7 +548,8 @@
       }
     },
     "Mill": {
-      "title": "Mill",
+      "name": "Mill",
+      "label": "Mill",
       "address": "14 Mill Ln, Cambridge CB2 1RX",
       "website": "http://www.themillpubcambridge.com/",
       "phone": "01223 311829",
@@ -508,7 +559,8 @@
       }
     },
     "MiltonArms": {
-      "title": "Milton Arms",
+      "name": "Milton Arms",
+      "label": "Milton Arms",
       "address": "205 Milton Rd, Cambridge, CB4 1XG",
       "website": "http://www.hungryhorse.co.uk/locations/milton-arms",
       "phone": "01223 505012",
@@ -518,7 +570,8 @@
       }
     },
     "Mitre": {
-      "title": "Mitre",
+      "name": "Mitre",
+      "label": "Mitre",
       "address": "17 Bridge St, Cambridge CB2 1UF",
       "website":
         "http://www.nicholsonspubs.co.uk/restaurants/eastofengland/themitrecambridge",
@@ -529,7 +582,8 @@
       }
     },
     "OldSpring": {
-      "title": "Old Spring",
+      "name": "Old Spring",
+      "label": "Old Spring",
       "address": "1 Ferry Path, Cambridge CB4 1HB",
       "website": "http://www.theoldspring.co.uk/",
       "phone": "01223 357228",
@@ -539,7 +593,8 @@
       }
     },
     "PantonArms": {
-      "title": "Panton\nArms",
+      "name": "Panton Arms",
+      "label": "Panton\nArms",
       "address": "43 Panton St, Cambridge CB2 1HL",
       "phone": "01223 464351",
       "position": {
@@ -548,7 +603,8 @@
       }
     },
     "Petersfield": {
-      "title": "Petersfield",
+      "name": "Petersfield",
+      "label": "Petersfield",
       "address": "2 Sturton Street, Cambridge CB1 2QA",
       "phone": "01223 306306",
       "position": {
@@ -557,7 +613,8 @@
       }
     },
     "Pickerel": {
-      "title": "Pickerel",
+      "name": "Pickerel",
+      "label": "Pickerel",
       "address": "30 Magdalene St, Cambridge CB3 0AF",
       "website": "http://www.taylor-walker.co.uk/pub/pickerel-cambridge",
       "phone": "01223 355068",
@@ -567,7 +624,8 @@
       }
     },
     "PintShop": {
-      "title": "Pint Shop",
+      "name": "Pint Shop",
+      "label": "Pint Shop",
       "address": "10 Peas Hill, Cambridge CB2 3PN",
       "website": "http://pintshop.co.uk/",
       "phone": "01223 352293",
@@ -577,7 +635,8 @@
       }
     },
     "Plough": {
-      "title": "Plough",
+      "name": "Plough",
+      "label": "Plough",
       "address": "Green End, Cambridge, Cambridgshire CB5 8SX",
       "website": "http://www.theploughfenditton.co.uk/",
       "phone": "01223 293264",
@@ -587,7 +646,8 @@
       }
     },
     "PortlandArms": {
-      "title": "Portland Arms",
+      "name": "Portland Arms",
+      "label": "Portland Arms",
       "address": "129 Chesterton Rd, Cambridge CB4 3BA",
       "website": "http://www.theportlandarms.co.uk/",
       "phone": "01223 357268",
@@ -597,7 +657,8 @@
       }
     },
     "PrinceRegent": {
-      "title": "Prince Regent",
+      "name": "Prince Regent",
+      "label": "Prince Regent",
       "address": "91 Regent St, Cambridge, CB2 1AW",
       "website": "http://www.princeregent-cambridge.co.uk/",
       "phone": "01223 505030",
@@ -607,7 +668,8 @@
       }
     },
     "Punter": {
-      "title": "Punter",
+      "name": "Punter",
+      "label": "Punter",
       "place_id": "ChIJIwqxlbhw2EcRQYT52kWYXhQ",
       "address": "3 Pound Hill, Cambridge CB3 0AE",
       "website": "http://www.thepuntercambridge.com/",
@@ -618,7 +680,8 @@
       }
     },
     "QueenEdith": {
-      "title": "Queen Edith",
+      "name": "Queen Edith",
+      "label": "Queen Edith",
       "address": "Wulfstan Way, Cambridge, CB1 8QN",
       "website": "https://www.individualpubs.co.uk/queenedith/",
       "phone": "01223 244536",
@@ -628,7 +691,8 @@
       }
     },
     "RedBull": {
-      "title": "Red Bull",
+      "name": "Red Bull",
+      "label": "Red Bull",
       "address": "11 Barton Rd, Newnham, Cambridge CB3 9JZ",
       "phone": "01223 300943",
       "position": {
@@ -637,7 +701,8 @@
       }
     },
     "RedLion": {
-      "title": "Red Lion",
+      "name": "Red Lion",
+      "label": "Red Lion",
       "address": "33 High St, Grantchester, Cambridge CB3 9NF",
       "website": "http://www.redliongrantchester.co.uk/",
       "phone": "01223 840121",
@@ -647,7 +712,8 @@
       }
     },
     "Regal": {
-      "title": "Regal",
+      "name": "Regal",
+      "label": "Regal",
       "address": "38-39 St Andrew's St, Cambridge, Cambridgeshire CB2 3AR",
       "website":
         "https://www.jdwetherspoon.com/pubs/all-pubs/england/cambridgeshire/the-regal-cambridge",
@@ -658,7 +724,8 @@
       }
     },
     "Rock": {
-      "title": "Rock",
+      "name": "Rock",
+      "label": "Rock",
       "address": "200 Cherry Hinton Rd, Cambridge CB1 7AW",
       "website": "http://www.rock-cambridge.co.uk/",
       "phone": "01223 505005",
@@ -668,7 +735,8 @@
       }
     },
     "RoyalStandard": {
-      "title": "Royal Standard",
+      "name": "Royal Standard",
+      "label": "Royal Standard",
       "address": "292 Mill Rd, Cambridge CB1 3NL",
       "website": "http://royalstandardcambridge.com/",
       "phone": "01223 569065",
@@ -678,7 +746,8 @@
       }
     },
     "RupertBrook": {
-      "title": "Rupert Brooke",
+      "name": "Rupert Brooke",
+      "label": "Rupert Brooke",
       "address": "2 Broadway, Grantchester CB3 9NQ",
       "website": "http://www.therupertbrooke.com/",
       "phone": "01223 841875",
@@ -688,7 +757,8 @@
       }
     },
     "SalisburyArms": {
-      "title": "Salisbury Arms",
+      "name": "Salisbury Arms",
+      "label": "Salisbury Arms",
       "address": "76 Tenison Rd, Cambridge, CB1 2DW",
       "website": "http://www.salisburyarmscambridge.co.uk/",
       "phone": "01223 576363",
@@ -698,7 +768,8 @@
       }
     },
     "Ship": {
-      "title": "Ship",
+      "name": "Ship",
+      "label": "Ship",
       "address": "Northfields Ave, Cambridge CB4 2LG",
       "phone": "01223 314445",
       "position": {
@@ -707,7 +778,8 @@
       }
     },
     "SirIsaacNewton": {
-      "title": "Sir Isaac Newton",
+      "name": "Sir Isaac Newton",
+      "label": "Sir Isaac Newton",
       "address": "84 Castle St, Cambridge CB3 0AJ",
       "website": "http://www.sirisaacnewton-cambridge.co.uk/",
       "phone": "01223 305555",
@@ -717,7 +789,8 @@
       }
     },
     "SixBells": {
-      "title": "Six Bells",
+      "name": "Six Bells",
+      "label": "Six Bells",
       "address": "11 Covent Garden, Cambridge CB1 2HS",
       "website": "http://sixbellspub.co.uk/",
       "phone": "01223 355559",
@@ -727,7 +800,8 @@
       }
     },
     "StRadegund": {
-      "title": "St Radegund",
+      "name": "St Radegund",
+      "label": "St Radegund",
       "address": "129 King St, Cambridge, CB1 1LD",
       "phone": "01223 311794",
       "position": {
@@ -736,7 +810,8 @@
       }
     },
     "TramDepot": {
-      "title": "Tram Depot",
+      "name": "Tram Depot",
+      "label": "Tram Depot",
       "address": "3-5 Dover St, Cambridge CB1 1DY",
       "website": "https://sites.google.com/site/tramdepotcambs/",
       "phone": "01223 324553",
@@ -746,7 +821,8 @@
       }
     },
     "Waterman": {
-      "title": "Waterman",
+      "name": "Waterman",
+      "label": "Waterman",
       "address": "32 Chesterton Rd, Cambridge CB4 3AX",
       "website": "http://www.thewaterman-cambridge.co.uk/",
       "phone": "01223 323813",
@@ -756,7 +832,8 @@
       }
     },
     "WhiteSwan": {
-      "title": "White Swan",
+      "name": "White Swan",
+      "label": "White Swan",
       "address": "109 Mill Rd, City Centre, Cambridge CB1 2AZ",
       "website": "http://www.whiteswancambridge.co.uk/",
       "position": {
@@ -765,7 +842,8 @@
       }
     },
     "Wrestlers": {
-      "title": "Wrestlers",
+      "name": "Wrestlers",
+      "label": "Wrestlers",
       "address": "Newmarket Rd, Cambridge CB5 8JE",
       "website": "http://www.thewrestlerscambridge.co.uk/",
       "phone": "01223 566554",
