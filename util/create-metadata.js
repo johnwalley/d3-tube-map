@@ -11,20 +11,41 @@ const puppeteer = require('puppeteer');
 
   const metadata = await page.evaluate(() => {
     const text = [...document.querySelectorAll('text')];
-    return text.map(t => ({
-      name: t.parentElement.id,
-      x: t.getBBox().x,
-      y: t.getBBox().y,
-      width: t.getBBox().width,
-      height: t.getBBox().height,
-    }));
+    const stations = [...document.querySelectorAll('.station')];
+    const interchanges = [...document.querySelectorAll('.interchange')];
+
+    const regex = /translate\((\d+.\d+),(\d+.\d+)\)/;
+
+    return {
+      text: text.map(t => ({
+        name: t.parentElement.id,
+        bbox: {
+          x: t.getBBox().x,
+          y: t.getBBox().y,
+          width: t.getBBox().width,
+          height: t.getBBox().height,
+        },
+      })),
+      stations: stations.map(s => ({
+        name: s.id,
+        x: s.getPointAtLength(0).x,
+        y: s.getPointAtLength(0).y,
+      })),
+      interchanges: interchanges.map(i => ({
+        name: i.parentElement.id,
+        x: +regex.exec(i.getAttribute('transform'))[1],
+        y: +regex.exec(i.getAttribute('transform'))[2],
+      })),
+    };
   });
 
   fs.writeFile(
     './cambridge-pub-map.json',
     JSON.stringify(
-      metadata.map(x => ({
+      metadata.text.map(x => ({
         ...x,
+        ...metadata.stations.find(s => s.name === x.name),
+        ...metadata.interchanges.find(i => i.name === x.name),
         label: json.stations[x.name].name,
       }))
     ),

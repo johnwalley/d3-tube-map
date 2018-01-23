@@ -25,9 +25,9 @@ d3
       .width(width)
       .height(height)
       .margin({
-        top: 20,
+        top: 40,
         right: 20,
-        bottom: 40,
+        bottom: 100,
         left: 100,
       })
   );
