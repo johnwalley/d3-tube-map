@@ -308,22 +308,30 @@ export default function() {
 
         if (station.labelPos === undefined) {
           station.labelPos = d.labelPos;
-          station.labelShiftX = d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[0]
-            : line.shiftCoords[0];
-          station.labelShiftY = d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[1]
-            : line.shiftCoords[1];
+          station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
+            ? d.labelShiftCoords[0]
+            : d.hasOwnProperty('shiftCoords')
+              ? d.shiftCoords[0]
+              : line.shiftCoords[0];
+          station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
+            ? d.labelShiftCoords[1]
+            : d.hasOwnProperty('shiftCoords')
+              ? d.shiftCoords[1]
+              : line.shiftCoords[1];
         }
 
         if (d.hasOwnProperty('canonical')) {
-          station.labelShiftX = d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[0]
-            : line.shiftCoords[0];
-          station.labelShiftY = d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[1]
-            : line.shiftCoords[1];
           station.labelPos = d.labelPos;
+          station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
+            ? d.labelShiftCoords[0]
+            : d.hasOwnProperty('shiftCoords')
+              ? d.shiftCoords[0]
+              : line.shiftCoords[0];
+          station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
+            ? d.labelShiftCoords[1]
+            : d.hasOwnProperty('shiftCoords')
+              ? d.shiftCoords[1]
+              : line.shiftCoords[1];
         }
 
         station.label = data.stations[d.name].label;

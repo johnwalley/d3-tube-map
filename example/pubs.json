@@ -871,7 +871,7 @@
           "name": "Regal",
           "labelPos": "NW",
           "shiftCoords": [0, 0],
-          "canonical": true
+          "hide": true
         },
         {
           "coords": [30, -4]
@@ -915,6 +915,7 @@
           "name": "BrewHouse",
           "labelPos": "SW",
           "shiftCoords": [0, 0.5],
+          "labelShiftCoords": [0, 0],
           "canonical": true
         },
         {
@@ -1278,30 +1279,31 @@
           "coords": [29, -4],
           "marker": "interchange",
           "name": "Regal",
-          "labelPos": "S",
+          "labelPos": "NW",
+          "shiftCoords": [0, -1],
           "hide": true
         },
         {
-          "coords": [30, -4]
+          "coords": [30.5, -4]
         },
         {
-          "coords": [32, -3]
+          "coords": [32.5, -3]
         },
         {
-          "coords": [42, 7],
+          "coords": [42.5, 7],
           "name": "Hopbine",
           "labelPos": "NW"
         },
         {
-          "coords": [44, 9],
+          "coords": [44.5, 9],
           "name": "BurleighArms",
           "labelPos": "NW"
         },
         {
-          "coords": [46, 11]
+          "coords": [46.5, 11]
         },
         {
-          "coords": [48, 12]
+          "coords": [48.5, 12]
         },
         {
           "coords": [52, 12],
@@ -1415,6 +1417,14 @@
           "canonical": true
         },
         {
+          "coords": [23, -4],
+          "marker": "interchange",
+          "name": "Regal",
+          "labelPos": "NE",
+          "shiftCoords": [0, -2],
+          "hide": true
+        },
+        {
           "coords": [27, -4]
         },
         {
@@ -1501,9 +1511,10 @@
           "coords": [23, -4],
           "marker": "interchange",
           "name": "Regal",
-          "labelPos": "NE",
+          "labelPos": "NW",
           "shiftCoords": [0, -1],
-          "hide": true
+          "labelShiftCoords": [0, 0],
+          "canonical": true
         },
         {
           "coords": [23, 10],
