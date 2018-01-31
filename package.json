@@ -2,13 +2,7 @@
   "name": "d3-tube-map",
   "version": "0.5.3",
   "description": "Draw tube maps in the style of the London Underground",
-  "keywords": [
-    "d3",
-    "d3-module",
-    "tube",
-    "map",
-    "visualization"
-  ],
+  "keywords": ["d3", "d3-module", "tube", "map", "visualization"],
   "homepage": "http://www.pubmap.co.uk/",
   "license": "BSD-3-Clause",
   "author": {
@@ -22,10 +16,13 @@
     "url": "https://github.com/johnwalley/d3-tube-map.git"
   },
   "scripts": {
-    "pretest": "rm -rf dist && mkdir dist && rollup -c --banner \"$(preamble)\"",
+    "pretest":
+      "rm -rf dist && mkdir dist && rollup -c --banner \"$(preamble)\"",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublishOnly": "npm run test && uglifyjs  -b beautify=false,--preamble \"$(preamble)\" dist/d3-tube-map.js -c -m -o dist/d3-tube-map.min.js",
-    "postpublish": "zip -j dist/d3-tube-map.zip -- LICENSE README.md dist/d3-tube-map.js dist/d3-tube-map.min.js"
+    "prepublishOnly":
+      "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" dist/d3-tube-map.js -c -m -o dist/d3-tube-map.min.js",
+    "postpublish":
+      "zip -j dist/d3-tube-map.zip -- LICENSE README.md dist/d3-tube-map.js dist/d3-tube-map.min.js"
   },
   "dependencies": {
     "d3": "^4.13.0"
