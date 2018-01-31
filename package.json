@@ -1,29 +1,28 @@
 {
   "name": "d3-tube-map",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Draw tube maps in the style of the London Underground",
-  "keywords": ["d3", "d3-module", "tube", "map"],
+  "keywords": ["d3", "d3-module", "tube", "map", "visualization"],
   "homepage": "http://www.pubmap.co.uk/",
   "license": "BSD-3-Clause",
   "author": {
     "name": "John Walley",
     "url": "http://www.walley.org.uk/"
   },
-  "main": "build/d3-tube-map.js",
-  "module": "",
-  "jsnext:main": "",
+  "main": "dist/d3-tube-map.js",
+  "module": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/johnwalley/d3-tube-map.git"
   },
   "scripts": {
     "pretest":
-      "rm -rf build && mkdir build && rollup -f umd -g d3:d3 -n d3 -o build/d3-tube-map.js --extend -- index.js",
+      "rm -rf dist && mkdir dist && rollup -c --banner \"$(preamble)\"",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublish":
-      "npm run test && uglifyjs --preamble \"$(preamble)\" build/d3-tube-map.js -c -m -o build/d3-tube-map.min.js",
+    "prepublishOnly":
+      "npm run test && uglifyjs  -b beautify=false,--preamble \"$(preamble)\" dist/d3-tube-map.js -c -m -o dist/d3-tube-map.min.js",
     "postpublish":
-      "zip -j build/d3-tube-map.zip -- LICENSE README.md build/d3-tube-map.js build/d3-tube-map.min.js"
+      "zip -j dist/d3-tube-map.zip -- LICENSE README.md dist/d3-tube-map.js dist/d3-tube-map.min.js"
   },
   "dependencies": {
     "d3": "^4.12.2"
