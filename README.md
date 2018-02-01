@@ -1,7 +1,6 @@
 # d3-tube-map
 
 [![Build Status](https://travis-ci.org/johnwalley/d3-tube-map.svg?branch=master)](https://travis-ci.org/johnwalley/d3-tube-map)
-[![Dependency Status](https://gemnasium.com/badges/github.com/johnwalley/d3-tube-map.svg)](https://gemnasium.com/github.com/johnwalley/d3-tube-map)
 
 Draw tube maps in the style of the London Underground using d3.
 
@@ -46,31 +45,31 @@ is exported:
 ## API Reference
 
 <a name="tubeMap" href="#tubeMap">#</a> d3.<b>tubeMap</b>()
-[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js "Source")
+[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js 'Source')
 
 Constructs a new tube map generator with the default settings.
 
 <a name="_tubeMap" href="#_tubeMap">#</a> <i>tubeMap</i>(<i>selection</i>)
-[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L26 "Source")
+[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L26 'Source')
 
 Render the tube map to the given _selection_, which is a
 [selection](https://github.com/d3/d3-selection).
 
 <a name="tubeMap_width" href="#tubeMap_width">#</a>
 <i>tubeMap</i>.<b>width</b>(<i>w</i>)
-[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L109 "Source")
+[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L109 'Source')
 
 Sets the width of the viewbox the map is rendered to.
 
 <a name="tubeMap_height" href="#tubeMap_height">#</a>
 <i>tubeMap</i>.<b>height</b>(<i>h</i>)
-[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L115 "Source")
+[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L115 'Source')
 
 Sets the height of the viewbox the map is rendered to.
 
 <a name="tubeMap_margin" href="#tubeMap_margin">#</a>
 <i>tubeMap</i>.<b>margin</b>(<i>m</i>)
-[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L121 "Source")
+[<>](https://github.com/johnwalley/d3-tube-map/blob/master/src/map.js#L121 'Source')
 
 Sets the margin around the map. Takes an object of the following form:
 
