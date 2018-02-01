@@ -18,7 +18,7 @@ is exported:
 
 ```html
 <script src="https://d3js.org/d3.v4.js"></script>
-<script src="../build/d3-tube-map.js"></script>
+<script src="../dist/d3-tube-map.js"></script>
 
 <script>
   var container = d3.select('#tube-map');
