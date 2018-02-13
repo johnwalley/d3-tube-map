@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+var argv = require('yargs').argv;
 var jsdom = require('jsdom');
 var fs = require('fs');
 var path = require('path');
@@ -12,8 +14,15 @@ var data = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../example/pubs.json'), 'utf8')
 );
 
-var width = 1600;
-var height = 1000;
+var width = argv.width || 1600;
+var height = argv.height || 1000;
+
+var margin = {
+  top: argv.top !== undefined ? argv.top : 40,
+  right: argv.right !== undefined ? argv.right : 20,
+  bottom: argv.bottom !== undefined ? argv.bottom : 100,
+  left: argv.left !== undefined ? argv.left : 100,
+};
 
 d3
   .select(dom.window.document.body)
@@ -24,12 +33,7 @@ d3
       .tubeMap()
       .width(width)
       .height(height)
-      .margin({
-        top: 40,
-        right: 20,
-        bottom: 100,
-        left: 100,
-      })
+      .margin(margin)
   );
 
 var pretext = `<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="${width}px" height="${height}px" viewBox="0 0 ${width} ${height}" enable-background="new 0 0 ${width} ${height}" xml:space="preserve"><defs><style type="text/css"><![CDATA[ 

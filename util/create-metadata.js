@@ -1,9 +1,10 @@
+#!/usr/bin/env node
 const fs = require('fs');
 const puppeteer = require('puppeteer');
 
 (async () => {
-  var content = fs.readFileSync('cambridge-pub-map.svg', 'utf-8');
-  var json = JSON.parse(fs.readFileSync('./example/pubs.json', 'utf-8'));
+  const content = fs.readFileSync('cambridge-pub-map.svg', 'utf-8');
+  const json = JSON.parse(fs.readFileSync('./example/pubs.json', 'utf-8'));
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
