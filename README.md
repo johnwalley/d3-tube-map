@@ -17,7 +17,7 @@ AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global
 is exported:
 
 ```html
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
 <script src="../dist/d3-tube-map.js"></script>
 
 <script>
@@ -36,7 +36,7 @@ is exported:
       left: width / 7,
     });
 
-  d3.json("./pubs.json", function(error, data) {
+  d3.json("./pubs.json").then(function(data)  {
     container.datum(data).call(map);
   });
 </script>
