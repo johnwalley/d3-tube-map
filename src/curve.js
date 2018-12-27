@@ -61,20 +61,20 @@ export function station(
     [
       d.x +
         d.shiftX * lineWidthMultiplier +
-        lineWidthMultiplier / 2.05 * dir[0],
+        (lineWidthMultiplier / 2.05) * dir[0],
       d.y +
         d.shiftY * lineWidthMultiplier +
-        lineWidthMultiplier / 2.05 * dir[1],
+        (lineWidthMultiplier / 2.05) * dir[1],
     ],
     [
       d.x +
         d.shiftX * lineWidthMultiplier +
-        lineWidthMultiplier / 2 * dir[0] +
-        lineWidthMultiplier / lineWidthTickRatio * dir[0],
+        (lineWidthMultiplier / 2) * dir[0] +
+        (lineWidthMultiplier / lineWidthTickRatio) * dir[0],
       d.y +
         d.shiftY * lineWidthMultiplier +
-        lineWidthMultiplier / 2 * dir[1] +
-        lineWidthMultiplier / lineWidthTickRatio * dir[1],
+        (lineWidthMultiplier / 2) * dir[1] +
+        (lineWidthMultiplier / lineWidthTickRatio) * dir[1],
     ],
   ]);
 }
@@ -88,8 +88,8 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
   var sqrt2 = Math.sqrt(2);
 
   var shiftCoords = [
-    data.shiftCoords[0] * lineWidth / unitLength,
-    data.shiftCoords[1] * lineWidth / unitLength,
+    (data.shiftCoords[0] * lineWidth) / unitLength,
+    (data.shiftCoords[1] * lineWidth) / unitLength,
   ];
 
   var lastSectionType = 'diagonal'; // TODO: HACK

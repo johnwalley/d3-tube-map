@@ -1,0 +1,41 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="./tubeMap.css">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script src="../dist/d3-tube-map.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'>
+  <style>
+    .tube-map {
+      width: 400px;
+      height: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="tube-map" class="tube-map">
+  </div>
+  <script>
+    var container = d3.select('#tube-map');
+    var width = 400;
+    var height = 200;
+
+    var map = d3.tubeMap()
+      .width(width)
+      .height(height)
+      .margin({
+        top: 20,
+        right: 120,
+        bottom: 40,
+        left: 100,
+      });
+
+    d3.json("./minimal.json").then(function(data)  {
+      container
+        .datum(data).call(map);
+    });
+  </script>
+</body>
+
+</html>

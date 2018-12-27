@@ -1,0 +1,36 @@
+{
+  "stations": {
+    "StationA": {
+      "label": "Station A"
+    },
+    "StationB": {
+      "label": "Station B"
+    }
+  },
+  "lines": [
+    {
+      "name": "LineA",
+      "color": "#FF0000",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [23, -4],
+          "name": "StationA",
+          "labelPos": "N"
+        },
+        {
+          "coords": [30, -4]
+        },
+        {
+          "coords": [31, -3],
+          "dir": "E"
+        },
+        {
+          "coords": [31, 2],
+          "name": "StationB",
+          "labelPos": "E"
+        }
+      ]
+    }
+  ]
+}

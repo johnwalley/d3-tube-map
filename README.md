@@ -17,7 +17,7 @@ AMD, CommonJS, and vanilla environments are supported. In vanilla, a `d3` global
 is exported:
 
 ```html
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
 <script src="../dist/d3-tube-map.js"></script>
 
 <script>
@@ -36,7 +36,7 @@ is exported:
       left: width / 7,
     });
 
-  d3.json("./pubs.json", function(error, data) {
+  d3.json("./pubs.json").then(function(data)  {
     container.datum(data).call(map);
   });
 </script>
@@ -76,3 +76,102 @@ Sets the margin around the map. Takes an object of the following form:
 ```
 { top: 10, right: 20, bottom: 10, left: 20 }
 ```
+
+## Input Data Format
+
+The data passed to the tube map should have the following properties: `stations`, `lines` and optionally `river`. A minimal example is shown below.
+
+```
+{
+  "stations": {
+    "StationA": {
+      "label": "Station A"
+    },
+    "StationB": {
+      "label": "Station B"
+    }
+  },
+  "lines": [
+    {
+      "name": "LineA",
+      "color": "#FF0000",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [23, -4],
+          "name": "StationA",
+          "labelPos": "N"
+        },
+        {
+          "coords": [30, -4]
+        },
+        {
+          "coords": [31, -3],
+          "dir": "E"
+        },
+        {
+          "coords": [31, 2],
+          "name": "StationB",
+          "labelPos": "E"
+        }
+      ]
+    }
+  ]
+}
+```
+
+`stations` is an object where each property is a a station with the key being a unique identifier and the value being an object with a label property. The label is the display friendly text that will be rendered to the screen.
+
+`lines` is an array of `line` objects. Each `line` must have the following:
+
+* `name` will be used as the `id` of the `svg` `path` element
+* `color` is simply the color of the line
+* `shiftCoords` will translate the whole line
+* `nodes` is an array of nodes which define the layout of the line
+
+Each node must have the following:
+
+* `coords` is the position of the node. Must be integer values
+* `name` should be present if the node represents a station. It should match a station defined in the top-level `stations` property
+* `labelPos` should be present if the node represents a station. It is a compass direction and determines where the label is positioned relative to the node, e.g. NE would place the label up and to the right of the node
+* `dir` is required when the node represents a 90 degree corner
+
+### Corners
+
+Two types of corner are supported: a 90 degree turn and a 45 degree turn. The latter is recognised when the position of a node differs from the position of the previous node by either:
+
+* 1 in the x direction and 2 in the y direction
+* 2 in the x direction and 1 in the y direction
+
+For example:
+
+```
+[
+  {
+    "coords": [-27, -11]
+  },
+  {
+    "coords": [-26, -9]
+  }
+]
+```
+
+A 90 degree turn is recognised when the position of a node differs from the position of the previous node by:
+
+* 1 in the x direction and 1 in the y direction
+
+For example:
+
+```
+[
+  {
+    "coords": [0, 2]
+  },
+  {
+    "coords": [1, 1],
+    "dir": "E"
+  }
+]
+```
+
+The value of `dir` represents the direction of the line before making the turn. It disambiguates between the two possible 90 degree turns which could link the two nodes.

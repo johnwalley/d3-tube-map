@@ -311,13 +311,13 @@ export default function() {
           station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
             ? d.labelShiftCoords[0]
             : d.hasOwnProperty('shiftCoords')
-              ? d.shiftCoords[0]
-              : line.shiftCoords[0];
+            ? d.shiftCoords[0]
+            : line.shiftCoords[0];
           station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
             ? d.labelShiftCoords[1]
             : d.hasOwnProperty('shiftCoords')
-              ? d.shiftCoords[1]
-              : line.shiftCoords[1];
+            ? d.shiftCoords[1]
+            : line.shiftCoords[1];
         }
 
         if (d.hasOwnProperty('canonical')) {
@@ -325,13 +325,13 @@ export default function() {
           station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
             ? d.labelShiftCoords[0]
             : d.hasOwnProperty('shiftCoords')
-              ? d.shiftCoords[0]
-              : line.shiftCoords[0];
+            ? d.shiftCoords[0]
+            : line.shiftCoords[0];
           station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
             ? d.labelShiftCoords[1]
             : d.hasOwnProperty('shiftCoords')
-              ? d.shiftCoords[1]
-              : line.shiftCoords[1];
+            ? d.shiftCoords[1]
+            : line.shiftCoords[1];
         }
 
         station.label = data.stations[d.name].label;
@@ -411,7 +411,7 @@ export default function() {
         textAnchor = 'start';
         break;
       case 'se':
-        pos = [offset / sqrt2, -1.4 * offset / sqrt2];
+        pos = [offset / sqrt2, (-1.4 * offset) / sqrt2];
         textAnchor = 'start';
         break;
       case 's':
@@ -419,7 +419,7 @@ export default function() {
         textAnchor = 'middle';
         break;
       case 'sw':
-        pos = [-offset / sqrt2, -1.4 * offset / sqrt2];
+        pos = [-offset / sqrt2, (-1.4 * offset) / sqrt2];
         textAnchor = 'end';
         break;
       case 'w':
