@@ -51,7 +51,7 @@ const puppeteer = require('puppeteer');
       }))
     ),
     function() {
-      console.log('Scccessfully wrote file to ./cambridge-pub-map.json');
+      console.log('Successfully wrote file to ./cambridge-pub-map.json');
     }
   );
 

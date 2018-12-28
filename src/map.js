@@ -15,8 +15,6 @@ export default function() {
   var svg;
   var _data;
   var gMap;
-  var zoom;
-  var t;
 
   var listeners = d3.dispatch('click');
 
@@ -254,7 +252,7 @@ export default function() {
         return d.label;
       })
       .attr('fill', '#10137E')
-      .attr('dy', 0.1)
+      .attr('dy', 0)
       .attr('x', function(d) {
         return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
       })
@@ -264,10 +262,13 @@ export default function() {
       .attr('text-anchor', function(d) {
         return textPos(d).textAnchor;
       })
+      .attr('dominant-baseline', function(d) {
+        return textPos(d).alignmentBaseline;
+      })
       .style('display', function(d) {
         return d.hide !== true ? 'block' : 'none';
       })
-      .style('font-size', lineWidth + 'px')
+      .style('font-size', 1.96 * lineWidth + 'px')
       .style('-webkit-user-select', 'none')
       .attr('class', function(d) {
         return d.marker
@@ -391,6 +392,7 @@ export default function() {
   function textPos(data) {
     var pos;
     var textAnchor;
+    var alignmentBaseline;
     var offset = lineWidth * 1.8;
 
     var numLines = data.label.split(/\n/).length;
@@ -399,32 +401,39 @@ export default function() {
 
     switch (data.labelPos.toLowerCase()) {
       case 'n':
-        pos = [0, lineWidth * (numLines - 1) + offset];
+        pos = [0, 2.1 * lineWidth * (numLines - 1) + offset];
         textAnchor = 'middle';
+        alignmentBaseline = 'baseline';
         break;
       case 'ne':
         pos = [offset / sqrt2, (lineWidth * (numLines - 1) + offset) / sqrt2];
         textAnchor = 'start';
+        alignmentBaseline = 'baseline';
         break;
       case 'e':
         pos = [offset, 0];
         textAnchor = 'start';
+        alignmentBaseline = 'middle';
         break;
       case 'se':
-        pos = [offset / sqrt2, (-1.4 * offset) / sqrt2];
+        pos = [offset / sqrt2, -offset / sqrt2];
         textAnchor = 'start';
+        alignmentBaseline = 'hanging';
         break;
       case 's':
-        pos = [0, -1.4 * lineWidthMultiplier * offset];
+        pos = [0, -lineWidthMultiplier * offset];
         textAnchor = 'middle';
+        alignmentBaseline = 'hanging';
         break;
       case 'sw':
-        pos = [-offset / sqrt2, (-1.4 * offset) / sqrt2];
+        pos = [-offset / sqrt2, -offset / sqrt2];
         textAnchor = 'end';
+        alignmentBaseline = 'hanging';
         break;
       case 'w':
         pos = [-offset, 0];
         textAnchor = 'end';
+        alignmentBaseline = 'middle';
         break;
       case 'nw':
         pos = [
@@ -432,6 +441,7 @@ export default function() {
           (lineWidth * (numLines - 1) + offset) / sqrt2,
         ];
         textAnchor = 'end';
+        alignmentBaseline = 'baseline';
         break;
       default:
         break;
@@ -440,6 +450,7 @@ export default function() {
     return {
       pos: pos,
       textAnchor: textAnchor,
+      alignmentBaseline: alignmentBaseline,
     };
   }
 

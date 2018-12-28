@@ -6,7 +6,6 @@ var path = require('path');
 var d3 = Object.assign({}, require('d3-selection'), require('../'));
 
 var dom = new jsdom.JSDOM('<!DOCTYPE html><div></div>');
-var bodyActual = dom.window.document.body;
 
 global.SVGElement = function() {};
 
@@ -14,8 +13,8 @@ var data = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../example/pubs.json'), 'utf8')
 );
 
-var width = argv.width || 1600;
-var height = argv.height || 1000;
+var width = argv.width || 841.89 * 0.85;
+var height = argv.height || 595.28;
 
 var margin = {
   top: argv.top !== undefined ? argv.top : 40,
@@ -24,8 +23,7 @@ var margin = {
   left: argv.left !== undefined ? argv.left : 100,
 };
 
-d3
-  .select(dom.window.document.body)
+d3.select(dom.window.document.body)
   .select('div')
   .datum(data)
   .call(
@@ -55,7 +53,7 @@ var svg = dom.window.document.querySelector('svg').innerHTML;
 var posttext = `</svg>`;
 
 fs.writeFile('./cambridge-pub-map.svg', pretext + svg + posttext, function() {
-  console.log('Scccessfully wrote file to ./cambridge-pub-map.svg');
+  console.log('Successfully wrote file to ./cambridge-pub-map.svg');
 });
 
 function file(file) {
