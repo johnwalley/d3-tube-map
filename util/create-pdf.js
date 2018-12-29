@@ -207,8 +207,14 @@ Object.values(data.stations)
       .fontSize(5)
       .fillColor('#10137E')
       .text(
-        `${'ABCDEFGHI'[Math.floor(9 * Math.random())]}${Math.ceil(
-          9 * Math.random()
+        `${
+          'ABCDEFGHI'[
+            Math.floor(
+              (metadata.find(x => x.name === line.name).y - 60) / (480 / 6)
+            )
+          ]
+        }${Math.ceil(
+          (metadata.find(x => x.name === line.name).x - 20) / (670 / 9)
         )}`,
         keyLeft + (i > numPubsInFirstColumn ? 70 : 0),
         60 +
