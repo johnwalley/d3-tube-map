@@ -198,6 +198,7 @@
       "name": "Champion of the Thames",
       "label": "Champion\nof the\nThames",
       "address": "68 King St, Cambridge CB1 1LN",
+      "website": "https://thechampionofthethames.com/",
       "position": {
         "lat": 52.207328,
         "lon": 0.124451
@@ -208,6 +209,7 @@
       "label": "Clarendon\nArms",
       "address": "35-36 Clarendon St, Cambridge CB1 1JX",
       "phone": "01223 778272",
+      "website": "https://theclarendonarms.com/",
       "position": {
         "lat": 52.20465,
         "lon": 0.127679
@@ -218,6 +220,7 @@
       "label": "Corner House",
       "address": "231 Newmarket Rd, Cambridge CB5 8JE",
       "phone": "01223 352047",
+      "website": "https://www.cornerhousepubcambridge.com/",
       "position": {
         "lat": 52.209485,
         "lon": 0.143369
@@ -694,6 +697,7 @@
       "label": "Red Bull",
       "address": "11 Barton Rd, Newnham, Cambridge CB3 9JZ",
       "phone": "01223 300943",
+      "website": "http://the-red-bull.weebly.com/",
       "position": {
         "lat": 52.196487,
         "lon": 0.108657
@@ -770,6 +774,7 @@
       "label": "Ship",
       "address": "Northfields Ave, Cambridge CB4 2LG",
       "phone": "01223 314445",
+      "website": "http://www.charleswellspubs.co.uk/pub-view/ship-cambs/",
       "position": {
         "lat": 52.231224,
         "lon": 0.128837
@@ -802,6 +807,7 @@
       "label": "St Radegund",
       "address": "129 King St, Cambridge, CB1 1LD",
       "phone": "01223 311794",
+      "website": "http://st-radegund.co.uk/",
       "position": {
         "lat": 52.207616,
         "lon": 0.126733
