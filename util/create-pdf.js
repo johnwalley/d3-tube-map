@@ -1,24 +1,32 @@
 #!/usr/bin/env node
-var PDFDocument = require('pdfkit');
-var fs = require('fs');
-var jsdom = require('jsdom');
-var path = require('path');
-var d3 = Object.assign({}, require('d3-selection'), require('../'));
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
+const jsdom = require('jsdom');
+const path = require('path');
+const d3 = Object.assign({}, require('d3'), require('../'));
 
-var dom = new jsdom.JSDOM('<!DOCTYPE html><div></div>');
+const FONT_SIZE_TITLE = 18;
+const FONT_SIZE_COPYRIGHT = 6;
+const FONT_SIZE_PUB = 7;
+const FONT_SIZE_LEGEND_TITLE = 10;
+const FONT_SIZE_LEGEND_CONTENT = 5;
+const FONT_SIZE_LEGEND_LINES = 8;
+
+const dom = new jsdom.JSDOM('<!DOCTYPE html><div></div>');
 
 global.SVGElement = function() {};
 
-var data = JSON.parse(
+const data = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../example/pubs.json'), 'utf8')
 );
 
-var metadata = JSON.parse(
+const metadata = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../cambridge-pub-map.json'), 'utf8')
 );
 
-var width = 841.89;
-var height = 595.28;
+// A4 landscape
+const width = 841.89;
+const height = 595.28;
 
 d3.select(dom.window.document.body)
   .select('div')
@@ -36,9 +44,9 @@ d3.select(dom.window.document.body)
       })
   );
 
-const date = 'January 2019';
+const date = d3.timeFormat('%B %Y')(Date.now());
 
-var doc = new PDFDocument({
+const doc = new PDFDocument({
   size: [height, width],
   layout: 'landscape',
   margin: 0,
@@ -50,46 +58,54 @@ doc.pipe(fs.createWriteStream('cambridge-pub-map.pdf'));
 doc.font('./util/HammersmithOne.ttf');
 
 doc.rect(0, 0, width, 40).fill('#1e4292');
+
 doc
-  .fontSize(18)
+  .fontSize(FONT_SIZE_TITLE)
   .fillColor('white')
   .strokeColor('white')
-  .lineWidth(18 * 0.03)
-  .text('Cambridge pub map', 20, 10, { fill: true, stroke: true });
-
-doc
-  .fontSize(12)
-  .fillColor('#10137E')
-  .text('www.pubmap.co.uk', 0, height - 18, {
-    width: width,
-    align: 'center',
+  .lineWidth(FONT_SIZE_TITLE * 0.03)
+  .text('Cambridge pub map', 20, 10, {
+    fill: true,
+    stroke: true,
+    link: 'https://www.pubmap.co.uk',
   });
 
 doc
-  .fontSize(10)
-  .fillColor('#10137E')
-  .text(`© John Walley ${date}`, width - 220, height - 18, {
-    width: 200,
-    align: 'right',
-  });
+  .fontSize(FONT_SIZE_TITLE)
+  .fillColor('white')
+  .strokeColor('white')
+  .lineWidth(FONT_SIZE_TITLE * 0.03)
+  .text(
+    'www.pubmap.co.uk',
+    width - 20 - doc.widthOfString('www.pubmap.co.uk'),
+    10,
+    {
+      fill: true,
+      stroke: true,
+      width: doc.widthOfString('www.pubmap.co.uk'),
+      align: 'center',
+      link: 'https://www.pubmap.co.uk',
+    }
+  );
 
 doc
   .lineWidth(0.4)
   .strokeColor('#00B3F0')
-  .rect(20, 60, 670, 480);
+  .rect(20, 60, 670, 480)
+  .stroke();
 
-[0, 1, 2, 3, 4, 5, 6, 7].forEach((num, i) => {
+d3.range(8).forEach((num, i) => {
   doc
-    .lineWidth(0.01)
+    .lineWidth(0.1)
     .strokeColor('#00B3F0')
     .moveTo(20 + ((i + 1) * 670) / 9, 60)
     .lineTo(20 + ((i + 1) * 670) / 9, 540)
     .stroke();
 });
 
-[0, 1, 2, 3, 4].forEach((num, i) => {
+d3.range(5).forEach((num, i) => {
   doc
-    .lineWidth(0.01)
+    .lineWidth(0.1)
     .strokeColor('#00B3F0')
     .moveTo(20, 60 + ((i + 1) * 480) / 6)
     .lineTo(690, 60 + ((i + 1) * 480) / 6)
@@ -100,22 +116,23 @@ doc
 doc.save();
 doc.rect(20, 60, 670, 480).clip();
 
-doc.fontSize(7);
+doc.fontSize(FONT_SIZE_PUB);
 doc.fillColor('#10137E');
 
-var labels = dom.window.document.querySelectorAll('tspan');
+const labels = dom.window.document.querySelectorAll('tspan');
 
-var alignMap = {
+const alignMap = {
   start: 'left',
   middle: 'center',
   end: 'right',
 };
 
 labels.forEach(label => {
-  var bbox = metadata.find(d => d.name === label.parentElement.parentElement.id)
-    .bbox;
+  const bbox = metadata.find(
+    d => d.name === label.parentElement.parentElement.id
+  ).bbox;
 
-  var align = alignMap[label.parentElement.getAttribute('text-anchor')];
+  const align = alignMap[label.parentElement.getAttribute('text-anchor')];
 
   doc.text(
     label.innerHTML,
@@ -124,11 +141,12 @@ labels.forEach(label => {
     {
       width: bbox.width,
       align: align,
+      link: data.stations[label.parentElement.parentElement.id].website,
     }
   );
 });
 
-var rivers = dom.window.document
+const rivers = dom.window.document
   .querySelector('.river')
   .querySelectorAll('path');
 
@@ -139,7 +157,7 @@ rivers.forEach(river => {
     .stroke(river.getAttribute('stroke'));
 });
 
-var lines = dom.window.document.querySelectorAll('.line');
+const lines = dom.window.document.querySelectorAll('.line');
 
 lines.forEach(line => {
   doc
@@ -148,7 +166,7 @@ lines.forEach(line => {
     .stroke(line.getAttribute('stroke'));
 });
 
-var stations = dom.window.document.querySelectorAll('.station');
+const stations = dom.window.document.querySelectorAll('.station');
 
 stations.forEach(station => {
   doc
@@ -157,9 +175,9 @@ stations.forEach(station => {
     .stroke(station.getAttribute('stroke'));
 });
 
-var interchanges = dom.window.document.querySelectorAll('.interchange');
+const interchanges = dom.window.document.querySelectorAll('.interchange');
 
-var regex = /translate\((\d+.\d+),(\d+.\d+)\)/;
+const regex = /translate\((\d+.\d+),(\d+.\d+)\)/;
 
 interchanges.forEach(interchange => {
   doc
@@ -188,7 +206,7 @@ const keyGap = 12;
 const numPubsInFirstColumn = 45;
 
 doc
-  .fontSize(10)
+  .fontSize(FONT_SIZE_LEGEND_TITLE)
   .fillColor('#10137E')
   .text('Index to pubs', keyLeft, 60);
 
@@ -204,7 +222,7 @@ Object.values(data.stations)
   })
   .forEach((line, i) => {
     doc
-      .fontSize(5)
+      .fontSize(FONT_SIZE_LEGEND_CONTENT)
       .fillColor('#10137E')
       .text(
         `${
@@ -223,14 +241,15 @@ Object.values(data.stations)
       );
 
     doc
-      .fontSize(5)
+      .fontSize(FONT_SIZE_LEGEND_CONTENT)
       .fillColor('#10137E')
       .text(
         line.label.replace(/\n/g, ' '),
         keyLeft + 10 + (i > numPubsInFirstColumn ? 70 : 0),
         60 +
           20 +
-          7 * (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i)
+          7 * (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i),
+        { link: line.website }
       );
   });
 
@@ -249,7 +268,7 @@ doc
   .stroke();
 
 doc
-  .fontSize(10)
+  .fontSize(FONT_SIZE_LEGEND_TITLE)
   .fillColor('#10137E')
   .text('Key to lines', keyLeft, keyTop + 10);
 
@@ -272,10 +291,45 @@ data.lines
       .stroke();
 
     doc
-      .fontSize(8)
+      .fontSize(FONT_SIZE_LEGEND_LINES)
       .fillColor('#10137E')
       .text(line.label, keyLeft + 68, keyTop + 25 + keyGap * i);
   });
+
+doc
+  .fontSize(8)
+  .fillColor('#00B3F0')
+  .strokeColor('white')
+  .lineWidth(8 * 0.3);
+
+d3.range(9).forEach((num, i) => {
+  doc.text(i + 1, 20 - 2.5 + ((i + 0.5) * 670) / 9, 60 - 4, {
+    fill: false,
+    stroke: true,
+  });
+
+  doc.text(i + 1, 20 - 2.5 + ((i + 0.5) * 670) / 9, 60 - 4, {
+    fill: true,
+    stroke: false,
+  });
+});
+
+d3.range(6).forEach((num, i) => {
+  doc.text('ABCDEF'[i], 20 - 2.5, 60 - 4 + ((i + 0.5) * 480) / 6, {
+    fill: false,
+    stroke: true,
+  });
+
+  doc.text('ABCDEF'[i], 20 - 2.5, 60 - 4 + ((i + 0.5) * 480) / 6, {
+    fill: true,
+    stroke: false,
+  });
+});
+
+doc
+  .fontSize(FONT_SIZE_COPYRIGHT)
+  .fillColor('#10137E')
+  .text(`© John Walley ${date}`, 22, 530);
 
 doc.end();
 
