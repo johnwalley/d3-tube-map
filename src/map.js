@@ -262,9 +262,6 @@ export default function() {
       .attr('text-anchor', function(d) {
         return textPos(d).textAnchor;
       })
-      .attr('dominant-baseline', function(d) {
-        return textPos(d).alignmentBaseline;
-      })
       .style('display', function(d) {
         return d.hide !== true ? 'block' : 'none';
       })
@@ -280,7 +277,9 @@ export default function() {
       .classed('highlighted', function(d) {
         return d.visited;
       })
-      .call(wrap);
+      .call(wrap, function(d) {
+        return textPos(d).alignmentBaseline;
+      });
   }
 
   function transformData(data) {
@@ -455,7 +454,7 @@ export default function() {
   }
 
   // Render line breaks for svg text
-  function wrap(text) {
+  function wrap(text, baseline) {
     text.each(function() {
       var text = d3.select(this);
       var lines = text.text().split(/\n/);
@@ -470,6 +469,7 @@ export default function() {
         .attr('x', x)
         .attr('y', y)
         .attr('dy', dy + 'em')
+        .attr('dominant-baseline', baseline)
         .text(lines[0]);
 
       for (var lineNum = 1; lineNum < lines.length; lineNum++) {
@@ -478,6 +478,7 @@ export default function() {
           .attr('x', x)
           .attr('y', y)
           .attr('dy', lineNum * 1.1 + dy + 'em')
+          .attr('dominant-baseline', baseline)
           .text(lines[lineNum]);
       }
     });
