@@ -1,8 +1,8 @@
 {
   "stations": {
-    "AlexandraArms": {
-      "name": "Alexandra Arms",
-      "label": "Alexandra\nArms",
+    "Alex": {
+      "name": "Alex",
+      "label": "Alex",
       "place_id": "ChIJaVrou4hw2EcROetQMMOP12M",
       "address": "22 Gwydir St, Cambridge CB1 2LL",
       "website": "http://www.thealexcambridge.com/",
@@ -596,7 +596,7 @@
     },
     "PantonArms": {
       "name": "Panton Arms",
-      "label": "Panton\nArms",
+      "label": "Panton Arms",
       "address": "43 Panton St, Cambridge CB2 1HL",
       "phone": "01223 464351",
       "position": {
@@ -1189,7 +1189,7 @@
         },
         {
           "coords": [75, 2],
-          "name": "AlexandraArms",
+          "name": "Alex",
           "labelPos": "S"
         },
 
@@ -1485,29 +1485,32 @@
       "shiftCoords": [0, 0],
       "nodes": [
         {
-          "coords": [-2, -36],
+          "coords": [-8, -42],
           "name": "LordByronInn",
           "labelPos": "SE"
         },
         {
-          "coords": [1, -33],
+          "coords": [-3, -37],
           "name": "HudsonsAleHouse",
           "labelPos": "SE"
         },
         {
-          "coords": [4, -30],
+          "coords": [1, -33],
           "name": "GreenManTrumpington",
           "labelPos": "SE"
         },
         {
-          "coords": [22, -12],
+          "coords": [20, -14],
           "name": "Alma",
           "labelPos": "SE"
         },
         {
-          "coords": [26, -8],
+          "coords": [22, -12],
           "name": "PantonArms",
           "labelPos": "SE"
+        },
+        {
+          "coords": [26, -8]
         },
         {
           "coords": [27, -6]
