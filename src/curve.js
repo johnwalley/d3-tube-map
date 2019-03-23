@@ -84,7 +84,9 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
 
   var lineNodes = data.nodes;
 
-  var unitLength = xScale(1) - xScale(0);
+  var unitLength = Math.abs(
+    xScale(1) - xScale(0) !== 0 ? xScale(1) - xScale(0) : yScale(1) - yScale(0)
+  );
   var sqrt2 = Math.sqrt(2);
 
   var shiftCoords = [

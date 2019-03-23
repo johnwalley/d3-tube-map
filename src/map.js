@@ -24,29 +24,33 @@ export default function() {
     selection.each(function(data) {
       _data = transformData(data);
 
-      var minX = d3.min(_data.raw, function(line) {
-        return d3.min(line.nodes, function(node) {
-          return node.coords[0];
-        });
-      });
+      var minX =
+        d3.min(_data.raw, function(line) {
+          return d3.min(line.nodes, function(node) {
+            return node.coords[0];
+          });
+        }) - 1;
 
-      var maxX = d3.max(_data.raw, function(line) {
-        return d3.max(line.nodes, function(node) {
-          return node.coords[0];
-        });
-      });
+      var maxX =
+        d3.max(_data.raw, function(line) {
+          return d3.max(line.nodes, function(node) {
+            return node.coords[0];
+          });
+        }) + 1;
 
-      var minY = d3.min(_data.raw, function(line) {
-        return d3.min(line.nodes, function(node) {
-          return node.coords[1];
-        });
-      });
+      var minY =
+        d3.min(_data.raw, function(line) {
+          return d3.min(line.nodes, function(node) {
+            return node.coords[1];
+          });
+        }) - 1;
 
-      var maxY = d3.max(_data.raw, function(line) {
-        return d3.max(line.nodes, function(node) {
-          return node.coords[1];
-        });
-      });
+      var maxY =
+        d3.max(_data.raw, function(line) {
+          return d3.max(line.nodes, function(node) {
+            return node.coords[1];
+          });
+        }) + 1;
 
       var desiredAspectRatio = (maxX - minX) / (maxY - minY);
       var actualAspectRatio =
@@ -68,7 +72,14 @@ export default function() {
 
       xScale.domain([minX, maxX]).range([margin.left, margin.left + maxXRange]);
       yScale.domain([minY, maxY]).range([margin.top + maxYRange, margin.top]);
-      lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
+
+      var unitLength = Math.abs(
+        xScale(1) - xScale(0) !== 0
+          ? xScale(1) - xScale(0)
+          : yScale(1) - yScale(0)
+      );
+
+      lineWidth = lineWidthMultiplier * unitLength;
 
       svg = selection
         .append('svg')
