@@ -12,6 +12,29 @@ const FONT_SIZE_LEGEND_TITLE = 10;
 const FONT_SIZE_LEGEND_CONTENT = 5;
 const FONT_SIZE_LEGEND_LINES = 8;
 
+const riversidePubs = [
+  'Anchor',
+  'Boathouse',
+  'FortStGeorge',
+  'Granta',
+  'GreenDragon',
+  'Mill',
+];
+
+const quizes = ['CarpentersArms', 'Dobblers', 'Petersfield'];
+
+const riverIcon =
+  'M562.1 383.9c-21.5-2.4-42.1-10.5-57.9-22.9-14.1-11.1-34.2-11.3-48.2 0-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3zm0-144c-21.5-2.4-42.1-10.5-57.9-22.9-14.1-11.1-34.2-11.3-48.2 0-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3zm0-144C540.6 93.4 520 85.4 504.2 73 490.1 61.9 470 61.7 456 73c-37.9 30.4-107.2 30.4-145.7-1.5-13.5-11.2-33-9.1-46.7 1.8-38 30.1-106.9 30-145.2-1.7-13.5-11.2-33.3-8.9-47.1 2-15.5 12.2-36 20.1-57.7 22.4-7.9.8-13.6 7.8-13.6 15.7v32.2c0 9.1 7.6 16.8 16.7 16 28.8-2.5 56.1-11.4 79.4-25.9 56.5 34.6 137 34.1 192 0 56.5 34.6 137 34.1 192 0 23.3 14.2 50.9 23.3 79.1 25.8 9.1.8 16.7-6.9 16.7-16v-31.6c.1-8-5.7-15.4-13.8-16.3z';
+
+//var width = 576;
+//var height = 512;
+
+const questionIcon =
+  'M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z';
+
+//var width = 384;
+//var height = 512;
+
 const dom = new jsdom.JSDOM('<!DOCTYPE html><div></div>');
 
 global.SVGElement = function() {};
@@ -37,7 +60,7 @@ d3.select(dom.window.document.body)
       .width(width * 0.85)
       .height(height)
       .margin({
-        top: 80,
+        top: 100,
         right: 80,
         bottom: 0,
         left: 80,
@@ -88,33 +111,32 @@ doc
     }
   );
 
-doc
-  .lineWidth(0.4)
-  .strokeColor('#00B3F0')
-  .rect(20, 60, 670, 480)
-  .stroke();
+const MAP_WIDTH = 670;
+const MAP_HEIGHT = 512;
+const NUM_SQUARES_X = 8;
+const NUM_SQUARES_Y = 6;
 
-d3.range(8).forEach((num, i) => {
+d3.range(NUM_SQUARES_X).forEach((num, i) => {
   doc
     .lineWidth(0.1)
     .strokeColor('#00B3F0')
-    .moveTo(20 + ((i + 1) * 670) / 9, 60)
-    .lineTo(20 + ((i + 1) * 670) / 9, 540)
+    .moveTo(20 + ((i + 1) * MAP_WIDTH) / (NUM_SQUARES_X + 1), 60)
+    .lineTo(20 + ((i + 1) * MAP_WIDTH) / (NUM_SQUARES_X + 1), MAP_HEIGHT + 60)
     .stroke();
 });
 
-d3.range(5).forEach((num, i) => {
+d3.range(NUM_SQUARES_Y).forEach((num, i) => {
   doc
     .lineWidth(0.1)
     .strokeColor('#00B3F0')
-    .moveTo(20, 60 + ((i + 1) * 480) / 6)
-    .lineTo(690, 60 + ((i + 1) * 480) / 6)
+    .moveTo(20, 60 + ((i + 1) * MAP_HEIGHT) / (NUM_SQUARES_Y + 1))
+    .lineTo(MAP_WIDTH + 20, 60 + ((i + 1) * MAP_HEIGHT) / (NUM_SQUARES_Y + 1))
     .stroke();
 });
 
 // Clip to map rectangle
 doc.save();
-doc.rect(20, 60, 670, 480).clip();
+doc.rect(20, 60, MAP_WIDTH, MAP_HEIGHT).clip();
 
 doc.fontSize(FONT_SIZE_PUB);
 doc.fillColor('#10137E');
@@ -199,11 +221,12 @@ interchanges.forEach(interchange => {
 
 doc.restore();
 
-const keyTop = 414;
-const keyLeft = 700;
+const keyTop = MAP_HEIGHT - 66;
+const keyLeft = MAP_WIDTH + 30;
 const keyGap = 12;
+const LEGEND_PUB_VERTICAL_OFFSET = 7;
 
-const numPubsInFirstColumn = 45;
+const numPubsInFirstColumn = 50;
 
 doc
   .fontSize(FONT_SIZE_LEGEND_TITLE)
@@ -226,18 +249,21 @@ Object.values(data.stations)
       .fillColor('#10137E')
       .text(
         `${
-          'ABCDEFGHI'[
+          'ABCDEFGH'[
             Math.floor(
-              (metadata.find(x => x.name === line.name).y - 60) / (480 / 6)
+              (metadata.find(x => x.name === line.name).y - 60) /
+                (MAP_HEIGHT / (NUM_SQUARES_Y + 1))
             )
           ]
         }${Math.ceil(
-          (metadata.find(x => x.name === line.name).x - 20) / (670 / 9)
+          (metadata.find(x => x.name === line.name).x - 20) /
+            (MAP_WIDTH / (NUM_SQUARES_X + 1))
         )}`,
         keyLeft + (i > numPubsInFirstColumn ? 70 : 0),
         60 +
           20 +
-          7 * (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i)
+          LEGEND_PUB_VERTICAL_OFFSET *
+            (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i)
       );
 
     doc
@@ -248,7 +274,8 @@ Object.values(data.stations)
         keyLeft + 10 + (i > numPubsInFirstColumn ? 70 : 0),
         60 +
           20 +
-          7 * (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i),
+          LEGEND_PUB_VERTICAL_OFFSET *
+            (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i),
         { link: line.website }
       );
   });
@@ -297,39 +324,65 @@ data.lines
   });
 
 doc
+  .lineWidth(0.4)
+  .strokeColor('#00B3F0')
+  .rect(20, 60, MAP_WIDTH, MAP_HEIGHT)
+  .stroke();
+
+doc
   .fontSize(8)
   .fillColor('#00B3F0')
   .strokeColor('white')
   .lineWidth(8 * 0.3);
 
-d3.range(9).forEach((num, i) => {
-  doc.text(i + 1, 20 - 2.5 + ((i + 0.5) * 670) / 9, 60 - 4, {
-    fill: false,
-    stroke: true,
-  });
+d3.range(NUM_SQUARES_X + 1).forEach((num, i) => {
+  doc.text(
+    i + 1,
+    20 - 2.5 + ((i + 0.5) * MAP_WIDTH) / (NUM_SQUARES_X + 1),
+    60 - 4,
+    {
+      fill: false,
+      stroke: true,
+    }
+  );
 
-  doc.text(i + 1, 20 - 2.5 + ((i + 0.5) * 670) / 9, 60 - 4, {
-    fill: true,
-    stroke: false,
-  });
+  doc.text(
+    i + 1,
+    20 - 2.5 + ((i + 0.5) * MAP_WIDTH) / (NUM_SQUARES_X + 1),
+    60 - 4,
+    {
+      fill: true,
+      stroke: false,
+    }
+  );
 });
 
-d3.range(6).forEach((num, i) => {
-  doc.text('ABCDEF'[i], 20 - 2.5, 60 - 4 + ((i + 0.5) * 480) / 6, {
-    fill: false,
-    stroke: true,
-  });
+d3.range(NUM_SQUARES_Y + 1).forEach((num, i) => {
+  doc.text(
+    'ABCDEFG'[i],
+    20 - 2.5,
+    60 - 4 + ((i + 0.5) * MAP_HEIGHT) / (NUM_SQUARES_Y + 1),
+    {
+      fill: false,
+      stroke: true,
+    }
+  );
 
-  doc.text('ABCDEF'[i], 20 - 2.5, 60 - 4 + ((i + 0.5) * 480) / 6, {
-    fill: true,
-    stroke: false,
-  });
+  doc.text(
+    'ABCDEFG'[i],
+    20 - 2.5,
+    60 - 4 + ((i + 0.5) * MAP_HEIGHT) / (NUM_SQUARES_Y + 1),
+    {
+      fill: true,
+      stroke: false,
+    }
+  );
 });
 
 doc
   .fontSize(FONT_SIZE_COPYRIGHT)
   .fillColor('#10137E')
-  .text(`© John Walley ${date}`, 22, 530);
+  .text(`© John Walley ${date}`, 25, MAP_HEIGHT + 50);
 
 doc.end();
 
