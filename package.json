@@ -17,6 +17,9 @@
   },
   "main": "dist/d3-tube-map.js",
   "module": "index.js",
+  "files": [
+    "dist/*.js"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/johnwalley/d3-tube-map.git"
