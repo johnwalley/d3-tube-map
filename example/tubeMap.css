@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -14,6 +15,10 @@ text {
   font-size: 14px;
   cursor: pointer;
   font-weight: normal;
+}
+
+.label.closed text {
+  text-decoration: line-through;
 }
 
 :focus {

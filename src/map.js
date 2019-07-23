@@ -255,6 +255,9 @@ export default function() {
         return d.name;
       })
       .classed('label', true)
+      .classed('closed', function(d) {
+        return d.closed;
+      })
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
@@ -347,6 +350,9 @@ export default function() {
 
         station.label = data.stations[d.name].label;
         station.position = data.stations[d.name].position;
+        station.closed = data.stations[d.name].hasOwnProperty('closed')
+          ? data.stations[d.name].closed
+          : false;
         station.visited = false;
 
         if (!d.hide) {

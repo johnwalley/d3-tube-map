@@ -461,7 +461,8 @@
       "position": {
         "lat": 52.207365,
         "lon": 0.12938
-      }
+      },
+      "closed": true
     },
     "HudsonsAleHouse": {
       "name": "Hudson's Ale House",
