@@ -574,8 +574,7 @@
       "name": "Mitre",
       "label": "Mitre",
       "address": "17 Bridge St, Cambridge CB2 1UF",
-      "website":
-        "http://www.nicholsonspubs.co.uk/restaurants/eastofengland/themitrecambridge",
+      "website": "http://www.nicholsonspubs.co.uk/restaurants/eastofengland/themitrecambridge",
       "phone": "01223 358403",
       "position": {
         "lat": 52.208852,
@@ -591,6 +590,17 @@
       "position": {
         "lat": 52.214393,
         "lon": 0.127719
+      }
+    },
+    "OldTicketOffice": {
+      "name": "Old Ticket Office",
+      "label": "Old Ticket Office",
+      "address": "Unit 1, Cambridge Railway Station, Cambridge CB1 2JW",
+      "website": "https://www.oldticketoffice.com/",
+      "phone": "01223 859017",
+      "position": {
+        "lat": 52.194681,
+        "lon": 0.1366827
       }
     },
     "PantonArms": {
@@ -716,8 +726,7 @@
       "name": "Regal",
       "label": "Regal",
       "address": "38-39 St Andrew's St, Cambridge, Cambridgeshire CB2 3AR",
-      "website":
-        "https://www.jdwetherspoon.com/pubs/all-pubs/england/cambridgeshire/the-regal-cambridge",
+      "website": "https://www.jdwetherspoon.com/pubs/all-pubs/england/cambridgeshire/the-regal-cambridge",
       "phone": "01223 366459",
       "position": {
         "lat": 52.202947,
@@ -1380,7 +1389,7 @@
         {
           "coords": [50, -14],
           "name": "DevonshireArms",
-          "labelPos": "SW"
+          "labelPos": "NE"
         },
         {
           "coords": [52, -16],
@@ -1448,11 +1457,16 @@
         },
         {
           "coords": [39, -15],
+          "name": "OldTicketOffice",
+          "labelPos": "NE"
+        },
+        {
+          "coords": [41, -17],
           "name": "EarlOfDerby",
           "labelPos": "SW"
         },
         {
-          "coords": [41, -17],
+          "coords": [43, -19],
           "name": "Rock",
           "labelPos": "SW"
         },
