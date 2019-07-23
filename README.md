@@ -4,8 +4,7 @@
 
 Draw tube maps in the style of the London Underground using d3.
 
-See a demo
-[here](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db420).
+See a demo on [bl.ocks.org](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9dff99073db420) or [Observable](https://observablehq.com/@johnwalley/d3-tube-map).
 
 ![Screenshot](https://user-images.githubusercontent.com/981531/34120207-c26283f4-e41c-11e7-9683-e772f7bd308d.png)
 
