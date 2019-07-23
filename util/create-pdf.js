@@ -150,9 +150,12 @@ const alignMap = {
 };
 
 labels.forEach(label => {
-  const bbox = metadata.find(
+  const el = metadata.find(
     d => d.name === label.parentElement.parentElement.id
-  ).bbox;
+  );
+
+  const bbox = el.bbox;
+  const strike = el.strike;
 
   const align = alignMap[label.parentElement.getAttribute('text-anchor')];
 
@@ -164,6 +167,7 @@ labels.forEach(label => {
       width: bbox.width,
       align: align,
       link: data.stations[label.parentElement.parentElement.id].website,
+      strike,
     }
   );
 });

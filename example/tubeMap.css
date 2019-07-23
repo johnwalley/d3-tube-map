@@ -17,10 +17,6 @@ text {
   font-weight: normal;
 }
 
-.label.closed text {
-  text-decoration: line-through;
-}
-
 :focus {
   outline: 0;
 }

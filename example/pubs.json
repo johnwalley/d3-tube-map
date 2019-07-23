@@ -1396,7 +1396,7 @@
         {
           "coords": [58, -16],
           "name": "DevonshireArms",
-          "labelPos": "NE"
+          "labelPos": "SW"
         },
         {
           "coords": [60, -18],
@@ -1463,7 +1463,7 @@
           "labelPos": "NE"
         },
         {
-          "coords": [41, -13],
+          "coords": [43, -15],
           "name": "OldTicketOffice",
           "labelPos": "SW"
         },

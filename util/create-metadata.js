@@ -20,6 +20,7 @@ const puppeteer = require('puppeteer');
     return {
       text: text.map(t => ({
         name: t.parentElement.id,
+        strike: t.style.textDecoration === 'line-through',
         bbox: {
           x: t.getBBox().x,
           y: t.getBBox().y,

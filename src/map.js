@@ -253,9 +253,6 @@ export default function() {
         return d.name;
       })
       .classed('label', true)
-      .classed('closed', function(d) {
-        return d.closed;
-      })
       .on('click', function() {
         var label = d3.select(this);
         var name = label.attr('id');
@@ -278,6 +275,9 @@ export default function() {
       })
       .style('display', function(d) {
         return d.hide !== true ? 'block' : 'none';
+      })
+      .style('text-decoration', function(d) {
+        return d.closed ? 'line-through' : 'none';
       })
       .style('font-size', 1.96 * lineWidth + 'px')
       .style('-webkit-user-select', 'none')
