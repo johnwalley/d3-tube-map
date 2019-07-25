@@ -8,6 +8,10 @@ See a demo on [bl.ocks.org](https://bl.ocks.org/johnwalley/9b6d8af7a209b95c5b9df
 
 ![Screenshot](https://user-images.githubusercontent.com/981531/34120207-c26283f4-e41c-11e7-9683-e772f7bd308d.png)
 
+A word of warning. This was created to scratch my own itch ([Cambridge Pub Map](https://www.pubmap.co.uk)). It works, but can be difficult to work with. That said, there are examples of other people creating awesome visualizations:
+
+- [Lisbon Schematic Metro Map](https://github.com/Joao-Pedrosa/GSDB)
+
 ## Installing
 
 If you use NPM, `npm install d3-tube-map`. Otherwise, download the
