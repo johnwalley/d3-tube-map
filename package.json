@@ -39,7 +39,7 @@
     "eslint-plugin-prettier": "3.1.0",
     "jsdom": "15.1.1",
     "package-preamble": "0.1.0",
-    "pdfkit": "0.8.3",
+    "pdfkit": "0.10.0",
     "prettier": "1.18.2",
     "puppeteer": "1.18.1",
     "rollup": "1.17.0",
