@@ -1,0 +1,205 @@
+{
+  "stations": {
+    "Brixton": {
+      "name": "Brixton",
+      "label": "Brixton"
+    },
+    "BlackhorseRoad": {
+      "name": "BlackhorseRoad",
+      "label": "Blackhorse\nRoad"
+    },
+    "FinsburyPark": {
+      "name": "FinsburyPark",
+      "label": "Finsbury\nPark"
+    },
+    "GreenPark": {
+      "name": "GreenPark",
+      "label": "Green Park"
+    },
+    "HighburyIslington": {
+      "name": "HighburyIslington",
+      "label": "Highbury &\nIslington"
+    },
+    "KingsCrossStPancras": {
+      "name": "KingsCrossStPancras",
+      "label": "King's Cross\nSt. Pancras"
+    },
+    "OxfordCircus": {
+      "name": "OxfordCircus",
+      "label": "Oxford Circus"
+    },
+    "Pimlico": {
+      "name": "Pimlico",
+      "label": "Pimlico"
+    },
+    "SevenSisters": {
+      "name": "SevenSisters",
+      "label": "Seven\nSisters"
+    },
+    "Stockwell": {
+      "name": "Stockwell",
+      "label": "Stockwell"
+    },
+    "TottenhamHale": {
+      "name": "TottenhamHale",
+      "label": "Tottenham\nHale"
+    },
+    "Vauxhall": {
+      "name": "Vauxhall",
+      "label": "Vauxhall"
+    },
+    "Victoria": {
+      "name": "Victoria",
+      "label": "Victoria"
+    },
+    "WalthamstowCentral": {
+      "name": "WalthamstowCentral",
+      "label": "Walthamstow\nCentral"
+    },
+    "WarrenStreet": {
+      "name": "WarrenStreet",
+      "label": "Warren\nStreet"
+    }
+  },
+  "lines": [
+    {
+      "name": "Victoria",
+      "label": "Victoria",
+      "color": "#2B8DBF",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [0, -20],
+          "name": "Brixton",
+          "labelPos": "SW"
+        },
+        {
+          "coords": [-4, -16],
+          "name": "Stockwell",
+          "marker": "interchange",
+          "labelPos": "E"
+        },
+        {
+          "coords": [-8, -12],
+          "name": "Vauxhall",
+          "marker": "interchange",
+          "labelPos": "NE"
+        },
+        {
+          "coords": [-9, -10]
+        },
+        {
+          "coords": [-9, -2]
+        },
+        {
+          "coords": [-9, -3],
+          "name": "Pimlico",
+          "labelPos": "W"
+        },
+        {
+          "coords": [-9, 1],
+          "name": "Victoria",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [-9, 5],
+          "name": "GreenPark",
+          "marker": "interchange",
+          "labelPos": "NE"
+        },
+        {
+          "coords": [-9, 6]
+        },
+        {
+          "coords": [-8, 8]
+        },
+        {
+          "coords": [-6, 10]
+        },
+        {
+          "coords": [-4, 12],
+          "name": "OxfordCircus",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [0, 16],
+          "name": "WarrenStreet",
+          "marker": "interchange",
+          "labelPos": "E"
+        },
+        {
+          "coords": [4, 20]
+        },
+        {
+          "coords": [6, 21]
+        },
+        {
+          "coords": [9, 21],
+          "name": "KingsCrossStPancras",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [16, 21]
+        },
+        {
+          "coords": [17, 22],
+          "dir": "E"
+        },
+        {
+          "coords": [17, 30]
+        },
+        {
+          "coords": [17, 31],
+          "name": "HighburyIslington",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [17, 34]
+        },
+        {
+          "coords": [18, 36]
+        },
+        {
+          "coords": [22, 40],
+          "name": "FinsburyPark",
+          "marker": "interchange",
+          "labelPos": "SE"
+        },
+        {
+          "coords": [26, 44]
+        },
+        {
+          "coords": [28, 45]
+        },
+        {
+          "coords": [32, 45],
+          "name": "SevenSisters",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [36, 45],
+          "name": "TottenhamHale",
+          "marker": "interchange",
+          "labelPos": "S"
+        },
+        {
+          "coords": [40, 45],
+          "name": "BlackhorseRoad",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [46, 45],
+          "name": "WalthamstowCentral",
+          "marker": "interchange",
+          "labelPos": "E"
+        }
+      ]
+    }
+  ]
+}
