@@ -36,7 +36,7 @@
   "devDependencies": {
     "eslint": "6.5.1",
     "eslint-config-prettier": "6.1.0",
-    "eslint-plugin-prettier": "3.1.0",
+    "eslint-plugin-prettier": "3.1.1",
     "jsdom": "15.1.1",
     "package-preamble": "0.1.0",
     "pdfkit": "0.10.0",
