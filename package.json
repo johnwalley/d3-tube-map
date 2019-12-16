@@ -1,6 +1,6 @@
 {
   "name": "d3-tube-map",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Draw tube maps in the style of the London Underground",
   "keywords": [
     "d3",
@@ -36,15 +36,15 @@
   "devDependencies": {
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
-    "eslint-plugin-prettier": "3.1.1",
-    "jsdom": "15.1.1",
+    "eslint-plugin-prettier": "3.1.2",
+    "jsdom": "15.2.1",
     "package-preamble": "0.1.0",
-    "pdfkit": "0.10.0",
-    "prettier": "1.18.2",
-    "puppeteer": "1.20.0",
-    "rollup": "1.27.8",
+    "pdfkit": "0.11.0",
+    "prettier": "1.19.1",
+    "puppeteer": "2.0.0",
+    "rollup": "1.27.13",
     "tape": "4.11.0",
-    "uglify-js": "3.7.1",
+    "uglify-js": "3.7.2",
     "yargs": "15.0.2"
   }
 }
