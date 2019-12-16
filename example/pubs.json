@@ -549,7 +549,8 @@
       "position": {
         "lat": 52.18913,
         "lon": 0.153427
-      }
+      },
+      "closed": true
     },
     "Mill": {
       "name": "Mill",
