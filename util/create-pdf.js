@@ -280,7 +280,7 @@ Object.values(data.stations)
           20 +
           LEGEND_PUB_VERTICAL_OFFSET *
             (i > numPubsInFirstColumn ? i - numPubsInFirstColumn - 1 : i),
-        { link: line.website }
+        { strike: line.closed, link: line.website }
       );
   });
 
