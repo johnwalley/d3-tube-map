@@ -20,8 +20,7 @@ tape('map(selection) produces the expected result', function(test) {
     fs.readFileSync(path.join(__dirname, 'map.json'), 'utf8')
   );
 
-  d3
-    .select(bodyActual)
+  d3.select(bodyActual)
     .select('div')
     .datum(data)
     .call(d3.tubeMap());

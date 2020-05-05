@@ -1,6 +1,6 @@
 {
   "name": "d3-tube-map",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Draw tube maps in the style of the London Underground",
   "keywords": [
     "d3",
@@ -9,30 +9,34 @@
     "map",
     "visualization"
   ],
-  "homepage": "http://www.pubmap.co.uk/",
+  "homepage": "https://github.com/johnwalley/d3-tube-map/",
   "license": "BSD-3-Clause",
   "author": {
     "name": "John Walley",
     "url": "http://www.walley.org.uk/"
   },
   "main": "dist/d3-tube-map.js",
-  "module": "index.js",
+  "unpkg": "dist/d3-tube.min.js",
+  "jsdelivr": "dist/d3-tube.min.js",
+  "module": "src/index.js",
   "files": [
-    "dist/*.js"
+    "dist/**/*.js",
+    "src/**/*.js"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/johnwalley/d3-tube-map.git"
   },
   "scripts": {
-    "pretest": "rm -rf dist && mkdir dist && rollup -c --banner \"$(preamble)\"",
-    "test": "tape 'test/**/*-test.js' && eslint index.js src",
-    "prepublishOnly": "npm run test && uglifyjs -b beautify=false,preamble=\"'$(preamble)'\" dist/d3-tube-map.js -c -m -o dist/d3-tube-map.min.js",
+    "pretest": "rm -rf dist && mkdir dist && rollup -c",
+    "test": "tape 'test/**/*-test.js' && eslint src",
+    "prepublishOnly": "npm run test",
     "postpublish": "zip -j dist/d3-tube-map.zip -- LICENSE README.md dist/d3-tube-map.js dist/d3-tube-map.min.js"
   },
   "dependencies": {
     "d3": "5"
   },
+  "sideEffects": false,
   "devDependencies": {
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.10.0",
@@ -41,6 +45,7 @@
     "package-preamble": "0.1.0",
     "prettier": "1.19.1",
     "rollup": "2.7.6",
+    "rollup-plugin-terser": "5",
     "tape": "5.0.0",
     "uglify-js": "3.8.0"
   }
