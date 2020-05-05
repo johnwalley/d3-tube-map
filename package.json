@@ -47,6 +47,6 @@
     "rollup": "2.7.6",
     "rollup-plugin-terser": "5",
     "tape": "5.0.0",
-    "uglify-js": "3.8.0"
+    "uglify-js": "3.9.2"
   }
 }
