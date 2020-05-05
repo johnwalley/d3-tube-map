@@ -40,7 +40,7 @@
     "jsdom": "16.2.1",
     "package-preamble": "0.1.0",
     "prettier": "1.19.1",
-    "rollup": "1.32.0",
+    "rollup": "2.7.6",
     "tape": "5.0.0",
     "uglify-js": "3.8.0"
   }
