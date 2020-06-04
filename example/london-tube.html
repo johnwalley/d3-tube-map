@@ -27,19 +27,16 @@
           bottom: 40,
           left: 100,
         })
-        .on('click', function(name) {
+        .on('click', function (name) {
           console.log(name);
         });
 
-      d3.json('./london-tube.json').then(function(data) {
+      d3.json('./london-tube.json').then(function (data) {
         container.datum(data).call(map);
 
         var svg = container.select('svg');
 
-        zoom = d3
-          .zoom()
-          .scaleExtent([0.1, 6])
-          .on('zoom', zoomed);
+        zoom = d3.zoom().scaleExtent([0.1, 6]).on('zoom', zoomed);
 
         var zoomContainer = svg.call(zoom);
         var initialScale = 0.5;

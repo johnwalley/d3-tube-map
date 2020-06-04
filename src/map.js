@@ -3,7 +3,7 @@ import { line, station, interchange } from './curve';
 import lineList from './lines';
 import stationList from './stations';
 
-export default function() {
+export default function () {
   var margin = { top: 80, right: 80, bottom: 20, left: 80 };
   var width = 760;
   var height = 640;
@@ -19,33 +19,33 @@ export default function() {
   var listeners = d3.dispatch('click');
 
   function map(selection) {
-    selection.each(function(data) {
+    selection.each(function (data) {
       _data = transformData(data);
 
       var minX =
-        d3.min(_data.raw, function(line) {
-          return d3.min(line.nodes, function(node) {
+        d3.min(_data.raw, function (line) {
+          return d3.min(line.nodes, function (node) {
             return node.coords[0];
           });
         }) - 1;
 
       var maxX =
-        d3.max(_data.raw, function(line) {
-          return d3.max(line.nodes, function(node) {
+        d3.max(_data.raw, function (line) {
+          return d3.max(line.nodes, function (node) {
             return node.coords[0];
           });
         }) + 1;
 
       var minY =
-        d3.min(_data.raw, function(line) {
-          return d3.min(line.nodes, function(node) {
+        d3.min(_data.raw, function (line) {
+          return d3.min(line.nodes, function (node) {
             return node.coords[1];
           });
         }) - 1;
 
       var maxY =
-        d3.max(_data.raw, function(line) {
-          return d3.max(line.nodes, function(node) {
+        d3.max(_data.raw, function (line) {
+          return d3.max(line.nodes, function (node) {
             return node.coords[1];
           });
         }) + 1;
@@ -97,25 +97,25 @@ export default function() {
     });
   }
 
-  map.width = function(w) {
+  map.width = function (w) {
     if (!arguments.length) return width;
     width = w;
     return map;
   };
 
-  map.height = function(h) {
+  map.height = function (h) {
     if (!arguments.length) return height;
     height = h;
     return map;
   };
 
-  map.margin = function(m) {
+  map.margin = function (m) {
     if (!arguments.length) return margin;
     margin = m;
     return map;
   };
 
-  map.on = function() {
+  map.on = function () {
     var value = listeners.on.apply(listeners, arguments);
     return value === listeners ? map : value;
   };
@@ -128,7 +128,7 @@ export default function() {
       .data([_data.river])
       .enter()
       .append('path')
-      .attr('d', function(d) {
+      .attr('d', function (d) {
         return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
       .attr('stroke', '#CCECF4')
@@ -144,17 +144,17 @@ export default function() {
       .data(_data.lines.lines)
       .enter()
       .append('path')
-      .attr('d', function(d) {
+      .attr('d', function (d) {
         return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
-      .attr('id', function(d) {
+      .attr('id', function (d) {
         return d.name;
       })
-      .attr('stroke', function(d) {
+      .attr('stroke', function (d) {
         return d.color;
       })
       .attr('fill', 'none')
-      .attr('stroke-width', function(d) {
+      .attr('stroke-width', function (d) {
         return d.highlighted ? lineWidth * 1.3 : lineWidth;
       })
       .classed('line', true);
@@ -171,17 +171,17 @@ export default function() {
       .data(_data.stations.interchanges())
       .enter()
       .append('g')
-      .attr('id', function(d) {
+      .attr('id', function (d) {
         return d.name;
       })
-      .on('click', function() {
+      .on('click', function () {
         var label = d3.select(this);
         var name = label.attr('id');
         listeners.call('click', this, name);
       })
       .append('path')
       .attr('d', interchange(lineWidth))
-      .attr('transform', function(d) {
+      .attr('transform', function (d) {
         return (
           'translate(' +
           xScale(d.x + d.marker[0].shiftX * lineWidthMultiplier) +
@@ -191,10 +191,10 @@ export default function() {
         );
       })
       .attr('stroke-width', lineWidth / 2)
-      .attr('fill', function(d) {
+      .attr('fill', function (d) {
         return d.visited ? fgColor : bgColor;
       })
-      .attr('stroke', function(d) {
+      .attr('stroke', function (d) {
         return d.visited ? bgColor : fgColor;
       })
       .classed('interchange', true)
@@ -209,16 +209,16 @@ export default function() {
       .data(_data.stations.normalStations())
       .enter()
       .append('g')
-      .attr('id', function(d) {
+      .attr('id', function (d) {
         return d.name;
       })
-      .on('click', function() {
+      .on('click', function () {
         var label = d3.select(this);
         var name = label.attr('id');
         listeners.call('click', this, name);
       })
       .append('path')
-      .attr('d', function(d) {
+      .attr('d', function (d) {
         return station(
           d,
           xScale,
@@ -227,15 +227,15 @@ export default function() {
           lineWidthTickRatio
         );
       })
-      .attr('stroke', function(d) {
+      .attr('stroke', function (d) {
         return d.color;
       })
       .attr('stroke-width', lineWidth / lineWidthTickRatio)
       .attr('fill', 'none')
-      .attr('class', function(d) {
+      .attr('class', function (d) {
         return d.line;
       })
-      .attr('id', function(d) {
+      .attr('id', function (d) {
         return d.name;
       })
       .classed('station', true);
@@ -249,49 +249,49 @@ export default function() {
       .data(_data.stations.toArray())
       .enter()
       .append('g')
-      .attr('id', function(d) {
+      .attr('id', function (d) {
         return d.name;
       })
       .classed('label', true)
-      .on('click', function() {
+      .on('click', function () {
         var label = d3.select(this);
         var name = label.attr('id');
         listeners.call('click', this, name);
       })
       .append('text')
-      .text(function(d) {
+      .text(function (d) {
         return d.label;
       })
       .attr('fill', '#10137E')
       .attr('dy', 0)
-      .attr('x', function(d) {
+      .attr('x', function (d) {
         return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
       })
-      .attr('y', function(d) {
+      .attr('y', function (d) {
         return yScale(d.y + d.labelShiftY) - textPos(d).pos[1];
       })
-      .attr('text-anchor', function(d) {
+      .attr('text-anchor', function (d) {
         return textPos(d).textAnchor;
       })
-      .style('display', function(d) {
+      .style('display', function (d) {
         return d.hide !== true ? 'block' : 'none';
       })
-      .style('text-decoration', function(d) {
+      .style('text-decoration', function (d) {
         return d.closed ? 'line-through' : 'none';
       })
       .style('font-size', 1.96 * lineWidth + 'px')
       .style('-webkit-user-select', 'none')
-      .attr('class', function(d) {
+      .attr('class', function (d) {
         return d.marker
-          .map(function(marker) {
+          .map(function (marker) {
             return marker.line;
           })
           .join(' ');
       })
-      .classed('highlighted', function(d) {
+      .classed('highlighted', function (d) {
         return d.visited;
       })
-      .call(wrap, function(d) {
+      .call(wrap, function (d) {
         return textPos(d).alignmentBaseline;
       });
   }
@@ -306,7 +306,7 @@ export default function() {
   }
 
   function extractStations(data) {
-    data.lines.forEach(function(line) {
+    data.lines.forEach(function (line) {
       for (var node = 0; node < line.nodes.length; node++) {
         var d = line.nodes[node];
 
@@ -380,7 +380,7 @@ export default function() {
   function extractLines(data) {
     var lines = [];
 
-    data.forEach(function(line) {
+    data.forEach(function (line) {
       var lineObj = {
         name: line.name,
         title: line.label,
@@ -472,7 +472,7 @@ export default function() {
 
   // Render line breaks for svg text
   function wrap(text, baseline) {
-    text.each(function() {
+    text.each(function () {
       var text = d3.select(this);
       var lines = text.text().split(/\n/);
 

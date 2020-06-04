@@ -30,7 +30,8 @@ is exported:
   var width = 1600;
   var height = 1024;
 
-  var map = d3.tubeMap()
+  var map = d3
+    .tubeMap()
     .width(width)
     .height(height)
     .margin({
@@ -40,7 +41,7 @@ is exported:
       left: width / 7,
     });
 
-  d3.json("./pubs.json").then(function(data)  {
+  d3.json('./pubs.json').then(function (data) {
     container.datum(data).call(map);
   });
 </script>
@@ -128,24 +129,24 @@ The data passed to the tube map should have the following properties: `stations`
 
 `lines` is an array of `line` objects. Each `line` must have the following:
 
-* `name` will be used as the `id` of the `svg` `path` element
-* `color` is simply the color of the line
-* `shiftCoords` will translate the whole line
-* `nodes` is an array of nodes which define the layout of the line
+- `name` will be used as the `id` of the `svg` `path` element
+- `color` is simply the color of the line
+- `shiftCoords` will translate the whole line
+- `nodes` is an array of nodes which define the layout of the line
 
 Each node must have the following:
 
-* `coords` is the position of the node. Must be integer values
-* `name` should be present if the node represents a station. It should match a station defined in the top-level `stations` property
-* `labelPos` should be present if the node represents a station. It is a compass direction and determines where the label is positioned relative to the node, e.g. NE would place the label up and to the right of the node
-* `dir` is required when the node represents a 90 degree corner
+- `coords` is the position of the node. Must be integer values
+- `name` should be present if the node represents a station. It should match a station defined in the top-level `stations` property
+- `labelPos` should be present if the node represents a station. It is a compass direction and determines where the label is positioned relative to the node, e.g. NE would place the label up and to the right of the node
+- `dir` is required when the node represents a 90 degree corner
 
 ### Corners
 
 Two types of corner are supported: a 90 degree turn and a 45 degree turn. The latter is recognised when the position of a node differs from the position of the previous node by either:
 
-* 1 in the x direction and 2 in the y direction
-* 2 in the x direction and 1 in the y direction
+- 1 in the x direction and 2 in the y direction
+- 2 in the x direction and 1 in the y direction
 
 For example:
 
@@ -162,7 +163,7 @@ For example:
 
 A 90 degree turn is recognised when the position of a node differs from the position of the previous node by:
 
-* 1 in the x direction and 1 in the y direction
+- 1 in the x direction and 1 in the y direction
 
 For example:
 

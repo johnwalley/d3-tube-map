@@ -21,10 +21,10 @@ export function station(
 
   var lineFunction = d3
     .line()
-    .x(function(d) {
+    .x(function (d) {
       return xScale(d[0]);
     })
-    .y(function(d) {
+    .y(function (d) {
       return yScale(d[1]);
     });
 
