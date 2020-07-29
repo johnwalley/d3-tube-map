@@ -112,7 +112,6 @@ The data passed to the tube map should have the following properties: `stations`
         },
         {
           "coords": [31, -3],
-          "dir": "E"
         },
         {
           "coords": [31, 2],
@@ -139,7 +138,6 @@ Each node must have the following:
 - `coords` is the position of the node. Must be integer values
 - `name` should be present if the node represents a station. It should match a station defined in the top-level `stations` property
 - `labelPos` should be present if the node represents a station. It is a compass direction and determines where the label is positioned relative to the node, e.g. NE would place the label up and to the right of the node
-- `dir` is required when the node represents a 90 degree corner
 
 ### Corners
 
@@ -174,9 +172,6 @@ For example:
   },
   {
     "coords": [1, 1],
-    "dir": "E"
   }
 ]
 ```
-
-The value of `dir` represents the direction of the line before making the turn. It disambiguates between the two possible 90 degree turns which could link the two nodes.
