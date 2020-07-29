@@ -1343,17 +1343,17 @@
           "coords": [70, 14]
         },
         {
-          "coords": [82, 27],
+          "coords": [83, 27],
           "name": "AncientShepherds",
           "labelPos": "SE"
         },
         {
-          "coords": [84, 29],
+          "coords": [85, 29],
           "name": "KingsHead",
           "labelPos": "SE"
         },
         {
-          "coords": [86, 31],
+          "coords": [87, 31],
           "name": "Plough",
           "labelPos": "SE"
         }
@@ -1612,7 +1612,7 @@
     "shiftCoords": [0, 0],
     "nodes": [
       {
-        "coords": [-42, -56]
+        "coords": [-43, -56]
       },
       {
         "coords": [5, -8]
