@@ -1,5 +1,87 @@
 import * as d3 from 'd3';
 
+const SQRT2 = Math.sqrt(2);
+
+const DIRECTION_VECTORS = {
+  N: [0, 1],
+  NE: [1, 1],
+  E: [1, 0],
+  SE: [1, -1],
+  S: [0, -1],
+  SW: [-1, -1],
+  W: [-1, 0],
+  NW: [-1, 1],
+};
+
+/**
+ * Apply a function to both components of a 2-dimensional vector.
+ */
+function apply2d(fn) {
+  return [0, 1].map((i) => fn(i));
+}
+
+/**
+ * Return the norm of a 2-dimensional vector.
+ */
+function norm2d(vector) {
+  return Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1]);
+}
+
+/**
+ * Return the cross product of a 2-dimensional vector.
+ */
+function crossProd2d(a, b) {
+  return a[0] * b[1] - a[1] * b[0];
+}
+
+/**
+ * Return whether the given 2D vectors are parallel.
+ */
+function areParallel(a, b) {
+  return (
+    crossProd2d(a, b) == 0 &&
+    Math.sign(a[0]) == Math.sign(b[0]) &&
+    Math.sign(a[1]) == Math.sign(b[1])
+  );
+}
+
+/**
+ * Return the given vector normalized.
+ */
+function normalize(vector) {
+  let norm = norm2d(vector);
+  return apply2d((i) => vector[i] / norm);
+}
+
+/**
+ * Return a vector in the direction of the provided compass bearing.
+ */
+function directionVector(bearing) {
+  let key = bearing.toUpperCase();
+  if (!DIRECTION_VECTORS.hasOwnProperty(key)) {
+    let options = Object.keys(DIRECTION_VECTORS).join(', ');
+    throw new Error(
+      `'${key}' is not a recognised compass bearing. Options are ${options}`
+    );
+  }
+  return DIRECTION_VECTORS[key];
+}
+
+/**
+ * Return the compass bearing matching the provided vector.
+ */
+function compassBearing(vector) {
+  let entry = Object.entries(DIRECTION_VECTORS).find(([b, vec]) =>
+    areParallel(vec, vector)
+  );
+  if (entry === undefined) {
+    throw new Error(
+      `No compass bearing matches vector ${vector}. Only 45 deg angles are supported.`
+    );
+  }
+  return entry[0];
+}
+
 export function interchange(lineWidth) {
   return d3
     .arc()
@@ -16,9 +98,6 @@ export function station(
   lineWidthMultiplier,
   lineWidthTickRatio
 ) {
-  var dir;
-  var sqrt2 = Math.sqrt(2);
-
   var lineFunction = d3
     .line()
     .x(function (d) {
@@ -28,34 +107,7 @@ export function station(
       return yScale(d[1]);
     });
 
-  switch (d.labelPos.toLowerCase()) {
-    case 'n':
-      dir = [0, 1];
-      break;
-    case 'ne':
-      dir = [1 / sqrt2, 1 / sqrt2];
-      break;
-    case 'e':
-      dir = [1, 0];
-      break;
-    case 'se':
-      dir = [1 / sqrt2, -1 / sqrt2];
-      break;
-    case 's':
-      dir = [0, -1];
-      break;
-    case 'sw':
-      dir = [-1 / sqrt2, -1 / sqrt2];
-      break;
-    case 'w':
-      dir = [-1, 0];
-      break;
-    case 'nw':
-      dir = [-1 / sqrt2, 1 / sqrt2];
-      break;
-    default:
-      break;
-  }
+  let dir = normalize(directionVector(d.labelPos));
 
   return lineFunction([
     [
@@ -87,270 +139,125 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
   var unitLength = Math.abs(
     xScale(1) - xScale(0) !== 0 ? xScale(1) - xScale(0) : yScale(1) - yScale(0)
   );
-  var sqrt2 = Math.sqrt(2);
 
   var shiftCoords = [
     (data.shiftCoords[0] * lineWidth) / unitLength,
     (data.shiftCoords[1] * lineWidth) / unitLength,
   ];
 
-  var lastSectionType = 'diagonal'; // TODO: HACK
+  let prevBearing;
 
-  var nextNode, currNode, xDiff, yDiff;
-  var points;
+  for (var lineNode = 1; lineNode < lineNodes.length; lineNode++) {
+    let nextNode = lineNodes[lineNode];
+    let currNode = lineNodes[lineNode - 1];
 
-  for (var lineNode = 0; lineNode < lineNodes.length; lineNode++) {
-    if (lineNode > 0) {
-      nextNode = lineNodes[lineNode];
-      currNode = lineNodes[lineNode - 1];
+    let xDiff = Math.round(nextNode.coords[0] - currNode.coords[0]);
+    let yDiff = Math.round(nextNode.coords[1] - currNode.coords[1]);
+    let diff = [xDiff, yDiff];
 
-      var direction = '';
-
-      xDiff = Math.round(currNode.coords[0] - nextNode.coords[0]);
-      yDiff = Math.round(currNode.coords[1] - nextNode.coords[1]);
-
-      var lineEndCorrection = [0, 0];
-
-      if (lineNode === lineNodes.length - 1) {
-        if (xDiff == 0 || yDiff == 0) {
-          if (xDiff > 0)
-            lineEndCorrection = [
-              -lineWidth / (2 * lineWidthTickRatio * unitLength),
-              0,
-            ];
-          if (xDiff < 0)
-            lineEndCorrection = [
-              lineWidth / (2 * lineWidthTickRatio * unitLength),
-              0,
-            ];
-          if (yDiff > 0)
-            lineEndCorrection = [
-              0,
-              -lineWidth / (2 * lineWidthTickRatio * unitLength),
-            ];
-          if (yDiff < 0)
-            lineEndCorrection = [
-              0,
-              lineWidth / (2 * lineWidthTickRatio * unitLength),
-            ];
-        } else {
-          if (xDiff > 0 && yDiff > 0)
-            lineEndCorrection = [
-              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            ];
-          if (xDiff > 0 && yDiff < 0)
-            lineEndCorrection = [
-              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            ];
-          if (xDiff < 0 && yDiff > 0)
-            lineEndCorrection = [
-              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-              -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            ];
-          if (xDiff < 0 && yDiff < 0)
-            lineEndCorrection = [
-              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-              lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            ];
-        }
-      }
-
-      points = [
-        [
-          xScale(currNode.coords[0] + shiftCoords[0]),
-          yScale(currNode.coords[1] + shiftCoords[1]),
-        ],
-        [
-          xScale(nextNode.coords[0] + shiftCoords[0] + lineEndCorrection[0]),
-          yScale(nextNode.coords[1] + shiftCoords[1] + lineEndCorrection[1]),
-        ],
-      ];
-
-      if (xDiff == 0 || yDiff == 0) {
-        lastSectionType = 'udlr';
-        path += 'L' + points[1][0] + ',' + points[1][1];
-      } else if (Math.abs(xDiff) == Math.abs(yDiff) && Math.abs(xDiff) > 1) {
-        lastSectionType = 'diagonal';
-        path += 'L' + points[1][0] + ',' + points[1][1];
-      } else if (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) {
-        direction = nextNode.dir.toLowerCase();
-
-        switch (direction) {
-          case 'e':
-            path +=
-              'Q' +
-              points[1][0] +
-              ',' +
-              points[0][1] +
-              ',' +
-              points[1][0] +
-              ',' +
-              points[1][1];
-            break;
-          case 's':
-            path +=
-              'Q' +
-              points[0][0] +
-              ',' +
-              points[1][1] +
-              ',' +
-              points[1][0] +
-              ',' +
-              points[1][1];
-            break;
-          case 'n':
-            path +=
-              'Q' +
-              points[0][0] +
-              ',' +
-              points[1][1] +
-              ',' +
-              points[1][0] +
-              ',' +
-              points[1][1];
-            break;
-          case 'w':
-            path +=
-              'Q' +
-              points[1][0] +
-              ',' +
-              points[0][1] +
-              ',' +
-              points[1][0] +
-              ',' +
-              points[1][1];
-            break;
-        }
-      } else if (
+    if (xDiff != 0 || yDiff != 0) {
+      let isCorner =
+        (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) ||
         (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
-        (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1)
-      ) {
-        var controlPoints;
-        if (xDiff == 1) {
-          if (lastSectionType == 'udlr') {
-            controlPoints = [
-              points[0][0],
-              points[0][1] + (points[1][1] - points[0][1]) / 2,
-            ];
-          } else if (lastSectionType == 'diagonal') {
-            controlPoints = [
-              points[1][0],
-              points[0][1] + (points[1][1] - points[0][1]) / 2,
-            ];
-          }
-        } else if (xDiff == -1) {
-          if (lastSectionType == 'udlr') {
-            controlPoints = [
-              points[0][0],
-              points[0][1] + (points[1][1] - points[0][1]) / 2,
-            ];
-          } else if (lastSectionType == 'diagonal') {
-            controlPoints = [
-              points[1][0],
-              points[0][1] + (points[1][1] - points[0][1]) / 2,
-            ];
-          }
-        } else if (xDiff == -2) {
-          if (lastSectionType == 'udlr') {
-            controlPoints = [
-              points[0][0] + (points[1][0] - points[0][0]) / 2,
-              points[0][1],
-            ];
-          } else if (lastSectionType == 'diagonal') {
-            controlPoints = [
-              points[0][0] + (points[1][0] - points[0][0]) / 2,
-              points[1][1],
-            ];
-          }
-        } else if (xDiff == 2) {
-          if (lastSectionType == 'udlr') {
-            controlPoints = [
-              points[0][0] + (points[1][0] - points[0][0]) / 2,
-              points[0][1],
-            ];
-          } else if (lastSectionType == 'diagonal') {
-            controlPoints = [
-              points[0][0] + (points[1][0] - points[0][0]) / 2,
-              points[1][1],
-            ];
-          }
+        (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1);
+
+      if (lineNode == 1) {
+        if (isCorner) {
+          throw new Error('Cannot begin with a corner segment');
         }
-
-        path +=
-          'C' +
-          controlPoints[0] +
-          ',' +
-          controlPoints[1] +
-          ',' +
-          controlPoints[0] +
-          ',' +
-          controlPoints[1] +
-          ',' +
-          points[1][0] +
-          ',' +
-          points[1][1];
+        // Initialize to the direction of the current segment
+        prevBearing = compassBearing(diff);
       }
-    } else {
-      nextNode = lineNodes[lineNode + 1];
-      currNode = lineNodes[lineNode];
 
-      xDiff = Math.round(currNode.coords[0] - nextNode.coords[0]);
-      yDiff = Math.round(currNode.coords[1] - nextNode.coords[1]);
+      let nextBearing;
 
-      var lineStartCorrection = [0, 0];
-
-      if (xDiff == 0 || yDiff == 0) {
-        if (xDiff > 0)
-          lineStartCorrection = [
-            lineWidth / (2 * lineWidthTickRatio * unitLength),
-            0,
-          ];
-        if (xDiff < 0)
-          lineStartCorrection = [
-            -lineWidth / (2 * lineWidthTickRatio * unitLength),
-            0,
-          ];
-        if (yDiff > 0)
-          lineStartCorrection = [
-            0,
-            lineWidth / (2 * lineWidthTickRatio * unitLength),
-          ];
-        if (yDiff < 0)
-          lineStartCorrection = [
-            0,
-            -lineWidth / (2 * lineWidthTickRatio * unitLength),
-          ];
+      if (isCorner) {
+        let prevVector = directionVector(prevBearing);
+        let nextVector = apply2d((i) => diff[i] - prevVector[i]);
+        nextBearing = compassBearing(nextVector);
       } else {
-        if (xDiff > 0 && yDiff > 0)
-          lineStartCorrection = [
-            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-          ];
-        if (xDiff > 0 && yDiff < 0)
-          lineStartCorrection = [
-            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-          ];
-        if (xDiff < 0 && yDiff > 0)
-          lineStartCorrection = [
-            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-          ];
-        if (xDiff < 0 && yDiff < 0)
-          lineStartCorrection = [
-            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-            -lineWidth / (2 * lineWidthTickRatio * unitLength * sqrt2),
-          ];
+        nextBearing = compassBearing(diff);
+        if (crossProd2d(directionVector(prevBearing), diff) != 0) {
+          throw new Error(
+            `Direction discontinuity: ${nextNode.coords} is` +
+              ` not ${prevBearing} (or opposite) of ${currNode.coords}`
+          );
+        }
+        let norm = norm2d(diff);
+        let segmentDirection = apply2d((i) => diff[i] / norm);
       }
 
-      points = [
-        xScale(currNode.coords[0] + shiftCoords[0] + lineStartCorrection[0]),
-        yScale(currNode.coords[1] + shiftCoords[1] + lineStartCorrection[1]),
+      if (lineNode == 1) {
+        let tangent = normalize(directionVector(prevBearing));
+        let lineStartCorrection = apply2d(
+          (i) =>
+            (-tangent[i] * lineWidth) / (2 * lineWidthTickRatio * unitLength)
+        );
+        let points = [
+          xScale(currNode.coords[0] + shiftCoords[0] + lineStartCorrection[0]),
+          yScale(currNode.coords[1] + shiftCoords[1] + lineStartCorrection[1]),
+        ];
+        path += 'M' + points[0] + ',' + points[1];
+      }
+
+      let lineEndCorrection = [0, 0];
+      if (lineNode === lineNodes.length - 1) {
+        let tangent = normalize(directionVector(nextBearing));
+        lineEndCorrection = apply2d(
+          (i) =>
+            (tangent[i] * lineWidth) / (2 * lineWidthTickRatio * unitLength)
+        );
+      }
+
+      let prevPoint = [
+        xScale(currNode.coords[0] + shiftCoords[0]),
+        yScale(currNode.coords[1] + shiftCoords[1]),
+      ];
+      let nextPoint = [
+        xScale(nextNode.coords[0] + shiftCoords[0] + lineEndCorrection[0]),
+        yScale(nextNode.coords[1] + shiftCoords[1] + lineEndCorrection[1]),
       ];
 
-      path += 'M' + points[0] + ',' + points[1];
+      if (isCorner) {
+        let prevVector = directionVector(prevBearing);
+        let nextVector = directionVector(nextBearing);
+        let controlPoint = apply2d(
+          (i) =>
+            (prevPoint[i] * nextVector[i] + nextPoint[i] * prevVector[i]) /
+            (prevVector[i] + nextVector[i])
+        );
+        if (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) {
+          path +=
+            'Q' +
+            controlPoint[0] +
+            ',' +
+            controlPoint[1] +
+            ',' +
+            nextPoint[0] +
+            ',' +
+            nextPoint[1];
+        } else if (
+          (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
+          (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1)
+        ) {
+          path +=
+            'C' +
+            controlPoint[0] +
+            ',' +
+            controlPoint[1] +
+            ',' +
+            controlPoint[0] +
+            ',' +
+            controlPoint[1] +
+            ',' +
+            nextPoint[0] +
+            ',' +
+            nextPoint[1];
+        }
+      } else {
+        path += 'L' + nextPoint[0] + ',' + nextPoint[1];
+      }
+      prevBearing = nextBearing;
     }
   }
 

@@ -12,8 +12,8 @@ tape('map() does not throw', function (test) {
 
 tape('map(selection) produces the expected result for map.json', function (test) {
   test.equal(
-    expectedHtml(readFile(testFilePath('map.html'))),
-    actualHtml(readFile(testFilePath('map.json')))
+    actualHtml(readFile(testFilePath('map.json'))),
+    expectedHtml(readFile(testFilePath('map.html')))
   );
   test.end();
 });
@@ -22,8 +22,8 @@ tape('map(selection) produces the expected result for london-tube.json', functio
   // Uncomment to replace the expected HTML content:
   // saveBaselineHtml(exampleFilePath('london-tube.json'), testFilePath('london-tube.html'));
   test.equal(
-    expectedHtml(readFile(testFilePath('london-tube.html'))),
-    actualHtml(readFile(exampleFilePath('london-tube.json')))
+    actualHtml(readFile(exampleFilePath('london-tube.json'))),
+    expectedHtml(readFile(testFilePath('london-tube.html')))
   );
   test.end();
 });
@@ -32,8 +32,8 @@ tape('map(selection) produces the expected result for pubs.json', function (test
   // Uncomment to replace the expected HTML content:
   // saveBaselineHtml(exampleFilePath('pubs.json'), testFilePath('pubs.html'));
   test.equal(
-    expectedHtml(readFile(testFilePath('pubs.html'))),
-    actualHtml(readFile(exampleFilePath('pubs.json')))
+    actualHtml(readFile(exampleFilePath('pubs.json'))),
+    expectedHtml(readFile(testFilePath('pubs.html')))
   );
   test.end();
 });
@@ -42,8 +42,8 @@ tape('map(selection) produces the expected result for minimal.json', function (t
   // Uncomment to replace the expected HTML content:
   // saveBaselineHtml(exampleFilePath('minimal.json'), testFilePath('minimal.html'));
   test.equal(
-    expectedHtml(readFile(testFilePath('minimal.html'))),
-    actualHtml(readFile(exampleFilePath('minimal.json')))
+    actualHtml(readFile(exampleFilePath('minimal.json'))),
+    expectedHtml(readFile(testFilePath('minimal.html')))
   );
   test.end();
 });
