@@ -82,6 +82,28 @@ function compassBearing(vector) {
   return entry[0];
 }
 
+/**
+ * Return an SVG instruction to move to the given point.
+ */
+function svgMoveTo(point) {
+  return `M${point[0]},${point[1]}`;
+}
+
+/**
+ * Return an SVG instruction to draw a line to the given point.
+ */
+function svgLineTo(point) {
+  return `L${point[0]},${point[1]}`;
+}
+
+/**
+ * Return an SVG instruction to draw a quadratic Bezier curve to the given end point,
+ * using the given control point.
+ */
+function svgQuadraticCurveTo(controlPoint, endPoint) {
+  return `Q${controlPoint[0]},${controlPoint[1]},${endPoint[0]},${endPoint[1]}`;
+}
+
 export function interchange(lineWidth) {
   return d3
     .arc()
@@ -134,26 +156,24 @@ export function station(
 export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
   var path = '';
 
-  var lineNodes = data.nodes;
-
   var unitLength = Math.abs(
     xScale(1) - xScale(0) !== 0 ? xScale(1) - xScale(0) : yScale(1) - yScale(0)
   );
 
-  var shiftCoords = [
-    (data.shiftCoords[0] * lineWidth) / unitLength,
-    (data.shiftCoords[1] * lineWidth) / unitLength,
-  ];
+  var shiftCoords = apply2d(
+    (i) => (data.shiftCoords[i] * lineWidth) / unitLength
+  );
 
   let prevBearing;
 
-  for (var lineNode = 1; lineNode < lineNodes.length; lineNode++) {
-    let nextNode = lineNodes[lineNode];
-    let currNode = lineNodes[lineNode - 1];
+  for (let nNode = 1; nNode < data.nodes.length; nNode++) {
+    let nextCoords = data.nodes[nNode].coords;
+    let prevCoords = data.nodes[nNode - 1].coords;
 
-    let xDiff = Math.round(nextNode.coords[0] - currNode.coords[0]);
-    let yDiff = Math.round(nextNode.coords[1] - currNode.coords[1]);
-    let diff = [xDiff, yDiff];
+    let diff = apply2d(
+      (i) => Math.round(nextCoords[i]) - Math.round(prevCoords[i])
+    );
+    let [xDiff, yDiff] = diff;
 
     if (xDiff != 0 || yDiff != 0) {
       let isCorner =
@@ -161,47 +181,50 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
         (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
         (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1);
 
-      if (lineNode == 1) {
+      // If it's the first segment, calculate the initial bearing, assuming
+      // a straight path, and move to the start point.
+      if (nNode == 1) {
         if (isCorner) {
           throw new Error('Cannot begin with a corner segment');
         }
         // Initialize to the direction of the current segment
         prevBearing = compassBearing(diff);
+
+        let tangent = normalize(directionVector(prevBearing));
+        let lineStartCorrection = apply2d(
+          (i) =>
+            (-tangent[i] * lineWidth) / (2 * lineWidthTickRatio * unitLength)
+        );
+        let point = [
+          xScale(prevCoords[0] + shiftCoords[0] + lineStartCorrection[0]),
+          yScale(prevCoords[1] + shiftCoords[1] + lineStartCorrection[1]),
+        ];
+        path += svgMoveTo(point);
       }
 
       let nextBearing;
 
       if (isCorner) {
+        // Corners are always a simple sum of the ingoing and outgoing
+        // vectors in canonical integer form.
         let prevVector = directionVector(prevBearing);
         let nextVector = apply2d((i) => diff[i] - prevVector[i]);
         nextBearing = compassBearing(nextVector);
       } else {
+        // Otherwise the outgoing vector is the same as the ingoing vector.
         nextBearing = compassBearing(diff);
         if (crossProd2d(directionVector(prevBearing), diff) != 0) {
           throw new Error(
-            `Direction discontinuity: ${nextNode.coords} is` +
-              ` not ${prevBearing} (or opposite) of ${currNode.coords}`
+            `Direction discontinuity: ${nextCoords} is` +
+              ` not ${prevBearing} (or opposite) of ${prevCoords}`
           );
         }
         let norm = norm2d(diff);
         let segmentDirection = apply2d((i) => diff[i] / norm);
       }
 
-      if (lineNode == 1) {
-        let tangent = normalize(directionVector(prevBearing));
-        let lineStartCorrection = apply2d(
-          (i) =>
-            (-tangent[i] * lineWidth) / (2 * lineWidthTickRatio * unitLength)
-        );
-        let points = [
-          xScale(currNode.coords[0] + shiftCoords[0] + lineStartCorrection[0]),
-          yScale(currNode.coords[1] + shiftCoords[1] + lineStartCorrection[1]),
-        ];
-        path += 'M' + points[0] + ',' + points[1];
-      }
-
       let lineEndCorrection = [0, 0];
-      if (lineNode === lineNodes.length - 1) {
+      if (nNode === data.nodes.length - 1) {
         let tangent = normalize(directionVector(nextBearing));
         lineEndCorrection = apply2d(
           (i) =>
@@ -210,52 +233,27 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
       }
 
       let prevPoint = [
-        xScale(currNode.coords[0] + shiftCoords[0]),
-        yScale(currNode.coords[1] + shiftCoords[1]),
+        xScale(prevCoords[0] + shiftCoords[0]),
+        yScale(prevCoords[1] + shiftCoords[1]),
       ];
       let nextPoint = [
-        xScale(nextNode.coords[0] + shiftCoords[0] + lineEndCorrection[0]),
-        yScale(nextNode.coords[1] + shiftCoords[1] + lineEndCorrection[1]),
+        xScale(nextCoords[0] + shiftCoords[0] + lineEndCorrection[0]),
+        yScale(nextCoords[1] + shiftCoords[1] + lineEndCorrection[1]),
       ];
 
       if (isCorner) {
         let prevVector = directionVector(prevBearing);
         let nextVector = directionVector(nextBearing);
+        // The control point is chosen simply to be the intersection of the
+        // ingoing and outgoing vectors.
         let controlPoint = apply2d(
           (i) =>
             (prevPoint[i] * nextVector[i] + nextPoint[i] * prevVector[i]) /
             (prevVector[i] + nextVector[i])
         );
-        if (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) {
-          path +=
-            'Q' +
-            controlPoint[0] +
-            ',' +
-            controlPoint[1] +
-            ',' +
-            nextPoint[0] +
-            ',' +
-            nextPoint[1];
-        } else if (
-          (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
-          (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1)
-        ) {
-          path +=
-            'C' +
-            controlPoint[0] +
-            ',' +
-            controlPoint[1] +
-            ',' +
-            controlPoint[0] +
-            ',' +
-            controlPoint[1] +
-            ',' +
-            nextPoint[0] +
-            ',' +
-            nextPoint[1];
-        }
+        path += svgQuadraticCurveTo(controlPoint, nextPoint);
       } else {
-        path += 'L' + nextPoint[0] + ',' + nextPoint[1];
+        path += svgLineTo(nextPoint);
       }
       prevBearing = nextBearing;
     }

@@ -11,6 +11,8 @@ tape('map() does not throw', function (test) {
 });
 
 tape('map(selection) produces the expected result for map.json', function (test) {
+  // Uncomment to replace the expected HTML content:
+  // saveBaselineHtml(testFilePath('map.json'), testFilePath('map.html'));
   test.equal(
     actualHtml(readFile(testFilePath('map.json'))),
     expectedHtml(readFile(testFilePath('map.html')))
