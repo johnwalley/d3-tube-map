@@ -59,6 +59,62 @@
     "WarrenStreet": {
       "name": "WarrenStreet",
       "label": "Warren\nStreet"
+    },
+    "SouthKensington": {
+      "name": "SouthKensington",
+      "label": "South\nKensington"
+    },
+    "SloaneSquare": {
+      "name": "SloaneSquare",
+      "label": "Sloane\nSquare"
+    },
+    "StJamessPark": {
+      "name": "StJamessPark",
+      "label": "St. James's\nPark"
+    },
+    "Westminster": {
+      "name": "Westminster",
+      "label": "Westminster"
+    },
+    "Embankment": {
+      "name": "Embankment",
+      "label": "Embankment"
+    },
+    "Temple": {
+      "name": "Temple",
+      "label": "Temple"
+    },
+    "Blackfriars": {
+      "name": "Blackfriars",
+      "label": "Blackfriars"
+    },
+    "MansionHouse": {
+      "name": "MansionHouse",
+      "label": "Mansion House"
+    },
+    "CannonStreet": {
+      "name": "CannonStreet",
+      "label": "Cannon Street"
+    },
+    "Monument": {
+      "name": "Monument",
+      "label": "Monument"
+    },
+    "TowerHill": {
+      "name": "TowerHill",
+      "label": "Tower\nHill"
+    },
+    "Aldgate": {
+      "name": "Aldgate",
+      "label": "Aldgate"
+    },
+    "LiverpoolStreet": {
+      "name": "LiverpoolStreet",
+      "label": "Liverpool\nStreet"
+    },
+    "Moorgate": {
+      "name": "Moorgate",
+      "label": "Moorgate"
     }
   },
   "lines": [
@@ -66,35 +122,158 @@
       "name": "Victoria",
       "label": "Victoria",
       "color": "#2B8DBF",
-      "shiftCoords": [0, 0],
+      "shiftCoords": [0, -0.5],
       "nodes": [
         {
-          "coords": [0, -20],
+          "coords": [0, -25],
           "name": "Brixton",
           "labelPos": "SW"
         },
         {
-          "coords": [-4, -16],
+          "coords": [-4, -21],
           "name": "Stockwell",
           "marker": "interchange",
           "labelPos": "E"
         },
         {
-          "coords": [-8, -12],
+          "coords": [-8, -17],
           "name": "Vauxhall",
           "marker": "interchange",
           "labelPos": "NE"
         },
         {
-          "coords": [-9, -10]
+          "coords": [-9, -15]
         },
         {
-          "coords": [-9, -2]
+          "coords": [-9, -7]
         },
         {
-          "coords": [-9, -3],
+          "coords": [-9, -8],
           "name": "Pimlico",
           "labelPos": "W"
+        },
+        {
+          "coords": [-9, 1],
+          "name": "Victoria",
+          "marker": "interchange",
+          "canonical": true,
+          "labelPos": "NW"
+        },
+        {
+          "coords": [-9, 10],
+          "name": "GreenPark",
+          "marker": "interchange",
+          "labelPos": "NE"
+        },
+        {
+          "coords": [-9, 11]
+        },
+        {
+          "coords": [-8, 13]
+        },
+        {
+          "coords": [-6, 15]
+        },
+        {
+          "coords": [-4, 17],
+          "name": "OxfordCircus",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [0, 21],
+          "name": "WarrenStreet",
+          "marker": "interchange",
+          "labelPos": "E"
+        },
+        {
+          "coords": [4, 25]
+        },
+        {
+          "coords": [6, 26]
+        },
+        {
+          "coords": [9, 26],
+          "name": "KingsCrossStPancras",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [16, 26]
+        },
+        {
+          "coords": [17, 27]
+        },
+        {
+          "coords": [17, 35]
+        },
+        {
+          "coords": [17, 36],
+          "name": "HighburyIslington",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [17, 39]
+        },
+        {
+          "coords": [18, 41]
+        },
+        {
+          "coords": [22, 45],
+          "name": "FinsburyPark",
+          "marker": "interchange",
+          "labelPos": "SE"
+        },
+        {
+          "coords": [26, 49]
+        },
+        {
+          "coords": [28, 50]
+        },
+        {
+          "coords": [32, 50],
+          "name": "SevenSisters",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [36, 50],
+          "name": "TottenhamHale",
+          "marker": "interchange",
+          "labelPos": "S"
+        },
+        {
+          "coords": [40, 50],
+          "name": "BlackhorseRoad",
+          "marker": "interchange",
+          "labelPos": "N"
+        },
+        {
+          "coords": [46, 50],
+          "name": "WalthamstowCentral",
+          "marker": "interchange",
+          "labelPos": "E"
+        }
+      ]
+    },
+    {
+      "name": "Circle",
+      "label": "Circle",
+      "color": "#FFD600",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [-25, 1],
+          "name": "SouthKensington",
+          "marker": "interchange",
+          "shiftCoords": [0, -0.5],
+          "labelPos": "S"
+        },
+        {
+          "coords": [-17, 1],
+          "name": "SloaneSquare",
+          "labelPos": "S"
         },
         {
           "coords": [-9, 1],
@@ -103,100 +282,239 @@
           "labelPos": "NW"
         },
         {
-          "coords": [-9, 5],
-          "name": "GreenPark",
-          "marker": "interchange",
-          "labelPos": "NE"
-        },
-        {
-          "coords": [-9, 6]
-        },
-        {
-          "coords": [-8, 8]
-        },
-        {
-          "coords": [-6, 10]
-        },
-        {
-          "coords": [-4, 12],
-          "name": "OxfordCircus",
-          "marker": "interchange",
-          "labelPos": "NW"
-        },
-        {
-          "coords": [0, 16],
-          "name": "WarrenStreet",
-          "marker": "interchange",
-          "labelPos": "E"
-        },
-        {
-          "coords": [4, 20]
-        },
-        {
-          "coords": [6, 21]
-        },
-        {
-          "coords": [9, 21],
-          "name": "KingsCrossStPancras",
-          "marker": "interchange",
+          "coords": [-3, 1],
+          "name": "StJamessPark",
+          "canonical": true,
           "labelPos": "N"
         },
         {
-          "coords": [16, 21]
-        },
-        {
-          "coords": [17, 22]
-        },
-        {
-          "coords": [17, 30]
-        },
-        {
-          "coords": [17, 31],
-          "name": "HighburyIslington",
+          "coords": [5, 1],
+          "name": "Westminster",
           "marker": "interchange",
-          "labelPos": "NW"
+          "shiftCoords": [0, -0.5],
+          "labelPos": "SW"
         },
         {
-          "coords": [17, 34]
-        },
-        {
-          "coords": [18, 36]
-        },
-        {
-          "coords": [22, 40],
-          "name": "FinsburyPark",
+          "coords": [9, 1],
+          "name": "Embankment",
           "marker": "interchange",
+          "shiftCoords": [0, -0.5],
           "labelPos": "SE"
         },
         {
-          "coords": [26, 44]
-        },
-        {
-          "coords": [28, 45]
-        },
-        {
-          "coords": [32, 45],
-          "name": "SevenSisters",
-          "marker": "interchange",
+          "coords": [17, 1],
+          "name": "Temple",
+          "canonical": true,
           "labelPos": "N"
         },
         {
-          "coords": [36, 45],
-          "name": "TottenhamHale",
+          "coords": [23, 1]
+        },
+        {
+          "coords": [25, 2]
+        },
+        {
+          "coords": [28, 5],
+          "name": "Blackfriars",
+          "canonical": true,
+          "labelPos": "NW"
+        },
+        {
+          "coords": [32, 9],
+          "name": "MansionHouse",
+          "canonical": true,
+          "labelPos": "NW"
+        },
+        {
+          "coords": [36, 13],
+          "name": "CannonStreet",
           "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "NW"
+        },
+        {
+          "coords": [38, 15]
+        },
+        {
+          "coords": [40, 16]
+        },
+        {
+          "coords": [45, 16],
+          "name": "Monument",
+          "marker": "interchange",
+          "shiftCoords": [0, -0.5],
           "labelPos": "S"
         },
         {
-          "coords": [40, 45],
-          "name": "BlackhorseRoad",
+          "coords": [53, 16],
+          "name": "TowerHill",
           "marker": "interchange",
+          "shiftCoords": [0, -0.5],
+          "labelPos": "S"
+        },
+        {
+          "coords": [55, 16]
+        },
+        {
+          "coords": [56, 17]
+        },
+        {
+          "coords": [56, 20],
+          "name": "Aldgate",
+          "labelPos": "W"
+        },
+        {
+          "coords": [56, 26]
+        },
+        {
+          "coords": [55, 27]
+        },
+        {
+          "coords": [50, 27],
+          "name": "LiverpoolStreet",
+          "marker": "interchange",
+          "shiftCoords": [-0.5, -0.5],
           "labelPos": "N"
         },
         {
-          "coords": [46, 45],
-          "name": "WalthamstowCentral",
+          "coords": [44, 27],
+          "name": "Moorgate",
           "marker": "interchange",
-          "labelPos": "E"
+          "shiftCoords": [-0.5, -0.5],
+          "labelPos": "SE"
+        }
+      ]
+    },
+    {
+      "name": "District",
+      "label": "District",
+      "color": "#0C6826",
+      "shiftCoords": [0, -1.0],
+      "nodes": [
+        {
+          "coords": [-25, 1],
+          "name": "SouthKensington",
+          "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "S"
+        },
+        {
+          "coords": [-17, 1],
+          "name": "SloaneSquare",
+          "canonical": true,
+          "labelPos": "S"
+        },
+        {
+          "coords": [-9, 1],
+          "name": "Victoria",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [-3, 1],
+          "name": "StJamessPark",
+          "labelPos": "N"
+        },
+        {
+          "coords": [5, 1],
+          "name": "Westminster",
+          "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "SW"
+        },
+        {
+          "coords": [9, 1],
+          "name": "Embankment",
+          "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "SE"
+        },
+        {
+          "coords": [17, 1],
+          "name": "Temple",
+          "labelPos": "N"
+        },
+        {
+          "coords": [23, 1]
+        },
+        {
+          "coords": [25, 2]
+        },
+        {
+          "coords": [28, 5],
+          "name": "Blackfriars",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [32, 9],
+          "name": "MansionHouse",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [36, 13],
+          "name": "CannonStreet",
+          "marker": "interchange",
+          "shiftCoords": [0, -0.5],
+          "labelPos": "NW"
+        },
+        {
+          "coords": [38, 15]
+        },
+        {
+          "coords": [40, 16]
+        },
+        {
+          "coords": [45, 16],
+          "name": "Monument",
+          "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "S"
+        },
+        {
+          "coords": [53, 16],
+          "name": "TowerHill",
+          "marker": "interchange",
+          "canonical": true,
+          "shiftCoords": [0, -0.5],
+          "labelPos": "S"
+        }
+      ]
+    },
+    {
+      "name": "Metropolitan",
+      "label": "Metropolitan",
+      "color": "#89014C",
+      "shiftCoords": [-1, -1],
+      "nodes": [
+        {
+          "coords": [56, 20],
+          "name": "Aldgate",
+          "labelPos": "W"
+        },
+        {
+          "coords": [56, 26]
+        },
+        {
+          "coords": [55, 27]
+        },
+        {
+          "coords": [50, 27],
+          "name": "LiverpoolStreet",
+          "marker": "interchange",
+          "shiftCoords": [-0.5, -0.5],
+          "labelPos": "N"
+        },
+        {
+          "coords": [44, 27],
+          "name": "Moorgate",
+          "marker": "interchange",
+          "shiftCoords": [-0.5, -0.5],
+          "labelPos": "SE"
         }
       ]
     }
