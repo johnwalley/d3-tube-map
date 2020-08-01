@@ -45,6 +45,6 @@
     "prettier": "2.0.5",
     "rollup": "2.23.0",
     "rollup-plugin-terser": "6",
-    "tape": "5.0.0"
+    "tape": "5.0.1"
   }
 }
