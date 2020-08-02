@@ -41,8 +41,10 @@ Stations.prototype.normalStations = function () {
         x: station.x,
         y: station.y,
         color: marker.color,
+        dir: marker.dir,
         shiftX: marker.shiftX,
         shiftY: marker.shiftY,
+        shiftNormal: marker.shiftNormal,
         labelPos: station.labelPos,
       });
     });

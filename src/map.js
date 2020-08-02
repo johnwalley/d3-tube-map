@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
-import { line, station, interchange } from './curve';
+import { line, station, interchange, populateLineDirections } from './curve';
+import { normalize, directionVector, interchangeShift } from './directions';
 import lineList from './lines';
 import stationList from './stations';
 
@@ -182,11 +183,12 @@ export default function () {
       .append('path')
       .attr('d', interchange(lineWidth))
       .attr('transform', function (d) {
+        let shift = interchangeShift(d.marker);
         return (
           'translate(' +
-          xScale(d.x + d.marker[0].shiftX * lineWidthMultiplier) +
+          xScale(d.x + (shift[0] + d.marker[0].shiftX) * lineWidthMultiplier) +
           ',' +
-          yScale(d.y + d.marker[0].shiftY * lineWidthMultiplier) +
+          yScale(d.y + (shift[1] + d.marker[0].shiftY) * lineWidthMultiplier) +
           ')'
         );
       })
@@ -265,10 +267,16 @@ export default function () {
       .attr('fill', '#10137E')
       .attr('dy', 0)
       .attr('x', function (d) {
-        return xScale(d.x + d.labelShiftX) + textPos(d).pos[0];
+        let shiftX =
+          d.labelShiftX +
+          d.labelShiftNormal * normalize(directionVector(d.dir))[1];
+        return xScale(d.x + shiftX * lineWidthMultiplier) + textPos(d).pos[0];
       })
       .attr('y', function (d) {
-        return yScale(d.y + d.labelShiftY) - textPos(d).pos[1];
+        let shiftY =
+          d.labelShiftY -
+          d.labelShiftNormal * normalize(directionVector(d.dir))[0];
+        return yScale(d.y + shiftY * lineWidthMultiplier) - textPos(d).pos[1];
       })
       .attr('text-anchor', function (d) {
         return textPos(d).textAnchor;
@@ -297,6 +305,11 @@ export default function () {
   }
 
   function transformData(data) {
+    data.lines.forEach((line) => populateLineDirections(line));
+    if (data.river !== undefined) {
+      populateLineDirections(data.river);
+    }
+
     return {
       raw: data.lines,
       river: data.river,
@@ -320,7 +333,7 @@ export default function () {
         station.x = d.coords[0];
         station.y = d.coords[1];
 
-        if (station.labelPos === undefined) {
+        if (station.labelPos === undefined || d.hasOwnProperty('canonical')) {
           station.labelPos = d.labelPos;
           station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
             ? d.labelShiftCoords[0]
@@ -332,20 +345,10 @@ export default function () {
             : d.hasOwnProperty('shiftCoords')
             ? d.shiftCoords[1]
             : line.shiftCoords[1];
-        }
-
-        if (d.hasOwnProperty('canonical')) {
-          station.labelPos = d.labelPos;
-          station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
-            ? d.labelShiftCoords[0]
-            : d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[0]
-            : line.shiftCoords[0];
-          station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
-            ? d.labelShiftCoords[1]
-            : d.hasOwnProperty('shiftCoords')
-            ? d.shiftCoords[1]
-            : line.shiftCoords[1];
+          station.labelShiftNormal = line.hasOwnProperty('shift')
+            ? line.shift
+            : 0;
+          station.dir = d.dir;
         }
 
         station.label = data.stations[d.name].label;
@@ -362,6 +365,7 @@ export default function () {
             line: line.name,
             color: line.color,
             labelPos: d.labelPos,
+            dir: d.dir,
             marker: d.hasOwnProperty('marker') ? d.marker : 'station',
             shiftX: d.hasOwnProperty('shiftCoords')
               ? d.shiftCoords[0]
@@ -369,6 +373,7 @@ export default function () {
             shiftY: d.hasOwnProperty('shiftCoords')
               ? d.shiftCoords[1]
               : line.shiftCoords[1],
+            shiftNormal: line.hasOwnProperty('shift') ? line.shift : 0,
           });
         }
       }
@@ -387,6 +392,7 @@ export default function () {
         stations: [],
         color: line.color,
         shiftCoords: line.shiftCoords,
+        shift: line.shift,
         nodes: line.nodes,
         highlighted: false,
       };
