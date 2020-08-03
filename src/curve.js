@@ -6,8 +6,6 @@ import {
   directionVector,
 } from './directions';
 
-const SQRT2 = Math.sqrt(2);
-
 /**
  * Return an SVG instruction to move to the given point.
  */
