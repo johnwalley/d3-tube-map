@@ -130,7 +130,8 @@ The data passed to the tube map should have the following properties: `stations`
 
 - `name` will be used as the `id` of the `svg` `path` element
 - `color` is simply the color of the line
-- `shiftCoords` will translate the whole line
+- `shiftCoords` will translate the whole line in the x and y directions
+- `shiftNormal` will offset the line along the direction of its normal vector
 - `nodes` is an array of nodes which define the layout of the line
 
 Each node must have the following:

@@ -183,12 +183,16 @@ export default function () {
       .append('path')
       .attr('d', interchange(lineWidth))
       .attr('transform', function (d) {
-        let shift = interchangeShift(d.marker);
+        let shiftNormal = interchangeShift(d.marker);
         return (
           'translate(' +
-          xScale(d.x + (shift[0] + d.marker[0].shiftX) * lineWidthMultiplier) +
+          xScale(
+            d.x + (shiftNormal[0] + d.marker[0].shiftX) * lineWidthMultiplier
+          ) +
           ',' +
-          yScale(d.y + (shift[1] + d.marker[0].shiftY) * lineWidthMultiplier) +
+          yScale(
+            d.y + (shiftNormal[1] + d.marker[0].shiftY) * lineWidthMultiplier
+          ) +
           ')'
         );
       })
@@ -345,8 +349,8 @@ export default function () {
             : d.hasOwnProperty('shiftCoords')
             ? d.shiftCoords[1]
             : line.shiftCoords[1];
-          station.labelShiftNormal = line.hasOwnProperty('shift')
-            ? line.shift
+          station.labelShiftNormal = line.hasOwnProperty('shiftNormal')
+            ? line.shiftNormal
             : 0;
           station.dir = d.dir;
         }
@@ -373,7 +377,9 @@ export default function () {
             shiftY: d.hasOwnProperty('shiftCoords')
               ? d.shiftCoords[1]
               : line.shiftCoords[1],
-            shiftNormal: line.hasOwnProperty('shift') ? line.shift : 0,
+            shiftNormal: line.hasOwnProperty('shiftNormal')
+              ? line.shiftNormal
+              : 0,
           });
         }
       }
@@ -392,7 +398,7 @@ export default function () {
         stations: [],
         color: line.color,
         shiftCoords: line.shiftCoords,
-        shift: line.shift,
+        shiftNormal: line.shiftNormal,
         nodes: line.nodes,
         highlighted: false,
       };

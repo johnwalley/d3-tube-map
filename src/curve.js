@@ -173,7 +173,7 @@ export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
     yScale,
     lineWidth,
     unitLength,
-    data.shift,
+    data.shiftNormal,
     data.shiftCoords
   );
 
