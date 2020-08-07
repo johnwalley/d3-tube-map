@@ -1,9 +1,10 @@
 import * as d3 from 'd3';
 import {
   apply2d,
-  normalize,
+  areParallel,
   compassBearing,
   directionVector,
+  normalize,
 } from './directions';
 
 /**
@@ -126,33 +127,38 @@ export function populateLineDirections(line) {
       throw new Error(`Repeated coordinates ${currNode.coords}`);
     }
 
-    let isCorner =
-      (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) ||
-      (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
-      (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1);
-
     // If it's the first segment, calculate the initial bearing, assuming
     // a straight path
     if (nNode == 1) {
-      if (isCorner) {
-        throw new Error('Cannot begin with a corner segment');
-      }
       prevNode.dir = compassBearing(diff);
     }
 
-    if (isCorner) {
-      // Corners are always a simple sum of the ingoing and outgoing
-      // vectors in canonical integer form.
-      let prevVector = directionVector(prevNode.dir);
-      let nextVector = apply2d((i) => diff[i] - prevVector[i]);
-      currNode.dir = compassBearing(nextVector);
-    } else {
+    let prevVector = directionVector(prevNode.dir);
+    if (areParallel(prevVector, diff)) {
       // Otherwise the outgoing vector is the same as the ingoing vector.
       currNode.dir = compassBearing(diff);
       if (currNode.dir !== prevNode.dir) {
         throw new Error(
           `Direction discontinuity: ${currNode.coords} is` +
             ` not ${prevNode.dir} of ${prevNode.coords}`
+        );
+      }
+    } else {
+      // A corner is required.
+      let cornerPossible =
+        (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 1) ||
+        (Math.abs(xDiff) == 1 && Math.abs(yDiff) == 2) ||
+        (Math.abs(xDiff) == 2 && Math.abs(yDiff) == 1);
+      if (cornerPossible) {
+        // Corners are always a simple sum of the ingoing and outgoing
+        // vectors in canonical integer form.
+        let prevVector = directionVector(prevNode.dir);
+        let nextVector = apply2d((i) => diff[i] - prevVector[i]);
+        currNode.dir = compassBearing(nextVector);
+      } else {
+        throw new Error(
+          'Cannot draw a corner between coordinates' +
+            ` ${prevNode.coords} and ${currNode.coords}`
         );
       }
     }
