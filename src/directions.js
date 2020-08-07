@@ -33,7 +33,7 @@ function dotProd2d(a, b) {
 /**
  * Return whether the given 2D vectors are parallel.
  */
-function areParallel(a, b) {
+export function areParallel(a, b) {
   return (
     crossProd2d(a, b) == 0 &&
     Math.sign(a[0]) == Math.sign(b[0]) &&
