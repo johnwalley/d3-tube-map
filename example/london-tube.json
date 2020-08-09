@@ -123,6 +123,14 @@
     "Waterloo": {
       "name": "Waterloo",
       "label": "Waterloo"
+    },
+    "Barbican": {
+      "name": "Barbican",
+      "label": "Barbican"
+    },
+    "Farringdon": {
+      "name": "Farringdon",
+      "label": "Farringdon"
     }
   },
   "lines": [
@@ -186,73 +194,73 @@
           "labelPos": "NW"
         },
         {
-          "coords": [0, 26],
+          "coords": [9, 35],
           "name": "WarrenStreet",
           "marker": "interchange",
           "labelPos": "E"
         },
         {
-          "coords": [4, 30]
+          "coords": [13, 39]
         },
         {
-          "coords": [6, 31]
+          "coords": [15, 40]
         },
         {
-          "coords": [9, 31],
+          "coords": [18, 40],
           "name": "KingsCrossStPancras",
           "marker": "interchange",
           "labelPos": "N"
         },
         {
-          "coords": [16, 31]
+          "coords": [25, 40]
         },
         {
-          "coords": [17, 32]
+          "coords": [26, 41]
         },
         {
-          "coords": [17, 41],
+          "coords": [26, 50],
           "name": "HighburyIslington",
           "marker": "interchange",
           "labelPos": "NW"
         },
         {
-          "coords": [17, 44]
+          "coords": [26, 53]
         },
         {
-          "coords": [18, 46]
+          "coords": [27, 55]
         },
         {
-          "coords": [22, 50],
+          "coords": [31, 59],
           "name": "FinsburyPark",
           "marker": "interchange",
           "labelPos": "SE"
         },
         {
-          "coords": [26, 54]
+          "coords": [35, 63]
         },
         {
-          "coords": [28, 55]
+          "coords": [37, 64]
         },
         {
-          "coords": [32, 55],
+          "coords": [41, 64],
           "name": "SevenSisters",
           "marker": "interchange",
           "labelPos": "N"
         },
         {
-          "coords": [36, 55],
+          "coords": [45, 64],
           "name": "TottenhamHale",
           "marker": "interchange",
           "labelPos": "S"
         },
         {
-          "coords": [40, 55],
+          "coords": [49, 64],
           "name": "BlackhorseRoad",
           "marker": "interchange",
           "labelPos": "N"
         },
         {
-          "coords": [46, 55],
+          "coords": [55, 64],
           "name": "WalthamstowCentral",
           "marker": "interchange",
           "labelPos": "E"
@@ -378,6 +386,22 @@
           "name": "Moorgate",
           "marker": "interchange",
           "labelPos": "SE"
+        },
+        {
+          "coords": [43, 27]
+        },
+        {
+          "coords": [41, 28]
+        },
+        {
+          "coords": [38, 31],
+          "name": "Barbican",
+          "labelPos": "SW"
+        },
+        {
+          "coords": [33, 36],
+          "name": "Farringdon",
+          "labelPos": "SW"
         }
       ]
     },
@@ -506,6 +530,22 @@
           "marker": "interchange",
           "canonical": true,
           "labelPos": "SE"
+        },
+        {
+          "coords": [43, 27]
+        },
+        {
+          "coords": [41, 28]
+        },
+        {
+          "coords": [38, 31],
+          "name": "Barbican",
+          "labelPos": "SW"
+        },
+        {
+          "coords": [33, 36],
+          "name": "Farringdon",
+          "labelPos": "SW"
         }
       ]
     },
