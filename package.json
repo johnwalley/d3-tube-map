@@ -43,7 +43,7 @@
     "eslint-plugin-prettier": "3.1.4",
     "js-beautify": "^1.11.0",
     "jsdom": "16.3.0",
-    "prettier": "2.0.5",
+    "prettier": "2.1.1",
     "rimraf": "^3.0.2",
     "rollup": "2.23.0",
     "rollup-plugin-terser": "6",
