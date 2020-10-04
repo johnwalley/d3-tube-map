@@ -19,7 +19,7 @@
   <body>
     <div id="tube-map" class="tube-map"></div>
     <script>
-      var container = d3.select('#tube-map');
+      var container = d3.select("#tube-map");
       var width = 400;
       var height = 200;
 
@@ -30,7 +30,7 @@
         left: 100,
       });
 
-      d3.json('./minimal.json').then(function (data) {
+      d3.json("./minimal.json").then(function (data) {
         container.datum(data).call(map);
       });
     </script>

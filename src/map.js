@@ -1,8 +1,8 @@
-import * as d3 from 'd3';
-import { line, station, interchange, populateLineDirections } from './curve';
-import { normalize, directionVector, interchangeShift } from './directions';
-import lineList from './lines';
-import stationList from './stations';
+import * as d3 from "d3";
+import { line, station, interchange, populateLineDirections } from "./curve";
+import { normalize, directionVector, interchangeShift } from "./directions";
+import lineList from "./lines";
+import stationList from "./stations";
 
 export default function () {
   var margin = { top: 80, right: 80, bottom: 20, left: 80 };
@@ -17,7 +17,7 @@ export default function () {
   var _data;
   var gMap;
 
-  var listeners = d3.dispatch('click');
+  var listeners = d3.dispatch("click");
 
   function map(selection) {
     selection.each(function (data) {
@@ -81,11 +81,11 @@ export default function () {
       lineWidth = lineWidthMultiplier * unitLength;
 
       svg = selection
-        .append('svg')
-        .style('width', '100%')
-        .style('height', '100%');
+        .append("svg")
+        .style("width", "100%")
+        .style("height", "100%");
 
-      gMap = svg.append('g');
+      gMap = svg.append("g");
 
       if (_data.river !== undefined) {
         drawRiver();
@@ -123,108 +123,108 @@ export default function () {
 
   function drawRiver() {
     gMap
-      .append('g')
-      .attr('class', 'river')
-      .selectAll('path')
+      .append("g")
+      .attr("class", "river")
+      .selectAll("path")
       .data([_data.river])
       .enter()
-      .append('path')
-      .attr('d', function (d) {
+      .append("path")
+      .attr("d", function (d) {
         return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
-      .attr('stroke', '#CCECF4')
-      .attr('fill', 'none')
-      .attr('stroke-width', 1.8 * lineWidth);
+      .attr("stroke", "#CCECF4")
+      .attr("fill", "none")
+      .attr("stroke-width", 1.8 * lineWidth);
   }
 
   function drawLines() {
     gMap
-      .append('g')
-      .attr('class', 'lines')
-      .selectAll('path')
+      .append("g")
+      .attr("class", "lines")
+      .selectAll("path")
       .data(_data.lines.lines)
       .enter()
-      .append('path')
-      .attr('d', function (d) {
+      .append("path")
+      .attr("d", function (d) {
         return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
       })
-      .attr('id', function (d) {
+      .attr("id", function (d) {
         return d.name;
       })
-      .attr('stroke', function (d) {
+      .attr("stroke", function (d) {
         return d.color;
       })
-      .attr('fill', 'none')
-      .attr('stroke-width', function (d) {
+      .attr("fill", "none")
+      .attr("stroke-width", function (d) {
         return d.highlighted ? lineWidth * 1.3 : lineWidth;
       })
-      .classed('line', true);
+      .classed("line", true);
   }
 
   function drawInterchanges() {
-    var fgColor = '#000000';
-    var bgColor = '#ffffff';
+    var fgColor = "#000000";
+    var bgColor = "#ffffff";
 
     gMap
-      .append('g')
-      .attr('class', 'interchanges')
-      .selectAll('path')
+      .append("g")
+      .attr("class", "interchanges")
+      .selectAll("path")
       .data(_data.stations.interchanges())
       .enter()
-      .append('g')
-      .attr('id', function (d) {
+      .append("g")
+      .attr("id", function (d) {
         return d.name;
       })
-      .on('click', function () {
+      .on("click", function () {
         var label = d3.select(this);
-        var name = label.attr('id');
-        listeners.call('click', this, name);
+        var name = label.attr("id");
+        listeners.call("click", this, name);
       })
-      .append('path')
-      .attr('d', interchange(lineWidth))
-      .attr('transform', function (d) {
+      .append("path")
+      .attr("d", interchange(lineWidth))
+      .attr("transform", function (d) {
         let shiftNormal = interchangeShift(d.marker);
         return (
-          'translate(' +
+          "translate(" +
           xScale(
             d.x + (shiftNormal[0] + d.marker[0].shiftX) * lineWidthMultiplier
           ) +
-          ',' +
+          "," +
           yScale(
             d.y + (shiftNormal[1] + d.marker[0].shiftY) * lineWidthMultiplier
           ) +
-          ')'
+          ")"
         );
       })
-      .attr('stroke-width', lineWidth / 2)
-      .attr('fill', function (d) {
+      .attr("stroke-width", lineWidth / 2)
+      .attr("fill", function (d) {
         return d.visited ? fgColor : bgColor;
       })
-      .attr('stroke', function (d) {
+      .attr("stroke", function (d) {
         return d.visited ? bgColor : fgColor;
       })
-      .classed('interchange', true)
-      .style('cursor', 'pointer');
+      .classed("interchange", true)
+      .style("cursor", "pointer");
   }
 
   function drawStations() {
     gMap
-      .append('g')
-      .attr('class', 'stations')
-      .selectAll('path')
+      .append("g")
+      .attr("class", "stations")
+      .selectAll("path")
       .data(_data.stations.normalStations())
       .enter()
-      .append('g')
-      .attr('id', function (d) {
+      .append("g")
+      .attr("id", function (d) {
         return d.name;
       })
-      .on('click', function () {
+      .on("click", function () {
         var label = d3.select(this);
-        var name = label.attr('id');
-        listeners.call('click', this, name);
+        var name = label.attr("id");
+        listeners.call("click", this, name);
       })
-      .append('path')
-      .attr('d', function (d) {
+      .append("path")
+      .attr("d", function (d) {
         return station(
           d,
           xScale,
@@ -233,74 +233,74 @@ export default function () {
           lineWidthTickRatio
         );
       })
-      .attr('stroke', function (d) {
+      .attr("stroke", function (d) {
         return d.color;
       })
-      .attr('stroke-width', lineWidth / lineWidthTickRatio)
-      .attr('fill', 'none')
-      .attr('class', function (d) {
+      .attr("stroke-width", lineWidth / lineWidthTickRatio)
+      .attr("fill", "none")
+      .attr("class", function (d) {
         return d.line;
       })
-      .attr('id', function (d) {
+      .attr("id", function (d) {
         return d.name;
       })
-      .classed('station', true);
+      .classed("station", true);
   }
 
   function drawLabels() {
     gMap
-      .append('g')
-      .attr('class', 'labels')
-      .selectAll('text')
+      .append("g")
+      .attr("class", "labels")
+      .selectAll("text")
       .data(_data.stations.toArray())
       .enter()
-      .append('g')
-      .attr('id', function (d) {
+      .append("g")
+      .attr("id", function (d) {
         return d.name;
       })
-      .classed('label', true)
-      .on('click', function () {
+      .classed("label", true)
+      .on("click", function () {
         var label = d3.select(this);
-        var name = label.attr('id');
-        listeners.call('click', this, name);
+        var name = label.attr("id");
+        listeners.call("click", this, name);
       })
-      .append('text')
+      .append("text")
       .text(function (d) {
         return d.label;
       })
-      .attr('fill', '#10137E')
-      .attr('dy', 0)
-      .attr('x', function (d) {
+      .attr("fill", "#10137E")
+      .attr("dy", 0)
+      .attr("x", function (d) {
         let shiftX =
           d.labelShiftX +
           d.labelShiftNormal * normalize(directionVector(d.dir))[1];
         return xScale(d.x + shiftX * lineWidthMultiplier) + textPos(d).pos[0];
       })
-      .attr('y', function (d) {
+      .attr("y", function (d) {
         let shiftY =
           d.labelShiftY -
           d.labelShiftNormal * normalize(directionVector(d.dir))[0];
         return yScale(d.y + shiftY * lineWidthMultiplier) - textPos(d).pos[1];
       })
-      .attr('text-anchor', function (d) {
+      .attr("text-anchor", function (d) {
         return textPos(d).textAnchor;
       })
-      .style('display', function (d) {
-        return d.hide !== true ? 'block' : 'none';
+      .style("display", function (d) {
+        return d.hide !== true ? "block" : "none";
       })
-      .style('text-decoration', function (d) {
-        return d.closed ? 'line-through' : 'none';
+      .style("text-decoration", function (d) {
+        return d.closed ? "line-through" : "none";
       })
-      .style('font-size', 1.96 * lineWidth + 'px')
-      .style('-webkit-user-select', 'none')
-      .attr('class', function (d) {
+      .style("font-size", 1.96 * lineWidth + "px")
+      .style("-webkit-user-select", "none")
+      .attr("class", function (d) {
         return d.marker
           .map(function (marker) {
             return marker.line;
           })
-          .join(' ');
+          .join(" ");
       })
-      .classed('highlighted', function (d) {
+      .classed("highlighted", function (d) {
         return d.visited;
       })
       .call(wrap, function (d) {
@@ -327,29 +327,29 @@ export default function () {
       for (var node = 0; node < line.nodes.length; node++) {
         var d = line.nodes[node];
 
-        if (!d.hasOwnProperty('name')) continue;
+        if (!d.hasOwnProperty("name")) continue;
 
         if (!data.stations.hasOwnProperty(d.name))
-          throw new Error('Cannot find station with key: ' + d.name);
+          throw new Error("Cannot find station with key: " + d.name);
 
         var station = data.stations[d.name];
 
         station.x = d.coords[0];
         station.y = d.coords[1];
 
-        if (station.labelPos === undefined || d.hasOwnProperty('canonical')) {
+        if (station.labelPos === undefined || d.hasOwnProperty("canonical")) {
           station.labelPos = d.labelPos;
-          station.labelShiftX = d.hasOwnProperty('labelShiftCoords')
+          station.labelShiftX = d.hasOwnProperty("labelShiftCoords")
             ? d.labelShiftCoords[0]
-            : d.hasOwnProperty('shiftCoords')
+            : d.hasOwnProperty("shiftCoords")
             ? d.shiftCoords[0]
             : line.shiftCoords[0];
-          station.labelShiftY = d.hasOwnProperty('labelShiftCoords')
+          station.labelShiftY = d.hasOwnProperty("labelShiftCoords")
             ? d.labelShiftCoords[1]
-            : d.hasOwnProperty('shiftCoords')
+            : d.hasOwnProperty("shiftCoords")
             ? d.shiftCoords[1]
             : line.shiftCoords[1];
-          station.labelShiftNormal = line.hasOwnProperty('shiftNormal')
+          station.labelShiftNormal = line.hasOwnProperty("shiftNormal")
             ? line.shiftNormal
             : 0;
           station.dir = d.dir;
@@ -357,7 +357,7 @@ export default function () {
 
         station.label = data.stations[d.name].label;
         station.position = data.stations[d.name].position;
-        station.closed = data.stations[d.name].hasOwnProperty('closed')
+        station.closed = data.stations[d.name].hasOwnProperty("closed")
           ? data.stations[d.name].closed
           : false;
         station.visited = false;
@@ -370,14 +370,14 @@ export default function () {
             color: line.color,
             labelPos: d.labelPos,
             dir: d.dir,
-            marker: d.hasOwnProperty('marker') ? d.marker : 'station',
-            shiftX: d.hasOwnProperty('shiftCoords')
+            marker: d.hasOwnProperty("marker") ? d.marker : "station",
+            shiftX: d.hasOwnProperty("shiftCoords")
               ? d.shiftCoords[0]
               : line.shiftCoords[0],
-            shiftY: d.hasOwnProperty('shiftCoords')
+            shiftY: d.hasOwnProperty("shiftCoords")
               ? d.shiftCoords[1]
               : line.shiftCoords[1],
-            shiftNormal: line.hasOwnProperty('shiftNormal')
+            shiftNormal: line.hasOwnProperty("shiftNormal")
               ? line.shiftNormal
               : 0,
           });
@@ -408,7 +408,7 @@ export default function () {
       for (var node = 0; node < line.nodes.length; node++) {
         var data = line.nodes[node];
 
-        if (!data.hasOwnProperty('name')) continue;
+        if (!data.hasOwnProperty("name")) continue;
 
         lineObj.stations.push(data.name);
       }
@@ -428,48 +428,48 @@ export default function () {
     var sqrt2 = Math.sqrt(2);
 
     switch (data.labelPos.toLowerCase()) {
-      case 'n':
+      case "n":
         pos = [0, 2.1 * lineWidth * (numLines - 1) + offset];
-        textAnchor = 'middle';
-        alignmentBaseline = 'baseline';
+        textAnchor = "middle";
+        alignmentBaseline = "baseline";
         break;
-      case 'ne':
+      case "ne":
         pos = [offset / sqrt2, (lineWidth * (numLines - 1) + offset) / sqrt2];
-        textAnchor = 'start';
-        alignmentBaseline = 'baseline';
+        textAnchor = "start";
+        alignmentBaseline = "baseline";
         break;
-      case 'e':
+      case "e":
         pos = [offset, 0];
-        textAnchor = 'start';
-        alignmentBaseline = 'middle';
+        textAnchor = "start";
+        alignmentBaseline = "middle";
         break;
-      case 'se':
+      case "se":
         pos = [offset / sqrt2, -offset / sqrt2];
-        textAnchor = 'start';
-        alignmentBaseline = 'hanging';
+        textAnchor = "start";
+        alignmentBaseline = "hanging";
         break;
-      case 's':
+      case "s":
         pos = [0, -lineWidthMultiplier * offset];
-        textAnchor = 'middle';
-        alignmentBaseline = 'hanging';
+        textAnchor = "middle";
+        alignmentBaseline = "hanging";
         break;
-      case 'sw':
+      case "sw":
         pos = [-offset / sqrt2, -offset / sqrt2];
-        textAnchor = 'end';
-        alignmentBaseline = 'hanging';
+        textAnchor = "end";
+        alignmentBaseline = "hanging";
         break;
-      case 'w':
+      case "w":
         pos = [-offset, 0];
-        textAnchor = 'end';
-        alignmentBaseline = 'middle';
+        textAnchor = "end";
+        alignmentBaseline = "middle";
         break;
-      case 'nw':
+      case "nw":
         pos = [
           -(lineWidth * (numLines - 1) + offset) / sqrt2,
           (lineWidth * (numLines - 1) + offset) / sqrt2,
         ];
-        textAnchor = 'end';
-        alignmentBaseline = 'baseline';
+        textAnchor = "end";
+        alignmentBaseline = "baseline";
         break;
       default:
         break;
@@ -488,26 +488,26 @@ export default function () {
       var text = d3.select(this);
       var lines = text.text().split(/\n/);
 
-      var y = text.attr('y');
-      var x = text.attr('x');
-      var dy = parseFloat(text.attr('dy'));
+      var y = text.attr("y");
+      var x = text.attr("x");
+      var dy = parseFloat(text.attr("dy"));
 
       text
         .text(null)
-        .append('tspan')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('dy', dy + 'em')
-        .attr('dominant-baseline', baseline)
+        .append("tspan")
+        .attr("x", x)
+        .attr("y", y)
+        .attr("dy", dy + "em")
+        .attr("dominant-baseline", baseline)
         .text(lines[0]);
 
       for (var lineNum = 1; lineNum < lines.length; lineNum++) {
         text
-          .append('tspan')
-          .attr('x', x)
-          .attr('y', y)
-          .attr('dy', lineNum * 1.1 + dy + 'em')
-          .attr('dominant-baseline', baseline)
+          .append("tspan")
+          .attr("x", x)
+          .attr("y", y)
+          .attr("dy", lineNum * 1.1 + dy + "em")
+          .attr("dominant-baseline", baseline)
           .text(lines[lineNum]);
       }
     });

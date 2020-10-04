@@ -20,7 +20,7 @@ Stations.prototype.interchanges = function () {
   var interchangeStations = this.toArray();
 
   return interchangeStations.filter(function (station) {
-    return station.marker[0].marker === 'interchange';
+    return station.marker[0].marker === "interchange";
   });
 };
 
@@ -28,7 +28,7 @@ Stations.prototype.normalStations = function () {
   var stations = this.toArray();
 
   var stationStations = stations.filter(function (station) {
-    return station.marker[0].marker !== 'interchange';
+    return station.marker[0].marker !== "interchange";
   });
 
   var stationMarkers = [];

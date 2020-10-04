@@ -1,11 +1,11 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 import {
   apply2d,
   areParallel,
   compassBearing,
   directionVector,
   normalize,
-} from './directions';
+} from "./directions";
 
 /**
  * Return an SVG instruction to move to the given point.
@@ -157,7 +157,7 @@ export function populateLineDirections(line) {
         currNode.dir = compassBearing(nextVector);
       } else {
         throw new Error(
-          'Cannot draw a corner between coordinates' +
+          "Cannot draw a corner between coordinates" +
             ` ${prevNode.coords} and ${currNode.coords}`
         );
       }
@@ -166,7 +166,7 @@ export function populateLineDirections(line) {
 }
 
 export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
-  let path = '';
+  let path = "";
 
   let unitLength = Math.abs(
     xScale(1) - xScale(0) !== 0 ? xScale(1) - xScale(0) : yScale(1) - yScale(0)

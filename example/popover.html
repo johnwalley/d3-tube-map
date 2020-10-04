@@ -34,7 +34,7 @@
   <body>
     <div id="tube-map"></div>
     <script>
-      var container = d3.select('#tube-map');
+      var container = d3.select("#tube-map");
       var width = 1600;
       var height = 1000;
 
@@ -45,25 +45,25 @@
         left: 100,
       });
 
-      d3.json('./pubs.json').then(function (data) {
+      d3.json("./pubs.json").then(function (data) {
         container.datum(data).call(map);
 
         container
-          .selectAll('.label')
-          .attr('title', function (d) {
+          .selectAll(".label")
+          .attr("title", function (d) {
             return d.label;
           })
-          .attr('data-content', function (d) {
+          .attr("data-content", function (d) {
             return d.address;
           })
-          .attr('data-trigger', 'focus')
-          .attr('tabindex', 0);
+          .attr("data-trigger", "focus")
+          .attr("tabindex", 0);
 
-        $('svg .label').popover({ container: 'body' });
+        $("svg .label").popover({ container: "body" });
 
-        var svg = container.select('svg');
+        var svg = container.select("svg");
 
-        zoom = d3.zoom().scaleExtent([0.5, 6]).on('zoom', zoomed);
+        zoom = d3.zoom().scaleExtent([0.5, 6]).on("zoom", zoomed);
 
         var zoomContainer = svg.call(zoom);
         var initialScale = 2;
@@ -77,8 +77,8 @@
         );
 
         function zoomed(event) {
-          svg.select('g').attr('transform', event.transform.toString());
-          $('.popover').popover('update');
+          svg.select("g").attr("transform", event.transform.toString());
+          $(".popover").popover("update");
         }
       });
     </script>

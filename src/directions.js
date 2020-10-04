@@ -62,7 +62,7 @@ export function normalize(vector) {
 export function directionVector(bearing) {
   let key = bearing.toUpperCase();
   if (!DIRECTION_VECTORS.hasOwnProperty(key)) {
-    let options = Object.keys(DIRECTION_VECTORS).join(', ');
+    let options = Object.keys(DIRECTION_VECTORS).join(", ");
     throw new Error(
       `'${key}' is not a recognised compass bearing. Options are ${options}`
     );
