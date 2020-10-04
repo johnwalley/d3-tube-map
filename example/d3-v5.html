@@ -1,7 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="./tubeMap.css" />
-    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
     <script src="../dist/d3-tube-map.js"></script>
     <link
       href="https://fonts.googleapis.com/css?family=Hammersmith+One"
@@ -49,8 +49,8 @@
           initialTranslate[1]
         );
 
-        function zoomed(event) {
-          svg.select('g').attr('transform', event.transform.toString());
+        function zoomed() {
+          svg.select('g').attr('transform', d3.event.transform.toString());
         }
       });
     </script>

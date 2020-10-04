@@ -1,7 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="./tubeMap.css" />
-    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v6.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -45,7 +45,7 @@
         left: 100,
       });
 
-      d3.json('./pubs.json', function (error, data) {
+      d3.json('./pubs.json').then(function (data) {
         container.datum(data).call(map);
 
         container
@@ -76,8 +76,8 @@
           initialTranslate[1]
         );
 
-        function zoomed() {
-          svg.select('g').attr('transform', d3.event.transform.toString());
+        function zoomed(event) {
+          svg.select('g').attr('transform', event.transform.toString());
           $('.popover').popover('update');
         }
       });
