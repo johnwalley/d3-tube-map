@@ -1,6 +1,8 @@
 import * as d3 from "d3";
-import { line, station, interchange, populateLineDirections } from "./curve";
-import { normalize, directionVector, interchangeShift } from "./directions";
+
+import { directionVector, interchangeShift, normalize } from "./directions";
+import { interchange, line, populateLineDirections, station } from "./curve";
+
 import lineList from "./lines";
 import stationList from "./stations";
 
@@ -465,8 +467,8 @@ export default function () {
         break;
       case "nw":
         pos = [
-          -(lineWidth * (numLines - 1) + offset) / sqrt2,
-          (lineWidth * (numLines - 1) + offset) / sqrt2,
+          -(lineWidth + offset) / sqrt2,
+          (lineWidth + offset) / sqrt2 + lineWidth * (numLines - 1),
         ];
         textAnchor = "end";
         alignmentBaseline = "baseline";

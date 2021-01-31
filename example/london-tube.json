@@ -191,6 +191,7 @@
           "coords": [-4, 22],
           "name": "OxfordCircus",
           "marker": "interchange",
+          "canonical": true,
           "labelPos": "NW"
         },
         {
@@ -590,6 +591,26 @@
           "name": "Waterloo",
           "marker": "interchange",
           "labelPos": "W"
+        }
+      ]
+    },
+    {
+      "name": "Central",
+      "label": "Central",
+      "color": "#DC241F",
+      "shiftCoords": [0, 0],
+      "nodes": [
+        {
+          "coords": [-12, 22],
+          "name": "BondStreet",
+          "marker": "interchange",
+          "labelPos": "NW"
+        },
+        {
+          "coords": [-4, 22],
+          "name": "OxfordCircus",
+          "marker": "interchange",
+          "labelPos": "NW"
         }
       ]
     }
