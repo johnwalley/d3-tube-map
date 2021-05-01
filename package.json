@@ -38,7 +38,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "eslint": "7.21.0",
+    "eslint": "7.25.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-prettier": "3.3.1",
     "js-beautify": "^1.11.0",
